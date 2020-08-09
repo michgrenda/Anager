@@ -1,0 +1,172 @@
+.sign-in {
+  border-radius: $formBrdRad;
+  overflow: hidden;
+
+  @include box-shadow(
+    null,
+    (
+      "h-offset": -$hOffstBShdw,
+      "v-offset": -$vOffstBShdw,
+      "blur": $brBShdwLt,
+      "color": $msBShdwClrLt,
+    ),
+    (
+      "blur": $brBShdwLt,
+      "color": $plBShdwClrLt,
+    )
+  );
+
+  &__form {
+    overflow: hidden;
+
+    @include flexbox;
+    @include align-items($gen: center);
+    @include flex-direction(column, vertical, normal, column);
+    @include space(padding, $gen: $formPad);
+    @include position(relative);
+  }
+
+  &__wlcm-txt {
+    color: $drkFntClr;
+
+    @include size($width: $inpWdth);
+
+    // Modifiers ***
+    &--mn {
+      font-size: 34px;
+      font-weight: 700;
+
+      @include space(margin, $bottom: 0);
+    }
+    // End ***
+  }
+
+  &__inp-wrap {
+    @include space(margin, $bottom: $inpMarB);
+    @include position(relative);
+  }
+
+  &__inp {
+    background: none;
+    border: none;
+    border-radius: $inpBrdRad;
+    outline: none;
+    color: $drkFntClr;
+
+    @include size($width: $inpWdth, $height: $inpHgt);
+    @include space(padding, $right: $inpPadRL, $left: $inpPadRL);
+    @include box-shadow(
+      null,
+      (
+        "h-offset": -$hOffstBShdw,
+        "v-offset": -$vOffstBShdw,
+        "blur": $brBShdwLt,
+        "color": $msBShdwClrLt,
+        "inset": inset,
+      ),
+      (
+        "blur": $brBShdwLt,
+        "color": $plBShdwClrLt,
+        "inset": inset,
+      )
+    );
+  }
+
+  &__plhlr {
+    @include transition(
+      null,
+      (
+        "property": opacity,
+      )
+    );
+
+    &:before {
+      content: attr(data-placeholder);
+      color: $drkLtFntClr;
+      z-index: -1;
+
+      @include position(absolute, $top: 50%, $left: $inpPadRL);
+      @include transform(translateY(-50%));
+    }
+  }
+
+  &__btns {
+    @include flexbox;
+    @include align-items($gen: center);
+    @include flex-direction(column, vertical, normal, column);
+  }
+
+  &__cir {
+    background-color: $drkBgClr;
+    border-radius: 50%;
+    z-index: -1;
+
+    @include size($width: $cirSz, $height: $cirSz);
+    @include position(absolute);
+  }
+
+  &__soc {
+    @include flexbox;
+  }
+
+  // Navbar modifiers ***
+  &--nav {
+    background-color: $ltBgClr;
+    opacity: 0;
+
+    @include size($width: $navFormWdth);
+    @include transform(translateX(-50%) scale(0));
+    @include transform-origin($x: top, $y: center);
+    @include transition(
+      null,
+      (
+        "property": transform,
+      ),
+      (
+        "property": opacity,
+      )
+    );
+    @include position(absolute, $top: 150%, $left: 50%);
+  }
+
+  &--nav & {
+    &__wlcm-txt {
+      color: $drkFntClr;
+
+      @include size($width: 100%);
+
+      // Modifiers ***
+      &--mn {
+        font-size: 34px;
+        font-weight: 700;
+
+        @include space(margin, $bottom: 0);
+      }
+      // End ***
+    }
+
+    &__inp-wrap {
+      @include size($width: 100%);
+    }
+
+    &__inp {
+      border-radius: $navInpBrdRad;
+
+      @include size($width: initial, $height: $navInpHgt);
+      @include space(padding, $right: $navInpPadRL, $left: $navInpPadRL);
+    }
+
+    &__cir {
+      @include size($width: $navCirSz, $height: $navCirSz);
+    }
+  }
+
+  // States
+  &--nav-is-extended {
+    opacity: 1;
+    z-index: 1;
+
+    @include transform(translateX(-50%) scale(1));
+  }
+  // End ***
+}

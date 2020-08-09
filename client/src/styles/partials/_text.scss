@@ -1,0 +1,19 @@
+.txt {
+  text-transform: capitalize;
+  color: $ltFntClr;
+
+  // Navbar modifiers ***
+  &--nav {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &--nav-auth {
+    color: $drkLtFntClr;
+  }
+
+  &--nav-3d {
+    color: $drkLtFntClr;
+  }
+  // End ***
+}

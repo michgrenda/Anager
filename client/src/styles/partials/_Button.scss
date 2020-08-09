@@ -1,0 +1,228 @@
+.button {
+  background-color: $ltBgClr;
+  border: none;
+  border-radius: $btnBrdRad;
+  color: $drkLtFntClr;
+
+  @include flexbox;
+  @include justify-content($gen: center);
+  @include align-items($gen: center);
+  @include size($height: $btnHgt);
+  @include space(padding, $right: $btnPadRL, $left: $btnPadRL);
+  @include transition(
+    null,
+    (
+      "property": color,
+    )
+  );
+  @include box-shadow(
+    null,
+    (
+      "h-offset": -$hOffstBShdw,
+      "v-offset": -$vOffstBShdw,
+      "blur": $brBShdwLt,
+      "color": $msBShdwClrLt,
+    ),
+    (
+      "blur": $brBShdwLt,
+      "color": $plBShdwClrLt,
+    )
+  );
+
+  &:hover {
+    color: $drkFntClr;
+  }
+
+  &__icon {
+    // Modifiers ***
+    &--nav-sign-in {
+      @include transition(
+        null,
+        (
+          "property": transform,
+        )
+      );
+    }
+    // End ***
+  }
+
+  &__txt {
+    @include space(margin, $right: 5px, $left: 5px);
+  }
+
+  &__chd {
+    @include flexbox;
+    @include justify-content($gen: center);
+    @include align-items($gen: center);
+    @include flex-direction(column, vertical, normal, column);
+  }
+
+  &__burger-ln {
+    background-color: $ltFntClr;
+    border-radius: $burgerLnRad;
+
+    @include size($width: $burgerLnWdth, $height: $burgerLnHgt);
+    @include space(margin, $top: $burgerLnMarTB, $bottom: $burgerLnMarTB);
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      ),
+      (
+        "property": transform,
+      )
+    );
+  }
+
+  // Sign in modifiers ***
+  &--sign-in {
+    background-color: $drkFntClr;
+    border-radius: $sgInBtnBrdRad;
+    color: $ltFntClr;
+
+    @include size($height: $sgInBtnHgt);
+    @include space(padding, $right: $sgInBtnPadRL, $left: $sgInBtnPadRL);
+    @include space(margin, $top: $sgInBtnMarT);
+    @include box-shadow(
+      null,
+      (
+        "h-offset": -$hOffstBShdw,
+        "v-offset": -$vOffstBShdw,
+        "blur": $brBShdwDrk,
+        "color": $msBShdwClrDrk,
+      ),
+      (
+        "blur": $brBShdwDrk,
+        "color": $plBShdwClrDrk,
+      )
+    );
+
+    &:hover {
+      color: $drkLtFntClr;
+    }
+  }
+
+  &--soc-si {
+    border-radius: 50%;
+
+    @include size($width: $sgInSocBtnSz, $height: $sgInSocBtnSz);
+    @include space(padding, $gen: 0);
+    @include space(margin, $right: $sgInSocBtnMarRL, $left: $sgInSocBtnMarRL);
+  }
+  // End ***
+
+  // Sign up modifiers ***
+  &--sign-up {
+    @include size($height: $sgUpBtnHgt);
+    @include space(padding, $right: $sgUpBtnPadRL, $left: $sgUpBtnPadRL);
+    @include space(margin, $top: $sgUpBtnMarT);
+
+    &:hover {
+      color: $drkFntClr;
+    }
+  }
+
+  &--soc-su {
+    border-radius: 50%;
+
+    @include size($width: $sgUpSocBtnSz, $height: $sgUpSocBtnSz);
+    @include space(padding, $gen: 0);
+    @include space(
+      margin,
+      $top: $sgUpSocBtnMarT,
+      $right: $sgUpSocBtnMarRL,
+      $left: $sgUpSocBtnMarRL
+    );
+  }
+  // End***
+
+  // Navbar modifiers ***
+  &--nav-sign-in {
+    border-radius: $navBtnBrdRad;
+
+    @include size($height: $navBtnHgt);
+    @include space(padding, $right: $navBtnSgInPadRL, $left: $navBtnSgInPadRL);
+  }
+
+  &--nav-soc {
+    @include size($width: $navSocBtnSz, $height: $navSocBtnSz);
+  }
+
+  &--nav-auth {
+    @include size($height: $navBtnHgt);
+    @include space(margin, $right: $authPnlMarRL, $left: $authPnlMarRL);
+    @include space(padding, $right: $navBtnPadRL, $left: $navBtnPadRL);
+    @include box-shadow(none);
+
+    &:hover {
+      color: $authActFntClr;
+    }
+  }
+
+  &--nav-auth-is-active {
+    color: $authActFntClr;
+  }
+
+  &--nav-auth-is-active & {
+    &__icon--nav-sign-in {
+      @include transform(rotateZ(-180deg));
+    }
+  }
+
+  &--nav-mn {
+    background-color: $drkBgClr;
+    border-radius: 50%;
+
+    @include size($width: $navBtnSz, $height: $navBtnSz);
+    @include box-shadow(
+      null,
+      (
+        "h-offset": -$hOffstBShdw,
+        "v-offset": -$vOffstBShdw,
+        "blur": $brBShdwDrk,
+        "color": $msBShdwClrDrk,
+      ),
+      (
+        "blur": $brBShdwDrk,
+        "color": $plBShdwClrDrk,
+      )
+    );
+
+    &:hover {
+      color: $drkLtFntClr;
+    }
+  }
+
+  &--nav-mn:hover & {
+    &__burger-ln {
+      background-color: $drkLtFntClr;
+    }
+  }
+
+  &--nav-mn-is-active & {
+    &__burger-ln {
+      background-color: $drkLtFntClr;
+
+      @include transform(scale(0.85));
+    }
+  }
+
+  &--nav-mn-is-active {
+    @include box-shadow(
+      null,
+      (
+        "blur": $brBShdwDrk,
+        "color": $plBShdwClrDrk,
+        "inset": inset,
+      ),
+      (
+        "h-offset": -$hOffstBShdw,
+        "v-offset": -$vOffstBShdw,
+        "blur": $brBShdwDrk,
+        "color": $msBShdwClrDrk,
+        "inset": inset,
+      )
+    );
+  }
+  // End ***
+}

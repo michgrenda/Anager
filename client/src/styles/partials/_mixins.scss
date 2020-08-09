@@ -1,0 +1,261 @@
+@mixin flexbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin inline-flexbox {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+// $gen - assign the same value to the prefixes
+@mixin justify-content(
+  $just-cont: flex-start,
+  $webkit-b-p: start,
+  $ms-f-p: start,
+  $gen: null
+) {
+  @if $gen {
+    -webkit-box-pack: $gen;
+    -ms-flex-pack: $gen;
+    justify-content: $gen;
+  } @else {
+    -webkit-box-pack: $webkit-b-p;
+    -ms-flex-pack: $ms-f-p;
+    justify-content: $just-cont;
+  }
+}
+
+// $gen - assign the same value to the prefixes
+@mixin align-items(
+  $aln-itms: stretch,
+  $webkit-b-a: stretch,
+  $ms-f-a: stretch,
+  $gen: null
+) {
+  @if $gen {
+    -webkit-box-align: $gen;
+    -ms-flex-align: $gen;
+    align-items: $gen;
+  } @else {
+    -webkit-box-align: $webkit-b-a;
+    -ms-flex-align: $ms-f-a;
+    align-items: $aln-itms;
+  }
+}
+
+// $gen - assign the same value to the prefixes
+@mixin flex-direction(
+  $f-dir: row,
+  $webkit-b-o: horizontal,
+  $webkit-b-d: normal,
+  $ms-f-d: row,
+  $gen: null
+) {
+  @if $gen {
+    -webkit-box-orient: $gen;
+    -webkit-box-direction: $gen;
+    -ms-flex-direction: $gen;
+    flex-direction: $gen;
+  } @else {
+    -webkit-box-orient: $webkit-b-o;
+    -webkit-box-direction: $webkit-b-d;
+    -ms-flex-direction: $ms-f-d;
+    flex-direction: $f-dir;
+  }
+}
+
+// $gen - keyword, global values
+@mixin flex($f-grw: 0, $f-b: 1, $f-shr: auto, $gen: null) {
+  @if $gen {
+    @if $gen == auto {
+      -webkit-box-flex: 1;
+    } @else if $gen == none {
+      -webkit-box-flex: 0;
+    } @else {
+      -webkit-box-flex: $gen;
+    }
+
+    -ms-flex: $gen;
+    flex: $gen;
+  } @else {
+    -webkit-box-flex: $f-grw;
+    -ms-flex: $f-grw $f-b $f-shr;
+    flex: $f-grw $f-b $f-shr;
+  }
+}
+
+@mixin transform($tfs) {
+  -webkit-transform: $tfs;
+  -ms-transform: $tfs;
+  transform: $tfs;
+}
+
+// $gen - global values
+@mixin transform-origin($x: 50%, $y: 50%, $z: 0, $gen: null) {
+  @if $gen {
+    -webkit-transform-origin: $gen;
+    -ms-transform-origin: $gen;
+    transform-origin: $gen;
+  } @else {
+    transform-origin: $x $y $z;
+    -webkit-transform-origin: $x $y $z;
+    -ms-transform-origin: $x $y $z;
+  }
+}
+
+@mixin position($pos, $top: null, $right: null, $bottom: null, $left: null) {
+  position: $pos;
+
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// $gen - set all
+@mixin space(
+  $ty,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null,
+  $gen: null
+) {
+  @if $ty == margin or $ty == padding {
+    @if $gen {
+      #{$ty}: $gen;
+    } @else {
+      #{$ty}-top: $top;
+      #{$ty}-right: $right;
+      #{$ty}-bottom: $bottom;
+      #{$ty}-left: $left;
+    }
+  }
+}
+
+@mixin size($width: null, $height: null) {
+  width: $width;
+  height: $height;
+}
+
+@mixin hardware($bf-vsby: true, $pers: null) {
+  @if $bf-vsby {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  -webkit-perspective: $pers;
+  perspective: $pers;
+}
+
+// Merge the received properties
+@function mrgProps($props, $dfltProps) {
+  $mrgdProps: ();
+  @each $key, $value in $dfltProps {
+    @if map-has-key($props, $key) {
+      $mrgdProps: map-merge(
+        $mrgdProps,
+        (
+          $key: map-get($props, $key),
+        )
+      );
+    } @else {
+      $mrgdProps: map-merge(
+        $mrgdProps,
+        (
+          $key: $value,
+        )
+      );
+    }
+  }
+
+  @return $mrgdProps;
+}
+
+// $gen - keyword, global values
+@mixin transition($gen, $trsns...) {
+  @if $gen {
+    -webkit-transition: $gen;
+    -o-transition: $gen;
+    transition: $gen;
+  } @else {
+    $procdTrsns: ();
+    @each $trsn in $trsns {
+      $procdTrsns: append($procdTrsns, procTrsn($trsn), comma);
+    }
+
+    -webkit-transition: $procdTrsns;
+    -o-transition: $procdTrsns;
+    transition: $procdTrsns;
+  }
+}
+
+@function procTrsn($trsn) {
+  // Default values
+  $property: all;
+  $duration: $trsnTm;
+  $timing-function: null;
+  $delay: null;
+  $dfltProps: (
+    "property": $property,
+    "duration": $duration,
+    "timing-function": $timing-function,
+    "delay": $delay,
+  );
+
+  // Merge the default values with the ones received
+  $procdProps: mrgProps($trsn, $dfltProps);
+
+  $procdTrsn: ();
+  @each $val in map-values($procdProps) {
+    $procdTrsn: append($procdTrsn, $val);
+  }
+
+  @return $procdTrsn;
+}
+
+// $gen - keyword, global values
+@mixin box-shadow($gen, $b-shdws...) {
+  @if $gen {
+    -webkit-box-shadow: $gen;
+    box-shadow: $gen;
+  } @else {
+    $procdBShdws: ();
+    @each $b-shdw in $b-shdws {
+      $procdBShdws: append($procdBShdws, procBShdw($b-shdw), comma);
+    }
+
+    -webkit-box-shadow: $procdBShdws;
+    box-shadow: $procdBShdws;
+  }
+}
+
+@function procBShdw($b-shdw) {
+  // Default values
+  $h-offset: $hOffstBShdw;
+  $v-offset: $vOffstBShdw;
+  $blur: null;
+  $spread: null;
+  $color: null;
+  $inset: null;
+  $dfltProps: (
+    "h-offset": $h-offset,
+    "v-offset": $v-offset,
+    "blur": $blur,
+    "spred": $spread,
+    "color": $color,
+    "inset": $inset,
+  );
+
+  // Merge the default values with the ones received
+  $procdProps: mrgProps($b-shdw, $dfltProps);
+
+  $procdBShdw: ();
+  @each $val in map-values($procdProps) {
+    $procdBShdw: append($procdBShdw, $val);
+  }
+
+  @return $procdBShdw;
+}

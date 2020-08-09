@@ -1,0 +1,17 @@
+@import "./partials/custom";
+@import "~bootstrap/scss/bootstrap";
+
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+@import "./partials/variables";
+@import "./partials/mixins";
+
+@import "./partials/text";
+@import "./partials/App";
+@import "./partials/Navbar";
+@import "./partials/Navbar3d";
+@import "./partials/SignIn";
+@import "./partials/SignUp";
+@import "./partials/Button";

@@ -1,0 +1,115 @@
+// ABBREVIATION
+
+// Basic
+// (Transition)
+$trsnTm: 0.4s;
+$trsnDlyTm: 0.2s;
+// (Box-shadow)
+$hOffstBShdw: 5px;
+$vOffstBShdw: 5px;
+$brBShdwDrk: 10px;
+$msBShdwClrDrk: rgba(62, 34, 110, 1);
+$plBShdwClrDrk: rgba(31, 31, 31, 0.5);
+$brBShdwLt: 10px;
+$msBShdwClrLt: rgba(255, 255, 255, 1);
+$plBShdwClrLt: rgba(151, 167, 195, 0.5);
+// (Color)
+$drkFntClr: #543279;
+$ltFntClr: #ecf0f3;
+$drkLtFntClr: darken(#ecf0f3, 40%); // ***
+$authActFntClr: #543279;
+// (Background)
+$drkBgClr: #543279;
+$ltBgClr: #ecf0f3;
+
+// Navbar
+// (Height)
+$navHgt: 60px;
+$navSmHgt: 130px;
+$lnkHgt: 36px;
+// (Border-radius)
+$mnPnlBrdRad: 30px;
+$lnkBrdRad: 18px;
+// (Padding)
+$mnPnlPadRL: 30px;
+$lnkPadRL: 20px;
+// (Margin)
+$authPnlMarRL: 15px;
+$navMarB: 30px;
+
+// Button
+// (Width)
+$burgerLnWdth: 27px;
+// (Height)
+$btnHgt: 30px;
+$burgerLnHgt: 3px;
+// (Border-radius)
+$btnBrdRad: 15px;
+$burgerLnRad: #{5%}/#{50%};
+// (Padding)
+$btnPadRL: 10px;
+// (Margin)
+$burgerLnMarTB: 2px;
+// --(Navbar (authentication) Button)
+// (Height & Width)
+$navSocBtnSz: 36px;
+// (Height)
+$navBtnHgt: 36px;
+// (Padding)
+$navBtnPadRL: 20px;
+$navBtnSgInPadRL: 10px;
+// (Border-radius)
+$navBtnBrdRad: 18px;
+// --(Navbar (main) Button)
+// (Width & Heigt)
+$navBtnSz: 40px;
+// --(Sing-in form)
+// (Height & Width)
+$sgInSocBtnSz: 40px;
+// (Height)
+$sgInBtnHgt: 40px;
+// (Border-radius)
+$sgInBtnBrdRad: 20px;
+// (Padding)
+$sgInBtnPadRL: 30px;
+// (Margin)
+$sgInBtnMarT: 20px;
+$sgInSocBtnMarRL: 10px;
+// --(Sign-up form)
+// (Height & Width)
+$sgUpSocBtnSz: 40px;
+// (Height)
+$sgUpBtnHgt: 40px;
+// (Padding)
+$sgUpBtnPadRL: 30px;
+// (Margin)
+$sgUpBtnMarT: 40px;
+$sgUpSocBtnMarT: 20px;
+$sgUpSocBtnMarRL: 10px;
+
+// Sing-in form
+// (Height & Width)
+$cirSz: 400px;
+$inpWdth: 300px;
+// (Height)
+$btnHgt: 36px;
+$inpHgt: 40px;
+// (Border-radius)
+$formBrdRad: 10px;
+$inpBrdRad: 20px;
+$btnBrdRad: 18px;
+// (Padding)
+$formPad: 30px;
+$inpPadRL: 20px;
+// (Margin)
+$inpMarB: 20px;
+// --(Navbar (authentication) form)
+// (Width & Height)
+$navCirSz: 300px;
+// (Width)
+$navFormWdth: 275px;
+$navInpHgt: 36px;
+// (Border-radius)
+$navInpBrdRad: 18px;
+// (Padding)
+$navInpPadRL: 15px;
