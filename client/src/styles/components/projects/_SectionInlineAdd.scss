@@ -1,0 +1,165 @@
+.section-inline-add {
+  /* =============== Variables =============== */
+  $information-font-color: $projects-neutral-tertiary;
+  $informartion-hover-font-color: darken($information-font-color, 15%);
+  $information-border-color-B: $information-font-color;
+  $plus-line-background-color: $information-font-color;
+  $plus-line-hover-background-color: $informartion-hover-font-color;
+  $input-background-color: $projects-accents-primary;
+  $input-font-color: $projects-font-color-primary;
+  $input-border-color-B: $information-font-color;
+  $input-shadow-color: $input-border-color-B;
+
+  $section-inline-add-padding: 15px;
+  $information-padding-TB: 5px;
+  $information-padding-RL: 20px;
+  $plus-line-width: $line-width-secondary;
+  $plus-line-height: $line-height-secondary;
+  $plus-line-border-radius: $line-border-radius-primary;
+  $icon-size: 16px;
+  $text-margin-L: 5px;
+  $input-wrapper-margin-B: 10px;
+  $input-width: 190px;
+  $input-height: 30px;
+  $input-border-radius: 5px;
+  $input-padding-RL: 10px;
+
+  $root: &;
+
+  @extend %flexbox;
+  @extend %justify-content-center;
+
+  // Section-inline-add-padding
+  @include space(padding, $gen: $section-inline-add-padding);
+
+  &__information {
+    color: $information-font-color;
+
+    border-bottom: 1px dashed $information-border-color-B;
+    cursor: pointer;
+
+    @extend %inline-flexbox;
+    @extend %align-items-center;
+    @extend %user-select-none;
+
+    // Information-padding-TB & Information-padding-RL
+    @include space(
+      padding,
+      $top: $information-padding-TB,
+      $right: $information-padding-RL,
+      $bottom: $information-padding-TB,
+      $left: $information-padding-RL
+    );
+    @include transition(
+      null,
+      (
+        "property": color,
+      )
+    );
+
+    &:hover {
+      color: $informartion-hover-font-color;
+
+      #{$root}__plus-line {
+        background-color: $plus-line-hover-background-color;
+      }
+    }
+  }
+
+  &__icon {
+    @extend %inline-flexbox;
+    @extend %justify-content-center;
+    @extend %align-items-center;
+
+    // Icon-size
+    @include size($width: $icon-size, $height: $icon-size);
+    @include position(relative);
+  }
+
+  &__plus-line {
+    background-color: $plus-line-background-color;
+
+    // Plus-line-border-radius
+    border-radius: $plus-line-border-radius;
+
+    // Plus-line-width & Plus-line-height
+    @include size($width: $plus-line-width, $height: $plus-line-height);
+    @include position(absolute);
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      )
+    );
+
+    &:first-child {
+      @include transform(rotateZ(90deg));
+    }
+  }
+
+  &__text {
+    text-transform: capitalize;
+
+    // Text-margin-L
+    @include space(margin, $left: $text-margin-L);
+  }
+
+  &__form {
+    @extend %inline-flexbox;
+    @extend %align-items-center;
+    @extend %flex-direction-column;
+  }
+
+  &__input-wrapper {
+    // Input-wrapper-margin-B
+    @include space(margin, $bottom: $input-wrapper-margin-B);
+  }
+
+  &__input {
+    background-color: $input-background-color;
+    color: $input-font-color;
+
+    border: none;
+    border-bottom: 1px solid $input-border-color-B;
+    border-radius: $input-border-radius;
+    outline: none;
+
+    // Input-width & Input-height
+    @include size($height: $input-height, $width: $input-width);
+    // Input-padding-RL
+    @include space(
+      padding,
+      $right: $input-padding-RL,
+      $left: $input-padding-RL
+    );
+    @include transition(
+      null,
+      (
+        "property": border-color,
+      ),
+      (
+        "property": box-shadow,
+      )
+    );
+
+    &:focus,
+    &:hover {
+      @include box-shadow(
+        null,
+        (
+          "x-offset": $shadow-x-offset-secondary,
+          "y-offset": $shadow-y-offset-secondary,
+          "blur": $shadow-blur-secondary,
+          "color": $input-shadow-color,
+        )
+      );
+    }
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: section-inline-add__form-wrapper,
+  $transformsStart: translateY(30px),
+  $transformsEnd: translateY(0)
+);

@@ -1,0 +1,135 @@
+.navbar {
+  /* =============== Variables =============== */
+  $panel-background-color--left: $navigation-background-color-primary;
+  $indicator-background-color--left: $navigation-accents-primary;
+
+  $navbar-height: 50px;
+  $navbar-margin-B: 30px;
+  $panel-border-radius: ($navbar-height/2);
+  $panel-padding-RL: 15px;
+  $link-padding-RL: 15px;
+  $text-margin-L: 5px;
+  // --Left
+  $indicator-width--left: 40px;
+  $indicator-height--left: 6px;
+  $indicator-border-radius--left: 1px 5px;
+  $indicator-position-B--left: -($indicator-height--left/2);
+
+  $root: &;
+
+  // Navbar-height
+  @include size($height: $navbar-height);
+  // Navbar-margin-B
+  @include space(margin, $bottom: $navbar-margin-B);
+  @include position(relative);
+
+  &__panel {
+    // Panel-border-radius
+    border-radius: $panel-border-radius;
+
+    @extend %flexbox;
+    @extend %align-items-center;
+
+    // Panel-padding-RL
+    @include space(
+      padding,
+      $right: $panel-padding-RL,
+      $left: $panel-padding-RL
+    );
+
+    &--left {
+      background-color: $panel-background-color--left;
+
+      @extend %box-shadow-light;
+
+      @include justify-content(space-between, justify, justify);
+
+      #{$root}__link {
+        /* =============== Modifiers =============== */
+        // State
+        // Indicator
+        &--is-active {
+          &:before {
+            content: "";
+            background-color: $indicator-background-color--left;
+
+            // Indicator-border-radius
+            border-radius: $indicator-border-radius--left;
+
+            // Indicator-width & Indicator-height
+            @include size(
+              $width: $indicator-width--left,
+              $height: $indicator-height--left
+            );
+            @include transform(translateX(-50%) rotateX(180deg));
+            // Indicator-position-B
+            @include position(
+              absolute,
+              $bottom: $indicator-position-B--left,
+              $left: 50%
+            );
+          }
+        }
+      }
+      /* =============== End =============== */
+    }
+
+    &--right {
+      @include justify-content(flex-end, end, end);
+      @include position(relative);
+
+      #{$root}__link {
+        /* =============== Modifiers =============== */
+        // State
+        // Indicator
+        &--is-active {
+          &:before {
+            @extend %navigation-indicator--right;
+          }
+        }
+        /* =============== End =============== */
+      }
+    }
+  }
+
+  &__list {
+    @extend %h-100;
+  }
+
+  &__item {
+    @extend %inline-flexbox;
+    @extend %h-100;
+  }
+
+  &__link {
+    @extend %navigation-link;
+    @extend %flexbox;
+    @extend %align-items-center;
+
+    // Link-padding-RL
+    @include space(padding, $right: $link-padding-RL, $left: $link-padding-RL);
+    @include position(relative);
+    @include transition(
+      null,
+      (
+        "property": color,
+      )
+    );
+  }
+
+  &__text {
+    &--margin-left {
+      // Text-margin-L
+      @include space(margin, $left: $text-margin-L);
+    }
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: navbar__main-panel,
+  $transformsStart: translateY(0),
+  $transformsEnd: translateY($navbar3d-height),
+  $opacity: false,
+  $done: true
+);

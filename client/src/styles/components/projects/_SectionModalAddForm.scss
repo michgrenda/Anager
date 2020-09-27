@@ -1,0 +1,54 @@
+.section-add-form {
+  /* =============== Variables =============== */
+  $welcome-text-font-color: $projects-font-color-secondary;
+  $input-font-color: $projects-font-color-form-primary;
+  $placeholder-font-color: $projects-font-color-form-secondary;
+
+  @extend %form;
+
+  &__header {
+    @include size($width: $input-width-primary);
+  }
+
+  &__welcome-text {
+    color: $welcome-text-font-color;
+
+    @extend %welcome-text;
+
+    /* =============== Modifiers =============== */
+    &--main {
+      @extend %welcome-text--main;
+    }
+    /* =============== End =============== */
+  }
+
+  &__input-wrapper {
+    z-index: 1;
+
+    @extend %input-wrapper;
+  }
+
+  &__input {
+    color: $input-font-color;
+
+    @extend %input-no-icon;
+    @extend %box-shadow-light-inset;
+  }
+
+  &__placeholder {
+    &:before {
+      color: $placeholder-font-color;
+
+      @extend %placeholder-text-no-icon;
+    }
+
+    /* =============== Modifiers =============== */
+    // State
+    &--is-active {
+      &:before {
+        opacity: 0;
+      }
+    }
+    /* =============== End =============== */
+  }
+}

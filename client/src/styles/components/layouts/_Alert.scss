@@ -1,0 +1,46 @@
+.alerts {
+  /* =============== Variables =============== */
+  $alerts-font-color: $alert-font-color-primary;
+
+  $alerts-width: 100%;
+  $alert-border-radius: 10px;
+  $alert-padding: 15px;
+  $alert-margin-B: 5px;
+  $text-margin-L: 5px;
+
+  color: $alerts-font-color;
+
+  // Alerts-width
+  @include size($width: $alerts-width);
+
+  &__alert {
+    // Alert-border-radius
+    border-radius: $alert-border-radius;
+
+    // Alert-padding
+    @include space(padding, $gen: $alert-padding);
+    // Alert-margin-B
+    @include space(margin, $bottom: $alert-margin-B);
+
+    /* =============== Modifiers =============== */
+    &--danger {
+      background-color: $alert-danger;
+    }
+    /* =============== End =============== */
+  }
+
+  &__text {
+    &--margin-left {
+      // Text-margin-L
+      @include space(margin, $left: $text-margin-L);
+    }
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: alerts__alert,
+  $transformsStart: translateX(50px),
+  $transformsEnd: translateX(0),
+  $done: true // Better performance
+);

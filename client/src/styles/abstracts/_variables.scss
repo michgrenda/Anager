@@ -1,0 +1,350 @@
+$breakpoints: (
+  breakpoint-large: 991px,
+  breakpoint-medium: 767px,
+  breakpoint-small: 575px,
+);
+
+// Palette
+$color-athens-gray: #ecf0f3;
+$color-heather: #adbfcc;
+$color-bermuda-gray: #6f8da4;
+$color-minsk: #543279;
+$color-alto: #dcdcdc;
+$color-san-marino: #4863a0;
+$color-black: #0e1111;
+$color-dove-gray: #696969;
+$color-medium-carmine: #b33a3a;
+$color-gigas: #62398b;
+$color-port-gore: #2e1c43;
+$color-white: #ffffff;
+$color-nepal: #97a7c3;
+$color-silver: #bababa;
+
+// Palette Transparentized
+$color-transparentized-nepal: transparentize($color-nepal, 0.5);
+$color-transparentized-port-gore: transparentize($color-port-gore, 0.5);
+$color-transparentized-heather: transparentize($color-heather, 0.75);
+$color-transparentized-black: transparentize($color-black, 0.7);
+
+/* Light Theme
+============================================================================================== */
+// Light
+$background-color-light-primary: $color-athens-gray;
+$font-color-light-primary: $color-bermuda-gray;
+$font-color-light-secondary: $color-minsk;
+
+// Dark
+$background-color-dark-primary: $color-minsk;
+$font-color-dark-primary: $color-athens-gray;
+
+// Accents
+$accents-primary: $color-minsk;
+$accents-secondary: $color-transparentized-heather;
+$accents-tertiary: $color-bermuda-gray;
+
+// Neutral
+$black: $color-black;
+$gray-dark: $color-dove-gray;
+$gray-light: $color-silver;
+
+// Shadow Palette Light
+$shadow-color-light-primary: $color-white;
+$shadow-color-light-secondary: $color-transparentized-nepal;
+// Shadow Palette Dark
+$shadow-color-dark-primary: $color-gigas;
+$shadow-color-dark-secondary: $color-transparentized-port-gore;
+
+// Shadow
+$shadow-x-offset-primary: 5px;
+$shadow-x-offset-secondary: 0;
+$shadow-y-offset-primary: 5px;
+$shadow-y-offset-secondary: 1px;
+$shadow-blur-primary: 10px;
+$shadow-blur-secondary: 3px;
+
+// Form Palette Light
+$placeholder-font-color-light-primary: $color-heather;
+$input-font-color-light-primary: $color-minsk;
+// Form Palette Dark
+$placeholder-font-color-dark-primary: $color-alto;
+$input-font-color-dark-primary: $color-athens-gray;
+
+// Alert Pallete
+$alert-danger: $color-medium-carmine;
+
+// Status & Priority Pallete
+$project-font-color-status-priority: $color-athens-gray;
+$project-low: #3da4ed;
+$project-low-darken: darken($project-low, 5%);
+$project-medium: #ffe311;
+$project-medium-darken: darken($project-medium, 5%);
+$project-high: #f45c43;
+$project-high-darken: darken($project-high, 5%);
+$project-proposed: #fdac0e;
+$project-proposed-darken: darken($project-proposed, 5%);
+$project-active: #a5cc82;
+$project-active-darken: darken($project-active, 5%);
+$project-on-hold: #1ae8d9;
+$project-on-hold-darken: darken($project-on-hold, 5%);
+$project-completed: #53db57;
+$project-completed-darken: darken($project-completed, 5%);
+$project-archived: #a09d9c;
+$project-archived-darken: darken($project-archived, 5%);
+$project-canceled: #c4c2c4;
+$project-canceled-darken: darken($project-canceled, 5%);
+
+// Form
+$input-width-primary: 300px;
+$input-height-primary: 36px;
+$input-height-secondary: 34px;
+$input-border-radius-primary: ($input-height-primary/2);
+$input-border-radius-secondary: ($input-height-secondary/2);
+$input-padding-RL-primary: 20px;
+$input-padding-RL-secondary: 41px;
+$input-margin-B-primary: 20px;
+$button-height-primary: 36px;
+$button-height-secondary: 34px;
+$button-border-radius-primary: ($button-height-primary/2);
+$button-border-radius-secondary: ($button-height-secondary/2);
+$text-area-padding-TB-primary: 10px;
+
+// Outline
+$outline: 3px solid rgba(21, 156, 228, 0.4);
+
+// Transition
+$transition-duration-primary: 0.4s;
+$transition-duration-secondary: 0.2s;
+$transition-duration-tertiary: 0.7s;
+$transition-delay-primary: 0.2s;
+
+/* Modal
+============================================================================================== */
+$modal-background-color-primary: $color-transparentized-black;
+// -----------------------------------------------------------------
+// (Modal)              |   Overlay
+
+$modal-background-color-secondary: $background-color-light-primary;
+// -----------------------------------------------------------------
+// (Modal)              | Container (--Default-light), Close-icon (--Default-light), Close-icon (--Default-dark - Hover)
+
+$modal-background-color-tertiary: $background-color-dark-primary;
+// -----------------------------------------------------------------
+// (Modal)              | Container (--Defult-dark), Close-icon (--Defult-dark), Close-icon (--Default-light - Hover)
+
+/* Navigation
+============================================================================================== */
+$navigation-background-color-primary: $background-color-light-primary;
+// -----------------------------------------------------------------
+// (Navbar)             |   Panel (--Left)
+// (Navbar3d)           |   List
+// (SignIn)             |   Sign-in (--Nav)
+// (SignUp)             |   Sign-up (--Nav)
+
+$navigation-font-color-primary: $font-color-light-primary;
+// -----------------------------------------------------------------
+// (Navbar)             |   Link
+// (Navbar3d)           |   Link
+
+$navigation-accents-primary: $accents-primary;
+// -----------------------------------------------------------------
+// (Navbar)             |   Link (Hover - Font-color), Indicator(--Left - Background-color), Indicator(--Right - Background-color)
+// (Navbar3d)           |   Link (Hover - Font-color), Indicator (Background-color)
+// (Button)             |   Button (--Nav-right-dropdown-is-active - Active - Font-color)
+
+// Navigation Global
+$navbar3d-height: 100px; // Use for moving main content by the height of the element when toggling | (max-width: 991px))
+
+/* Authentication
+============================================================================================== */
+$authentication-font-color-primary: $font-color-dark-primary;
+// -----------------------------------------------------------------
+// (SignIn)             |   Welcome-text
+// (SignUp)             |   Welcome-text
+
+$authentication-font-color-secondary: $font-color-light-primary;
+// -----------------------------------------------------------------
+// (SignOut)            |   Text, Link, Line
+
+$authentication-font-color-form-primary: $input-font-color-dark-primary;
+// -----------------------------------------------------------------
+// (SignIn)             |   Input
+// (SignUp)             |   Input
+
+$authentication-font-color-form-secondary: $placeholder-font-color-dark-primary;
+// -----------------------------------------------------------------
+// (SignIn)             |   Placeholder
+// (SignUp)             |   Placeholder
+
+$authentication-accents-primary: $accents-primary;
+// -----------------------------------------------------------------
+// (SignIn)             |   Circle (Background-color)
+// (SignUp)             |   Circle (Background-color)
+// (SignOut)            |   Link (Hover - Font-color), Line (Hover - Background-color)
+
+/* Alert
+============================================================================================== */
+$alert-font-color-primary: $font-color-dark-primary;
+// -----------------------------------------------------------------
+// (Alert)              |   Alerts
+
+// alert-danger
+// -----------------------------------------------------------------
+// (Alert)              |   Alert (--Danger - Background-color)
+
+/* Delete Confirmation
+============================================================================================== */
+$delete-confirmation-background-color-primary: $background-color-light-primary;
+// -----------------------------------------------------------------
+// (DeleteConfirmation) |   Delete-confirmation
+
+$delete-confirmation-neutral-primary: $gray-dark;
+// -----------------------------------------------------------------
+// (Button)             |   Button (--Cancel - Background-color)
+
+// alert-danger
+// -----------------------------------------------------------------
+// (DeleteConfirmation) |   Header
+// (Button)             |   Button (--Delete)
+
+$delete-confirmation-font-color-primary: $font-color-dark-primary;
+// -----------------------------------------------------------------
+// (DeleteConfirmation) |   Header
+// (Button)             |   Button (--Delete-confirmation (--Delete & --Cancel))
+
+$delete-confirmation-font-color-secondary: $font-color-light-primary;
+// -----------------------------------------------------------------
+// (DeleteConfirmation) |   Information
+
+/* Select Input - Default
+============================================================================================== */
+$select-input-background-color-primary: $background-color-light-primary;
+// -----------------------------------------------------------------
+// (SelectInput)        |   Title (--Default-light), List (--Default-light)
+
+$select-input-background-color-secondary: $background-color-dark-primary;
+// -----------------------------------------------------------------
+// (SelectInput)        |   Title (--Default-dark), List (--Default-dark)
+
+$select-input-font-color-primary: $font-color-light-secondary;
+// -----------------------------------------------------------------
+// (SelectInput)        |   Header (--Default-light), Item (--Default-light - Hover - Font-color)
+
+$select-input-font-color-secondary: $font-color-dark-primary;
+// -----------------------------------------------------------------
+// (SelectInput)        |   Header (--Default-dark), Item (--Default-dark - Hover - Font-color)
+
+$select-input-font-color-tertiary: $font-color-light-primary;
+// -----------------------------------------------------------------
+// (SelectInput)        |   Title (--Default-light & --Default-dark - Hover - Font-color), Item (--Default-light & --Default-dark)
+
+$select-input-accents-primary: $accents-secondary;
+// -----------------------------------------------------------------
+// (SelectInput)        |   Item (--Default-light & --Default-dark - Hover - Background-color)
+
+/* Button - Default
+============================================================================================== */
+$button-background-color-primary: $background-color-light-primary;
+// -----------------------------------------------------------------
+// (Button)             |   Button (--Default-light), Burger Line (--Default-dark), Plus Line (--Default-dark)
+
+$button-background-color-secondary: $background-color-dark-primary;
+// -----------------------------------------------------------------
+// (Button)             |   Button (--Default-dark), Burger Line (--Default-light), Plus Line (--Default-light)
+
+$button-font-color-primary: $font-color-light-secondary;
+// -----------------------------------------------------------------
+// (Button)             |   Button (--Default-light)
+
+$button-font-color-secondary: $font-color-dark-primary;
+// -----------------------------------------------------------------
+// (Button)             |   Button (--Default-dark)
+
+$button-accents-primary: $accents-tertiary;
+// -----------------------------------------------------------------
+// (Button)             |   Button (--Default-light & --Default-dark - Hover - Font-color), Burger Line (--Default-light & --Default-dark - Hover, Active - Background-color), Plus Line (--Default-light & --Default-dark - Hover, Active - Background-color)
+
+// Button Global
+$line-width-primary: 24px;
+$line-width-secondary: 14px;
+$line-height-primary: 3px;
+$line-height-secondary: 2px;
+$line-border-radius-primary: #{5%}/#{50%};
+
+/* Projects
+============================================================================================== */
+$projects-background-color-primary: $background-color-light-primary;
+// -----------------------------------------------------------------
+// (ProjectMenu)        |   List
+
+$projects-font-color-primary: $font-color-light-primary;
+// -----------------------------------------------------------------
+// (Projects)           |   Header-col, Section-header (Font-color, Border-bottom)
+// (SectionInlineAdd)   |   Input
+// (SectionInlineEdit)  |   Input
+// (ProjectMenu)        |   Item
+
+$projects-font-color-secondary: $font-color-light-secondary;
+// -----------------------------------------------------------------
+// (ProjectModalAdd)    |   Welcome-text
+// (SectionModalAdd)    |   Welcome-text
+
+$projects-font-color-tertiary: $font-color-dark-primary;
+// -----------------------------------------------------------------
+// (SelectInput)        |   Title (--Project - Font-color, Hover - Font-color)
+// (SelectInput)        |   Title (--Projects-modal-add - Hover - Font-Color)
+
+$projects-neutral-primary: $black;
+// -----------------------------------------------------------------
+// (Projects)           |   Project-name (Font-color, Hover - Font-color), Project-icon (--Edit - Font-color)
+// (ProjectInlineEdit)  |   Input (Font-color)
+// (Button)             |   Button (--Project-inline-edit - Font-color, Hover - Font-color)
+
+$projects-neutral-secondary: $gray-dark;
+// -----------------------------------------------------------------
+// (Projects)           |   Project-col (--Date - Font-color)
+// (ProjectInlineEdit)  |   Input (Border-bottom, Hover, Focus - Box-shadow)
+// (SelectInput)        |   Header (--Projects-modal-add - Font-color), Title (--Projects-modal-add - Border-bottom, Hover - Background-color)
+// (Button)             |   Button (--Project-ellipsis - Font-color)
+
+$projects-neutral-tertiary: $gray-light;
+// -----------------------------------------------------------------
+// (Projects)           |   Project-icon (Font-color)
+// (SectionInlineAdd)   |   Information (Font-color, Border-bottom), Plus-line (Background-color), Input (Border-bottom, Box-shadow)
+// (Button)             |   Plus-line (--Section-inline-add - Background-color)
+
+$projects-font-color-form-primary: $input-font-color-light-primary;
+// -----------------------------------------------------------------
+// (Projects)           |   Input
+// (ProjectModalAdd)    |   Input
+// (SectionModalAdd)    |   Input
+
+$projects-font-color-form-secondary: $placeholder-font-color-light-primary;
+// -----------------------------------------------------------------
+// (Projects)           |   Placeholder
+// (ProjectModalAdd)    |   Placeholder
+// (SectionModalAdd)    |   Placeholder
+
+$projects-accents-primary: $accents-secondary;
+// -----------------------------------------------------------------
+// (Projects)           |   Grid-header (Border-bottom), Header-col (Border-left), Grid-project (Border-bottom), Project-col (Border-left), Project-name (Hover - Background-color), Section-Option (Hover - Background-color), Project Option (Hover - Background-color)
+// (SectionInlineAdd)   |   Input (Background-color)
+// (ProjectInlineEdit)  |   Input (Background-color)
+// (SectionInlineEdit)  |   Input (Background-color)
+// (ProjectMenu)        |   Item (Hover - Background-color)
+// (Button)             |   Button (--Project-ellipsis - Hover - Background-color), Button (--Section-inline-add - Hover - Background-color), Button (--Projects-inline-edit (--Section-inline-edit & --Project-inline-edit) - Hover - Background-color))
+
+$projects-accents-secondary: $accents-primary;
+// -----------------------------------------------------------------
+// (Projects)           |   Section-header (Hover - Font-color, Border-bottom)
+// (SectionInlineEdit)  |   Input (Border-bottom, Hover, Focus - Box-shadow)
+// (Button)             |   Button (--Section-inline-edit - Font-color, Hover - Font-color)
+// (ProjectMenu)        |   Item (Hover - Font-color)
+
+// Projects Global
+$option-size: 25px;
+
+/* Footer
+============================================================================================== */
+$footer-font-color-primary: $font-color-light-primary;
+// -----------------------------------------------------------------
+// (Footer)             |   Copyright

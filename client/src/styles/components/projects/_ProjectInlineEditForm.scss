@@ -1,0 +1,55 @@
+.project-inline-edit {
+  /* =============== Variables =============== */
+  $input-background-color: $projects-accents-primary;
+  $input-font-color: $projects-neutral-primary;
+  $input-border-color-B: $projects-neutral-secondary;
+  $input-shadow-color: $input-border-color-B;
+
+  $input-wrapper-margin-L: 10px;
+
+  z-index: 1; // Firefox
+
+  &:hover {
+    .button--project-inline-edit {
+      opacity: 1;
+    }
+  }
+
+  &__form {
+    @extend %inline-edit-form;
+  }
+
+  &__input-wrapper {
+    // Input-wrapper-margin-L
+    @include space(margin, $left: $input-wrapper-margin-L);
+  }
+
+  &__input {
+    background-color: $input-background-color;
+    color: $input-font-color;
+
+    border-bottom: 1px solid $input-border-color-B;
+
+    @extend %inline-edit-input;
+
+    &:focus,
+    &:hover {
+      @include box-shadow(
+        null,
+        (
+          "x-offset": $shadow-x-offset-secondary,
+          "y-offset": $shadow-y-offset-secondary,
+          "blur": $shadow-blur-secondary,
+          "color": $input-shadow-color,
+        )
+      );
+    }
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: project-inline-edit,
+  $transformsStart: translateX(20px),
+  $transformsEnd: translateX(0)
+);

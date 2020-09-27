@@ -1,0 +1,462 @@
+/* General
+============================================================================================== */
+%flexbox {
+  @include flexbox;
+}
+
+%inline-flexbox {
+  @include inline-flexbox;
+}
+
+%align-items-center {
+  @include align-items($gen: center);
+}
+
+%justify-content-center {
+  @include justify-content($gen: center);
+}
+
+%flex-direction-column {
+  @include flex-direction(column, vertical, normal, column);
+}
+
+%grid {
+  @include grid;
+}
+
+%user-select-none {
+  @include prefix(
+    (
+      user-select: none,
+    ),
+    webkit moz ms
+  );
+}
+
+%box-shadow-light {
+  @include box-shadow(
+    null,
+    (
+      "x-offset": -$shadow-x-offset-primary,
+      "y-offset": -$shadow-y-offset-primary,
+      "blur": $shadow-blur-primary,
+      "color": $shadow-color-light-primary,
+    ),
+    (
+      "blur": $shadow-blur-primary,
+      "color": $shadow-color-light-secondary,
+    )
+  );
+}
+
+%box-shadow-light-inset {
+  @include box-shadow(
+    null,
+    (
+      "x-offset": -$shadow-x-offset-primary,
+      "y-offset": -$shadow-y-offset-primary,
+      "blur": $shadow-blur-primary,
+      "color": $shadow-color-light-primary,
+      "inset": inset,
+    ),
+    (
+      "blur": $shadow-blur-primary,
+      "color": $shadow-color-light-secondary,
+      "inset": inset,
+    )
+  );
+}
+
+%box-shadow-dark {
+  @include box-shadow(
+    null,
+    (
+      "x-offset": -$shadow-x-offset-primary,
+      "y-offset": -$shadow-y-offset-primary,
+      "blur": $shadow-blur-primary,
+      "color": $shadow-color-dark-primary,
+    ),
+    (
+      "blur": $shadow-blur-primary,
+      "color": $shadow-color-dark-secondary,
+    )
+  );
+}
+
+%box-shadow-dark-inset {
+  @include box-shadow(
+    null,
+    (
+      "x-offset": -$shadow-x-offset-primary,
+      "y-offset": -$shadow-y-offset-primary,
+      "blur": $shadow-blur-primary,
+      "color": $shadow-color-dark-primary,
+      "inset": inset,
+    ),
+    (
+      "blur": $shadow-blur-primary,
+      "color": $shadow-color-dark-secondary,
+      "inset": inset,
+    )
+  );
+}
+
+%box-shadow-light-gentle {
+  @include box-shadow(
+    null,
+    (
+      "x-offset": $shadow-x-offset-secondary,
+      "y-offset": $shadow-y-offset-secondary,
+      "blur": $shadow-blur-secondary,
+      "color": $shadow-color-light-secondary,
+    )
+  );
+}
+
+%box-shadow-dark-gentle {
+  @include box-shadow(
+    null,
+    (
+      "x-offset": $shadow-x-offset-secondary,
+      "y-offset": $shadow-y-offset-secondary,
+      "blur": $shadow-blur-secondary,
+      "color": $shadow-color-dark-secondary,
+    )
+  );
+}
+
+%link {
+  // Prevent dragging
+  -webkit-user-drag: none;
+
+  @extend %user-select-none;
+}
+
+%w-100 {
+  @include size($width: 100%);
+}
+
+%h-100 {
+  @include size($height: 100%);
+}
+
+/* Navigation Bar
+============================================================================================== */
+%navigation-link {
+  /* =============== Variables =============== */
+  $link-font-color: $font-color-light-primary;
+  $link-hover-font-color: $accents-primary;
+
+  $link-font-size: 17px;
+
+  @extend %link;
+
+  text-transform: capitalize;
+  // Link-font-size
+  font-size: $link-font-size;
+  color: $link-font-color;
+
+  &:hover {
+    text-decoration: none;
+    color: $link-hover-font-color;
+  }
+}
+
+%navigation-indicator--right {
+  /* =============== Variables =============== */
+  $indicator-background-color: $navigation-accents-primary;
+
+  $indicator-size: 15px;
+  $indicator-position-T: -10px;
+
+  content: "";
+  background-color: $indicator-background-color;
+
+  // Indicator-size
+  @include size($width: $indicator-size, $height: $indicator-size);
+  @include transform(translateX(-50%) rotate(45deg));
+  // Indicator-position-T
+  @include position(absolute, $top: $indicator-position-T, $left: 50%);
+}
+
+/* Form  
+============================================================================================== */
+%welcome-header {
+  @extend %w-100;
+}
+
+%welcome-text {
+  /* =============== Variables =============== */
+  $text-margin-B: 30px;
+
+  // Text-margin-B
+  @include space(margin, $bottom: $text-margin-B);
+}
+
+%welcome-text--main {
+  /* =============== Variables =============== */
+  $text-font-size: 34px;
+  $text-margin-B: 10px;
+
+  // Text-font-size
+  font-size: $text-font-size;
+  font-weight: 700;
+
+  // Text-margin-B
+  @include space(margin, $bottom: $text-margin-B);
+}
+
+%form {
+  @extend %flexbox;
+  @extend %align-items-center;
+  @extend %flex-direction-column;
+}
+
+%input-wrapper {
+  /* =============== Variables =============== */
+  $input-wrapper-margin-B: 20px;
+
+  // Input-wrapper-margin-B
+  @include space(margin, $bottom: $input-wrapper-margin-B);
+  @include position(relative);
+}
+
+%input-basic {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+%input {
+  /* =============== Variables =============== */
+  $input-width: $input-width-primary;
+  $input-height: $input-height-primary;
+  $input-border-radius: $input-border-radius-primary;
+
+  // Input-border-radius
+  border-radius: $input-border-radius;
+
+  @extend %input-basic;
+
+  // Input-width & Input-height
+  @include size($width: $input-width, $height: $input-height);
+}
+
+%input-no-icon {
+  /* =============== Variables =============== */
+  $input-padding-RL: $input-padding-RL-primary;
+
+  @extend %input;
+
+  // Input-padding-RL
+  @include space(padding, $right: $input-padding-RL, $left: $input-padding-RL);
+}
+
+%input-icon {
+  /* =============== Variables =============== */
+  $input-padding-RL: $input-padding-RL-secondary;
+
+  @extend %input;
+
+  // Input-padding-RL
+  @include space(padding, $right: $input-padding-RL, $left: $input-padding-RL);
+}
+
+%placeholder-text-basic {
+  content: attr(data-placeholder);
+  z-index: -1;
+
+  @include transform(translateY(-50%));
+
+  @include transition(
+    null,
+    (
+      "property": opacity,
+    )
+  );
+}
+
+%placeholder-text-no-icon {
+  /* =============== Variables =============== */
+  $placeholder-position-L: $input-padding-RL-primary;
+
+  @extend %placeholder-text-basic;
+
+  // Placeholder-position-L
+  @include position(absolute, $top: 50%, $left: $placeholder-position-L);
+}
+
+%placeholder-text-icon {
+  /* =============== Variables =============== */
+  $placeholder-position-L: $input-padding-RL-secondary;
+
+  @extend %placeholder-text-basic;
+
+  // Placeholder-position-L
+  @include position(absolute, $top: 50%, $left: $placeholder-position-L);
+}
+
+%placeholder-icon {
+  /* =============== Variables =============== */
+  $placeholder-position-L: $input-padding-RL-primary;
+
+  z-index: -1;
+
+  @include transform(translateY(-50%));
+  // Placeholder-position-L
+  @include position(absolute, $top: 50%, $left: $placeholder-position-L);
+  @include transition(
+    null,
+    (
+      "property": color,
+    ),
+    (
+      "property": opacity,
+    )
+  );
+}
+
+%placeholder-icon-settings {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+%text-area {
+  /* =============== Variables =============== */
+  $text-area-width: $input-width-primary;
+  $text-area-padding-TB: $text-area-padding-TB-primary;
+  $text-area-padding-RL: $input-padding-RL-primary;
+
+  resize: none;
+
+  // Text-area-width
+  @include size($width: $text-area-width, $height: initial);
+  // Text-area-padding-TB & Text-area-padding-RL
+  @include space(
+    padding,
+    $top: $text-area-padding-TB,
+    $right: $text-area-padding-RL,
+    $bottom: $text-area-padding-TB,
+    $left: $text-area-padding-RL
+  );
+}
+
+/* Authentication
+============================================================================================== */
+%authentication {
+  /* =============== Variables =============== */
+  $authentication-border-radius: 10px;
+  $authentication-padding: 30px;
+
+  // Authentication-border-radius
+  border-radius: $authentication-border-radius;
+  overflow: hidden;
+
+  @extend %form;
+  @extend %box-shadow-light;
+
+  // Authentication-padding
+  @include space(padding, $gen: $authentication-padding);
+}
+
+%authentication-form {
+  @extend %form;
+
+  @include position(relative, $bottom: 0);
+}
+
+%authentication-circle {
+  /* =============== Variables =============== */
+  $circle-background-color: $authentication-accents-primary;
+
+  $circle-size: 580px;
+
+  content: "";
+  background-color: $circle-background-color;
+  border-radius: 50%;
+  z-index: -1;
+
+  // Circle-size
+  @include size($width: $circle-size, $height: $circle-size);
+}
+
+%authentication-buttons {
+  /* =============== Variables =============== */
+  $buttons-margin-T: 20px;
+
+  @extend %form;
+
+  // Buttons-margin-T
+  @include space(margin, $top: $buttons-margin-T);
+  @include position(relative);
+}
+
+%authentication--nav {
+  /* =============== Variables =============== */
+  $authentication-background-color: $navigation-background-color-primary;
+
+  $authentication-width: 325px;
+  $authentication-position-T: calc(100% + 10px);
+
+  background-color: $authentication-background-color;
+  z-index: 1;
+
+  @extend %box-shadow-light-gentle;
+
+  // Authentication-width
+  @include size($width: $authentication-width);
+  @include transform-origin($x: top, $y: right);
+  // Authentication-position-T
+  @include position(absolute, $top: $authentication-position-T, $right: 0);
+}
+
+%authentication-input--nav {
+  /* =============== Variables =============== */
+  $input-width: 250px;
+  $input-height: $input-height-secondary;
+  $input-border-radius: $input-border-radius-secondary;
+  $input-padding-RL: $input-padding-RL-primary;
+
+  // Input-border-radius
+  border-radius: $input-border-radius;
+
+  // Input-width & Input-height
+  @include size($width: $input-width, $height: $input-height);
+  // Input-padding-RL
+  @include space(padding, $right: $input-padding-RL, $left: $input-padding-RL);
+}
+
+/* ***===================== Projects =====================*** */
+/* =============== Section Inline Edit & Project Inline Edit =============== */
+%inline-edit-form {
+  @extend %inline-flexbox;
+  @extend %align-items-center;
+}
+
+%inline-edit-input {
+  /* =============== Variables =============== */
+  $input-width: 150px;
+  $input-height: 25px;
+  $input-border-radius: 5px;
+  $input-padding-RL: 10px;
+
+  // Input-border-radius
+  border-radius: $input-border-radius;
+
+  @extend %input-basic;
+
+  // Input-width & Input-height
+  @include size($width: $input-width, $height: $input-height);
+  // Input-padding-RL
+  @include space(padding, $right: $input-padding-RL, $left: $input-padding-RL);
+  @include transition(
+    null,
+    (
+      "property": box-shadow,
+    )
+  );
+}
+/* =============== End =============== */

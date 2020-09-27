@@ -1,68 +1,250 @@
 .button {
-  background-color: $ltBgClr;
-  border: none;
-  border-radius: $btnBrdRad;
-  color: $drkLtFntClr;
+  /* =============== Variables =============== */
+  // --Default-light
+  $button-background-color--default-light: $button-background-color-primary;
+  $button-font-color--default-light: $button-font-color-primary;
+  $button-hover-font-color--default-light: $button-accents-primary;
+  $button-active-font-color--default-light: $button-hover-font-color--default-light;
+  $line-background-color--default-light: $button-background-color-secondary;
+  $line-hover-background-color--default-light: $button-hover-font-color--default-light;
+  $line-active-background-color--default-light: $button-hover-font-color--default-light;
 
-  @include flexbox;
-  @include justify-content($gen: center);
-  @include align-items($gen: center);
-  @include size($height: $btnHgt);
-  @include space(padding, $right: $btnPadRL, $left: $btnPadRL);
+  // --Default-dark
+  $button-background-color--default-dark: $button-background-color-secondary;
+  $button-font-color--default-dark: $button-font-color-secondary;
+  $button-hover-font-color--default-dark: $button-accents-primary;
+  $button-active-font-color--default-dark: $button-hover-font-color--default-dark;
+  $line-background-color--default-dark: $button-background-color-primary;
+  $line-hover-background-color--default-dark: $button-hover-font-color--default-dark;
+  $line-active-background-color--default-dark: $button-hover-font-color--default-dark;
+
+  // --Nav-right-dropdown-is-active
+  $button-active-font-color--nav-right-dropdown-is-active: $navigation-accents-primary;
+  // --Project-ellipsis
+  $button-hover-background-color--project-ellipsis: $projects-accents-primary;
+  $button-font-color--project-ellipsis: $projects-neutral-secondary;
+  // --Section-inline-add
+  $button-hover-background-color--section-inline-add: $projects-accents-primary;
+  $plus-line-background-color--section-inline-add: $projects-neutral-tertiary;
+  $plus-line-hover-background-color--section-inline-add: darken(
+    $plus-line-background-color--section-inline-add,
+    15%
+  );
+  // --Projects-inline-edit (--Section-inline-edit & --Project-inline-edit)
+  $button-hover-background-color--projects-inline-edit: $projects-accents-primary;
+  // --Section-inline-edit
+  $button-font-color--section-inline-edit: $projects-accents-secondary;
+  $button-hover-font-color--section-inline-edit: $button-font-color--section-inline-edit;
+  // --Project-inline-edit
+  $button-font-color--project-inline-edit: $projects-neutral-primary;
+  $button-hover-font-color--project-inline-edit: $button-font-color--project-inline-edit;
+  // --Delete-confirmation (--Delete & --Cancel)
+  $button-font-color--delete-confirmation: $delete-confirmation-font-color-primary;
+  // --Delete
+  $button-background-color--delete: $alert-danger;
+  // --Cancel
+  $button-background-color--cancel: $delete-confirmation-neutral-primary;
+
+  $button-border-radius: 0.25rem;
+  $button-padding-TB: 0.375rem;
+  $button-padding-RL: 0.75rem;
+  $text-margin: 5px;
+  $line-width: $line-width-primary;
+  $line-height: $line-height-primary;
+  $line-border-radius: $line-border-radius-primary;
+  $burger-line-margin-TB: 2px;
+  // --Auth
+  $button-height--auth: $button-height-primary;
+  $button-border-radius--auth: $button-border-radius-primary;
+  $button-padding-RL--auth: 30px;
+  $button-margin-T--auth: 20px;
+  // --Auth-social
+  $button-size--auth-social: $button-height--auth;
+  $button-margin-RL--auth-social: 10px;
+  // --Nav-auth
+  $button-height--nav-auth: $button-height-secondary;
+  $button-border-radius--nav-auth: $button-border-radius-secondary;
+  $button-padding-RL--nav-auth: 25px;
+  // --Nav-auth-social
+  $button-size--nav-auth-social: $button-height--nav-auth;
+  // --Nav-right
+  $button-padding-RL--nav-right: 15px;
+  // --Nav-main
+  $button-size--nav-main: $button-height-primary;
+  // --Projects-main
+  $button-size--projects-main: $button-height-primary;
+  // --Projects-create
+  $button-height--projects-create: $button-height-primary;
+  $button-border-radius--projects-create: $button-border-radius-primary;
+  $button-padding-RL--projects-create: 30px;
+  $button-margin-T--projects-create: 20px;
+  // --Project-ellipsis
+  $button-size--project-ellipsis: $option-size;
+  // --Section-inline-add
+  $button-size--section-inline-add: $option-size;
+  $plus-line-width--section-inline-add: $line-width-secondary;
+  $plus-line-height--section-inline-add: $line-height-secondary;
+  // --Projects-inline-edit (--Section-inline-edit & --Project-inline-edit)
+  $button-size--projects-inline-edit: $option-size;
+  $button-margin-L--projects-inline-edit: 8px;
+  // --Delete-confirmation (--Delete & --Cancel)
+  $button-height--delete-confirmation: 26px;
+  $button-border-radius--delete-confirmation: 5px;
+
+  $root: &;
+
+  border: 1px solid transparent;
+  // Button-border-radius
+  border-radius: $button-border-radius;
+  text-transform: capitalize;
+
+  @extend %flexbox;
+  @extend %justify-content-center;
+  @extend %align-items-center;
+  @extend %user-select-none;
+
+  // Button-padding-TB & Button-padding-RL
+  @include space(
+    padding,
+    $top: $button-padding-TB,
+    $right: $button-padding-RL,
+    $bottom: $button-padding-TB,
+    $left: $button-padding-RL
+  );
   @include transition(
     null,
     (
       "property": color,
-    )
-  );
-  @include box-shadow(
-    null,
-    (
-      "h-offset": -$hOffstBShdw,
-      "v-offset": -$vOffstBShdw,
-      "blur": $brBShdwLt,
-      "color": $msBShdwClrLt,
     ),
     (
-      "blur": $brBShdwLt,
-      "color": $plBShdwClrLt,
+      "property": background-color,
+    ),
+    (
+      "property": border-color,
     )
   );
+  /* =============== Modifiers =============== */
+  &--default-light {
+    background-color: $button-background-color--default-light;
+    color: $button-font-color--default-light;
 
-  &:hover {
-    color: $drkFntClr;
-  }
+    @extend %box-shadow-light;
 
-  &__icon {
-    // Modifiers ***
-    &--nav-sign-in {
-      @include transition(
-        null,
-        (
-          "property": transform,
-        )
-      );
+    &:hover {
+      color: $button-hover-font-color--default-light;
+
+      #{$root}__burger-line,
+      #{$root}__plus-line {
+        background-color: $line-hover-background-color--default-light;
+      }
     }
-    // End ***
+
+    #{$root}__burger-line,
+    #{$root}__plus-line {
+      background-color: $line-background-color--default-light;
+    }
   }
 
-  &__txt {
-    @include space(margin, $right: 5px, $left: 5px);
+  &--default-dark {
+    background-color: $button-background-color--default-dark;
+    color: $button-font-color--default-dark;
+
+    @extend %box-shadow-dark;
+
+    &:hover {
+      color: $button-hover-font-color--default-light;
+
+      #{$root}__burger-line,
+      #{$root}__plus-line {
+        background-color: $line-hover-background-color--default-dark;
+      }
+    }
+
+    #{$root}__burger-line,
+    #{$root}__plus-line {
+      background-color: $line-background-color--default-dark;
+    }
   }
 
-  &__chd {
-    @include flexbox;
-    @include justify-content($gen: center);
-    @include align-items($gen: center);
-    @include flex-direction(column, vertical, normal, column);
+  // State
+  &--light-is-active {
+    color: $button-active-font-color--default-light;
+
+    @extend %box-shadow-light-inset;
+
+    #{$root}__content {
+      @include transform(scale(0.95));
+    }
+
+    #{$root}__burger-line,
+    #{$root}__plus-line {
+      background-color: $line-active-background-color--default-light;
+    }
   }
 
-  &__burger-ln {
-    background-color: $ltFntClr;
-    border-radius: $burgerLnRad;
+  // State
+  &--dark-is-active {
+    color: $button-active-font-color--default-dark;
 
-    @include size($width: $burgerLnWdth, $height: $burgerLnHgt);
-    @include space(margin, $top: $burgerLnMarTB, $bottom: $burgerLnMarTB);
+    @extend %box-shadow-dark-inset;
+
+    #{$root}__content {
+      @include transform(scale(0.95));
+    }
+
+    #{$root}__burger-line,
+    #{$root}__plus-line {
+      background-color: $line-active-background-color--default-dark;
+    }
+  }
+  /* =============== End =============== */
+
+  &__content {
+    @extend %flexbox;
+    @extend %justify-content-center;
+    @extend %align-items-center;
+
+    @include transition(
+      null,
+      (
+        "property": transform,
+      )
+    );
+
+    /* =============== Modifiers =============== */
+    &--reverse-children {
+      @include flex-direction(row-reverse, horizontal, reverse, row-reverse);
+    }
+    /* =============== End =============== */
+  }
+
+  &__text {
+    &--margin-left {
+      // Text-margin
+      @include space(margin, $left: $text-margin);
+    }
+    &--margin-right {
+      // Text-margin
+      @include space(margin, $right: $text-margin);
+    }
+  }
+
+  &__children {
+    @extend %flexbox;
+    @extend %justify-content-center;
+    @extend %align-items-center;
+    @extend %flex-direction-column;
+
+    @include position(relative);
+  }
+
+  &__burger-line,
+  &__plus-line {
+    // Line-border-radius
+    border-radius: $line-border-radius;
+
+    // Line-width & Line-height
+    @include size($width: $line-width, $height: $line-height);
     @include transition(
       null,
       (
@@ -74,155 +256,299 @@
     );
   }
 
-  // Sign in modifiers ***
-  &--sign-in {
-    background-color: $drkFntClr;
-    border-radius: $sgInBtnBrdRad;
-    color: $ltFntClr;
-
-    @include size($height: $sgInBtnHgt);
-    @include space(padding, $right: $sgInBtnPadRL, $left: $sgInBtnPadRL);
-    @include space(margin, $top: $sgInBtnMarT);
-    @include box-shadow(
-      null,
-      (
-        "h-offset": -$hOffstBShdw,
-        "v-offset": -$vOffstBShdw,
-        "blur": $brBShdwDrk,
-        "color": $msBShdwClrDrk,
-      ),
-      (
-        "blur": $brBShdwDrk,
-        "color": $plBShdwClrDrk,
-      )
-    );
-
-    &:hover {
-      color: $drkLtFntClr;
-    }
-  }
-
-  &--soc-si {
-    border-radius: 50%;
-
-    @include size($width: $sgInSocBtnSz, $height: $sgInSocBtnSz);
-    @include space(padding, $gen: 0);
-    @include space(margin, $right: $sgInSocBtnMarRL, $left: $sgInSocBtnMarRL);
-  }
-  // End ***
-
-  // Sign up modifiers ***
-  &--sign-up {
-    @include size($height: $sgUpBtnHgt);
-    @include space(padding, $right: $sgUpBtnPadRL, $left: $sgUpBtnPadRL);
-    @include space(margin, $top: $sgUpBtnMarT);
-
-    &:hover {
-      color: $drkFntClr;
-    }
-  }
-
-  &--soc-su {
-    border-radius: 50%;
-
-    @include size($width: $sgUpSocBtnSz, $height: $sgUpSocBtnSz);
-    @include space(padding, $gen: 0);
+  &__burger-line {
+    // Burger-line-margin-TB
     @include space(
       margin,
-      $top: $sgUpSocBtnMarT,
-      $right: $sgUpSocBtnMarRL,
-      $left: $sgUpSocBtnMarRL
+      $top: $burger-line-margin-TB,
+      $bottom: $burger-line-margin-TB
     );
   }
-  // End***
 
-  // Navbar modifiers ***
-  &--nav-sign-in {
-    border-radius: $navBtnBrdRad;
+  &__plus-line {
+    @include position(absolute);
 
-    @include size($height: $navBtnHgt);
-    @include space(padding, $right: $navBtnSgInPadRL, $left: $navBtnSgInPadRL);
+    &:first-child {
+      @include transform(rotate(90deg));
+    }
   }
 
-  &--nav-soc {
-    @include size($width: $navSocBtnSz, $height: $navSocBtnSz);
+  /* =============== Authentication Modifiers =============== */
+  &--auth {
+    // Button-border-radius--auth
+    border-radius: $button-border-radius--auth;
+
+    // Button-height--auth
+    @include size($height: $button-height--auth);
+    // Button-padding-RL--auth
+    @include space(
+      padding,
+      $top: unset,
+      $right: $button-padding-RL--auth,
+      $bottom: unset,
+      $left: $button-padding-RL--auth
+    );
+    // Button-margin-T--auth
+    @include space(margin, $top: $button-margin-T--auth);
+  }
+
+  &--auth-social {
+    border-radius: 50%;
+
+    // Button-size--auth-social
+    @include size(
+      $width: $button-size--auth-social,
+      $height: $button-size--auth-social
+    );
+    @include space(padding, $gen: unset);
+    // Button-margin-RL--auth-social
+    @include space(
+      margin,
+      $right: $button-margin-RL--auth-social,
+      $left: $button-margin-RL--auth-social
+    );
   }
 
   &--nav-auth {
-    @include size($height: $navBtnHgt);
-    @include space(margin, $right: $authPnlMarRL, $left: $authPnlMarRL);
-    @include space(padding, $right: $navBtnPadRL, $left: $navBtnPadRL);
-    @include box-shadow(none);
+    // Button-border-radius--nav-auth
+    border-radius: $button-border-radius--nav-auth;
 
-    &:hover {
-      color: $authActFntClr;
+    // Button-height--nav-auth
+    @include size($height: $button-height--nav-auth);
+    // Button-padding-RL--nav-auth
+    @include space(
+      padding,
+      $right: $button-padding-RL--nav-auth,
+      $left: $button-padding-RL--nav-auth
+    );
+  }
+
+  &--nav-auth-social {
+    // Button-size--nav-auth-social
+    @include size(
+      $width: $button-size--nav-auth-social,
+      $height: $button-size--nav-auth-social
+    );
+  }
+  /* =============== End =============== */
+
+  /* =============== Navbar Modifiers =============== */
+  &--nav-right {
+    background-color: transparent;
+
+    @extend %navigation-link;
+    @extend %h-100;
+
+    // Button-padding-RL--nav-right
+    @include space(
+      padding,
+      $right: $button-padding-RL--nav-right,
+      $left: $button-padding-RL--nav-right
+    );
+  }
+
+  &--nav-right-dropdown {
+    #{$root}__icon {
+      @include transition(
+        null,
+        (
+          "property": transform,
+        )
+      );
     }
   }
 
-  &--nav-auth-is-active {
-    color: $authActFntClr;
-  }
+  // State
+  &--nav-right-dropdown-is-active {
+    color: $button-active-font-color--nav-right-dropdown-is-active;
 
-  &--nav-auth-is-active & {
-    &__icon--nav-sign-in {
+    #{$root}__icon {
       @include transform(rotateZ(-180deg));
     }
   }
 
-  &--nav-mn {
-    background-color: $drkBgClr;
+  &--nav-main {
     border-radius: 50%;
 
-    @include size($width: $navBtnSz, $height: $navBtnSz);
-    @include box-shadow(
+    // Button-size--nav-main
+    @include size(
+      $width: $button-size--nav-main,
+      $height: $button-size--nav-main
+    );
+    @include space(padding, $gen: unset);
+  }
+
+  // State
+  &--nav-main-is-active {
+    #{$root}__burger-line {
+      @include transform(scale(0.9));
+    }
+  }
+  /* =============== End =============== */
+
+  /* =============== Projects Modifiers =============== */
+  &--projects-main {
+    border-radius: 50%;
+    z-index: 1;
+
+    // Button-size--projects-main
+    @include size(
+      $width: $button-size--projects-main,
+      $height: $button-size--projects-main
+    );
+    @include space(padding, $gen: unset);
+  }
+
+  // State
+  &--projects-main-is-active {
+    #{$root}__plus-line {
+      @include transform(scale(0.9));
+
+      &:first-child {
+        @include transform(rotate(90deg) scale(0.9));
+      }
+    }
+  }
+
+  &--projects-create {
+    // Button-border-radius--projects-create
+    border-radius: $button-border-radius--projects-create;
+
+    // Button-height--projects-create
+    @include size($height: $button-height--projects-create);
+    // Button-margin-T--projects-create)
+    @include space(margin, $top: $button-margin-T--projects-create);
+    // Button-padding-RL--projects-create
+    @include space(
+      padding,
+      $right: $button-padding-RL--projects-create,
+      $left: $button-padding-RL--projects-create
+    );
+  }
+
+  &--project-ellipsis {
+    background-color: transparent;
+    color: $button-font-color--project-ellipsis;
+
+    border-radius: 50%;
+
+    // Button-size--project-ellipsis
+    @include size(
+      $width: $button-size--project-ellipsis,
+      $height: $button-size--project-ellipsis
+    );
+    @include space(padding, $gen: unset);
+
+    &:hover {
+      background-color: $button-hover-background-color--project-ellipsis;
+    }
+  }
+
+  &--section-inline-add {
+    background-color: transparent;
+
+    border-radius: 50%;
+
+    // Button-size--section-inline-add
+    @include size(
+      $width: $button-size--section-inline-add,
+      $height: $button-size--section-inline-add
+    );
+    @include space(padding, $gen: unset);
+
+    #{$root}__plus-line {
+      background-color: $plus-line-background-color--section-inline-add;
+
+      // Plus-line-width--section-inline-add & Plus-line-height--section-inline-add
+      @include size(
+        $width: $plus-line-width--section-inline-add,
+        $height: $plus-line-height--section-inline-add
+      );
+    }
+
+    &:hover {
+      background-color: $button-hover-background-color--section-inline-add;
+
+      #{$root}__plus-line {
+        background-color: $plus-line-hover-background-color--section-inline-add;
+      }
+    }
+  }
+
+  &--section-inline-edit,
+  &--project-inline-edit {
+    background-color: transparent;
+
+    border-radius: 50%;
+    opacity: 0;
+
+    // Button-size--projects-inline-edit
+    @include size(
+      $width: $button-size--projects-inline-edit,
+      $height: $button-size--projects-inline-edit
+    );
+    @include space(padding, $gen: unset);
+    // Button-margin-L--projects-inline-edit
+    @include space(margin, $left: $button-margin-L--projects-inline-edit);
+    @include transition(
       null,
       (
-        "h-offset": -$hOffstBShdw,
-        "v-offset": -$vOffstBShdw,
-        "blur": $brBShdwDrk,
-        "color": $msBShdwClrDrk,
+        "property": background-color,
       ),
       (
-        "blur": $brBShdwDrk,
-        "color": $plBShdwClrDrk,
+        "property": opacity,
       )
     );
 
     &:hover {
-      color: $drkLtFntClr;
+      background-color: $button-hover-background-color--projects-inline-edit;
+
+      opacity: 1;
     }
   }
 
-  &--nav-mn:hover & {
-    &__burger-ln {
-      background-color: $drkLtFntClr;
+  &--section-inline-edit {
+    color: $button-font-color--section-inline-edit;
+
+    &:hover {
+      color: $button-hover-font-color--section-inline-edit;
     }
   }
 
-  &--nav-mn-is-active & {
-    &__burger-ln {
-      background-color: $drkLtFntClr;
+  &--project-inline-edit {
+    color: $button-font-color--project-inline-edit;
 
-      @include transform(scale(0.85));
+    &:hover {
+      color: $button-hover-font-color--project-inline-edit;
     }
   }
 
-  &--nav-mn-is-active {
-    @include box-shadow(
-      null,
-      (
-        "blur": $brBShdwDrk,
-        "color": $plBShdwClrDrk,
-        "inset": inset,
-      ),
-      (
-        "h-offset": -$hOffstBShdw,
-        "v-offset": -$vOffstBShdw,
-        "blur": $brBShdwDrk,
-        "color": $msBShdwClrDrk,
-        "inset": inset,
-      )
-    );
+  &--delete,
+  &--cancel {
+    color: $button-font-color--delete-confirmation;
+
+    // Button-border-radius--delete-confirmation
+    border-radius: $button-border-radius--delete-confirmation;
+
+    // Button-height--delete-confirmation
+    @include size($height: $button-height--delete-confirmation);
+    @include space(padding, $top: unset, $bottom: unset);
   }
-  // End ***
+
+  &--delete {
+    background-color: $button-background-color--delete;
+
+    &:hover {
+      background-color: darken($button-background-color--delete, 5%);
+    }
+  }
+
+  &--cancel {
+    background-color: $button-background-color--cancel;
+
+    &:hover {
+      background-color: darken($button-background-color--cancel, 5%);
+    }
+  }
+  /* =============== End =============== */
 }

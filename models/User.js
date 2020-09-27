@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
+const Section = require("./Section");
+const Project = require("./Project");
+const Column = require("./Column");
 const Task = require("./Task");
 
 const userSchema = new mongoose.Schema({
@@ -29,20 +32,43 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 7,
   },
-  tokens: [{
-    token: {
-      type: String,
-      required: true,
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
     },
-  }, ],
+  ],
 });
 
-// Specify User/Task relationship
+// Specify User/Sections relationship
+userSchema.virtual("sections", {
+  ref: "Section",
+  localField: "_id",
+  foreignField: "owner",
+});
+
+// Specify User/Projects relationship
+userSchema.virtual("projects", {
+  ref: "Project",
+  localField: "_id",
+  foreignField: "owner",
+});
+
+// Specify User/Columns relationship
+userSchema.virtual("columns", {
+  ref: "Column",
+  localField: "_id",
+  foreignField: "owner",
+});
+
+// Specify User/Tasks relationship
 userSchema.virtual("tasks", {
   ref: "Task",
   localField: "_id",
-  foreignField: "owner"
-})
+  foreignField: "owner",
+});
 
 // Generate token
 userSchema.methods.generateAuthToken = async function () {
@@ -54,7 +80,7 @@ userSchema.methods.generateAuthToken = async function () {
   };
 
   const token = jwt.sign(payload, config.get("jwtSecret"), {
-    expiresIn: "7 days"
+    expiresIn: "7 days",
   });
   user.tokens = user.tokens.concat({
     token,
@@ -66,36 +92,37 @@ userSchema.methods.generateAuthToken = async function () {
 };
 
 // Check credentials
-userSchema.statics.findByCredentials = async ({
-  email,
-  password
-}) => {
+userSchema.statics.findByCredentials = async ({ email, password }) => {
   const user = await User.findOne({
-    email
+    email,
   });
   if (!user) {
-    const err = new Error()
+    const err = new Error();
     err.error = {
-      errors: [{
-        msg: "Invalid credentials"
-      }]
-    }
-    throw err
+      errors: [
+        {
+          msg: "Invalid credentials",
+        },
+      ],
+    };
+    throw err;
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    const err = new Error()
+    const err = new Error();
     err.error = {
-      errors: [{
-        msg: "Invalid credentials"
-      }]
-    }
-    throw err
+      errors: [
+        {
+          msg: "Invalid credentials",
+        },
+      ],
+    };
+    throw err;
   }
 
-  return user
-}
+  return user;
+};
 
 // Hide sensitive data
 userSchema.methods.toJSON = function () {
@@ -119,13 +146,22 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-// Cascade delete tasks
+// Cascade delete sections & projects & columns & tasks
 userSchema.pre("remove", async function (next) {
-  const user = this
+  const user = this;
   await Task.deleteMany({
-    owner: user._id
-  })
-  next()
-})
+    owner: user._id,
+  });
+  await Column.deleteMany({
+    owner: user._id,
+  });
+  await Project.deleteMany({
+    owner: user._id,
+  });
+  await Section.deleteMany({
+    owner: user._id,
+  });
+  next();
+});
 
 module.exports = User = mongoose.model("User", userSchema);

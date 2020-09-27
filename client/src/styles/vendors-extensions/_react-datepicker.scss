@@ -1,0 +1,171 @@
+.react-datepicker {
+  background-color: $background-color-light-primary;
+
+  border: 1px solid $color-heather;
+
+  &__header {
+    background-color: $background-color-dark-primary;
+
+    border-bottom: none;
+  }
+
+  &__day-name,
+  &__time-name {
+    color: $font-color-dark-primary;
+  }
+
+  &__day {
+    color: $font-color-light-primary;
+  }
+
+  &__day,
+  &__month-text,
+  &__quarter-text,
+  &__year-text {
+    border-radius: 50%;
+
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      ),
+      (
+        "property": color,
+      )
+    );
+
+    &:hover {
+      background-color: $color-transparentized-heather;
+
+      border-radius: 50%;
+    }
+
+    /* =============== Modifiers =============== */
+    &--selected,
+    &--in-selecting-range,
+    &--in-range {
+      background-color: $background-color-dark-primary;
+      color: $font-color-dark-primary;
+
+      &:hover {
+        background-color: lighten($background-color-dark-primary, 10%);
+        color: $font-color-dark-primary;
+      }
+    }
+
+    &--keyboard-selected {
+      background-color: lighten($background-color-dark-primary, 10%);
+      color: $font-color-dark-primary;
+
+      &:hover {
+        background-color: $color-transparentized-heather;
+        color: $font-color-light-primary;
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__day {
+    /* =============== Modifiers =============== */
+    &--today {
+      background-color: $background-color-dark-primary;
+      color: $font-color-dark-primary;
+
+      &:hover {
+        background-color: lighten($background-color-dark-primary, 10%);
+        color: $font-color-dark-primary;
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__current-month {
+    color: $font-color-dark-primary;
+  }
+
+  &__navigation {
+    /* =============== Modifiers =============== */
+    &--previous {
+      border-right-color: $font-color-dark-primary;
+
+      @include transition(
+        null,
+        (
+          "property": border-right-color,
+          "duration": $transition-duration-secondary,
+        )
+      );
+
+      &:hover {
+        border-right-color: $font-color-light-primary;
+      }
+    }
+
+    &--next {
+      border-left-color: $font-color-dark-primary;
+
+      @include transition(
+        null,
+        (
+          "property": border-left-color,
+          "duration": $transition-duration-secondary,
+        )
+      );
+
+      &:hover {
+        border-left-color: $font-color-light-primary;
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__year-read-view,
+  &__month-read-view,
+  &__month-year-read-view {
+    /* =============== Modifiers =============== */
+    &--down-arrow {
+      border-top-color: $background-color-light-primary;
+
+      &:before {
+        border-top-color: $background-color-light-primary;
+        border-top-color: $color-heather;
+      }
+    }
+    /* =============== End =============== */
+  }
+}
+
+.react-datepicker-time {
+  &__header {
+    color: $font-color-dark-primary;
+  }
+}
+.react-datepicker-year-header {
+  color: $font-color-dark-primary;
+}
+
+.react-datepicker-popper {
+  &[data-placement^="bottom"] {
+    .react-datepicker {
+      &__triangle {
+        border-bottom-color: $background-color-dark-primary;
+        &:before {
+          border-bottom-color: $background-color-dark-primary;
+          border-bottom-color: $color-heather;
+        }
+      }
+    }
+  }
+
+  &[data-placement^="top"] {
+    .react-datepicker {
+      &__triangle {
+        border-top-color: $background-color-light-primary;
+        &:before {
+          border-top-color: $background-color-light-primary;
+          border-top-color: $color-heather;
+        }
+      }
+    }
+  }
+}

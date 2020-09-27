@@ -1,72 +1,117 @@
 import React from "react";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 
-export const Button = React.forwardRef((props, ref) => {
-  // Manage the received classes
+const Button = React.forwardRef((props, ref) => {
+  // Manage received modifiers
+  const { categories } = props;
+
   const catgs = {};
-  const txtCatgs = {};
-  const chdMods = {};
+  if (categories)
+    categories.forEach((catg) => (catgs[`button--${catg}`] = catg));
 
-  if (props.categories) {
-    props.categories.forEach((catg) => {
-      catgs[`button--${catg}`] = catg;
-    });
-  }
-  if (props.textCategories) {
-    props.textCategories.forEach((catg) => {
-      catgs[`txt--${catg}`] = catg;
-    });
-  }
-  if (props.childrenModifiers) {
-    props.childrenModifiers.forEach((mod) => {
-      chdMods[`button__chd--${mod}`] = mod;
-    });
-  }
-
-  const cls = classNames({
+  const modifiers = classNames({
     ...catgs,
-    ...txtCatgs,
-  });
-  const chdCls = classNames({
-    ...chdMods,
   });
 
-  const inrTxtMod = classNames({
-    [`button__txt--${props.textSpace}`]: props.textSpace,
-  });
+  // Remove class after a few seconds
+  const removeClassTime = (el, className) => el.classList.remove(className);
 
-  const iconMod = classNames({
-    [`button__icon--${props.iconModifier}`]: props.iconModifier,
-  });
+  // Add light active state
+  const addLightClass = (el) => {
+    el.classList.toggle(props.lightActiveClassName);
+    setTimeout(
+      removeClassTime.bind(null, el, props.lightActiveClassName),
+      1000
+    );
+  };
+
+  // Add dark active state
+  const addDarkClass = (el) => {
+    el.classList.toggle(props.darkActiveClassName);
+    setTimeout(removeClassTime.bind(null, el, props.darkActiveClassName), 1000);
+  };
+
+  const handleButtonClick = (e) => {
+    if (props.light) addLightClass.call(null, e.currentTarget);
+    else if (props.dark) addDarkClass.call(null, e.currentTarget);
+    if (props.onClick) props.onClick.call(null, e);
+  };
 
   return (
     <button
-      className={`button txt ${cls} ${props.bootstrapClasses || ""}`}
-      type="button"
-      ref={ref || null}
-      disabled={props.hidden}
-      onClick={props.click}
+      className={`button ${
+        props.defaultLight && !props.defaultDark
+          ? "button--default-light"
+          : props.defaultDark && "button--default-dark"
+      } ${modifiers} ${props.bootstrapClasses} ${
+        props.outsideClickIgnoreClass
+      }`}
+      ref={ref}
+      onClick={handleButtonClick}
+      onKeyDown={props.onKeyDown}
+      onFocus={props.focus}
+      onBlur={props.blur}
+      type={props.type}
     >
-      {/* Place the icon on the left side if (!rightIcon && icon) */}
-      {props.icon && !props.rightIcon && (
-        <i className={`button__icon ${iconMod} ${props.icon}`}></i>
-      )}
-      {/* Place the children and set the proper class, depending on the type */}
-      {props.children && (
-        <span
-          className={
-            props.icon || typeof props.children === "string"
-              ? `button__txt ${inrTxtMod}`
-              : `button__chd ${chdCls}`
-          }
-        >
-          {props.children}
-        </span>
-      )}
-      {/* Place the icon on the right side if (rightIcon && icon) */}
-      {props.icon && props.rightIcon && (
-        <i className={`button__icon ${iconMod} ${props.icon}`}></i>
-      )}
+      <span
+        className={`button__content ${
+          props.rightIcon && "button__content--reverse-children"
+        }`}
+      >
+        {props.icon && <i className={`button__icon ${props.icon}`}></i>}
+        {props.hamburger ? (
+          <span className="button__children">
+            <span className="button__burger-line"></span>
+            <span className="button__burger-line"></span>
+            <span className="button__burger-line"></span>
+          </span>
+        ) : props.plus ? (
+          <span className="button__children">
+            <span className="button__plus-line"></span>
+            <span className="button__plus-line"></span>
+          </span>
+        ) : props.children ? (
+          <span
+            className={
+              props.icon &&
+              `button__text ${
+                props.rightIcon
+                  ? "button__text--margin-right"
+                  : "button__text--margin-left"
+              }`
+            }
+          >
+            {props.children}
+          </span>
+        ) : null}
+      </span>
     </button>
   );
 });
+
+Button.defaultProps = {
+  type: "button",
+  lightActiveClassName: "button--light-is-active",
+  darkActiveClassName: "button--dark-is-active",
+  defaultLight: true,
+  defaultDark: false,
+};
+
+Button.propTypes = {
+  onClick: PropTypes.func,
+  onKeyDown: PropTypes.func,
+  type: PropTypes.string,
+  icon: PropTypes.string,
+  rightIcon: PropTypes.bool,
+  hamburger: PropTypes.bool,
+  plus: PropTypes.bool,
+  children: PropTypes.string,
+  categories: PropTypes.arrayOf(PropTypes.string),
+  bootstrapClasses: PropTypes.string,
+  outsideClickIgnoreClass: PropTypes.string,
+  lightActiveClassName: PropTypes.string,
+  darkActiveClassName: PropTypes.string,
+};
+
+export default Button;

@@ -1,0 +1,95 @@
+.sign-up {
+  /* =============== Variables =============== */
+  $welcome-text-font-color: $authentication-font-color-primary;
+  $input-font-color: $authentication-font-color-form-primary;
+  $placeholder-font-color: $authentication-font-color-form-secondary;
+
+  $circle-position-T: -180px;
+  // --Nav
+  $circle-position-T--nav: -200px;
+
+  $root: &;
+
+  @extend %authentication;
+
+  &__form {
+    @extend %authentication-form;
+
+    // Circle
+    &:before {
+      @extend %authentication-circle;
+
+      // Circle-position-T
+      @include position(absolute, $top: $circle-position-T);
+    }
+  }
+
+  &__header {
+    @extend %welcome-header;
+  }
+
+  &__welcome-text {
+    color: $welcome-text-font-color;
+
+    @extend %welcome-text;
+
+    /* =============== Modifiers =============== */
+    &--main {
+      @extend %welcome-text--main;
+    }
+    /* =============== End =============== */
+  }
+
+  &__input-wrapper {
+    @extend %input-wrapper;
+  }
+
+  &__input {
+    color: $input-font-color;
+
+    @extend %input-no-icon;
+    @extend %box-shadow-dark-inset;
+  }
+
+  &__placeholder {
+    &:before {
+      color: $placeholder-font-color;
+
+      @extend %placeholder-text-no-icon;
+    }
+
+    /* =============== Modifiers =============== */
+    // State
+    &--is-active {
+      &:before {
+        opacity: 0;
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__btns {
+    @extend %authentication-buttons;
+  }
+
+  &__social {
+    @extend %flexbox;
+  }
+
+  /* =============== Navbar Modifiers =============== */
+  &--nav {
+    @extend %authentication--nav;
+
+    #{$root}__form {
+      // Circle-position-T--nav
+      &:before {
+        top: $circle-position-T--nav;
+      }
+    }
+
+    #{$root}__input {
+      @extend %authentication-input--nav;
+    }
+  }
+  /* =============== End =============== */
+}

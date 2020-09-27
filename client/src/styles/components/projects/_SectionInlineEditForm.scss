@@ -1,0 +1,46 @@
+.section-inline-edit {
+  /* =============== Variables =============== */
+  $input-background-color: $projects-accents-primary;
+  $input-font-color: $projects-font-color-primary;
+  $input-border-color-B: $projects-accents-secondary;
+  $input-shadow-color: $input-border-color-B;
+
+  &:hover {
+    .button--section-inline-edit {
+      opacity: 1;
+    }
+  }
+
+  &__form {
+    @extend %inline-edit-form;
+  }
+
+  &__input {
+    background-color: $input-background-color;
+    color: $input-font-color;
+
+    border-bottom: 1px solid $input-border-color-B;
+
+    @extend %inline-edit-input;
+
+    &:focus,
+    &:hover {
+      @include box-shadow(
+        null,
+        (
+          "x-offset": $shadow-x-offset-secondary,
+          "y-offset": $shadow-y-offset-secondary,
+          "blur": $shadow-blur-secondary,
+          "color": $input-shadow-color,
+        )
+      );
+    }
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: section-inline-edit,
+  $transformsStart: translateX(20px),
+  $transformsEnd: translateX(0)
+);

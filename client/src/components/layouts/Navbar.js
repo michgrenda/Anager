@@ -1,273 +1,304 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
-import { NavLink, Link } from "react-router-dom";
-import { SignIn } from "../auth/SignIn";
-import { Button } from "../Button";
-import { Navbar3d } from "../layouts/Navbar3d";
-import { withRouter } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { CSSTransition } from "react-transition-group";
+// Redux
+import { signOut } from "../../actions/auth";
+import { connect } from "react-redux";
+// Components
+import Button from "../Button";
+import Navbar3d from "../layouts/Navbar3d";
+import Dropdown from "./Dropdown";
+import SignIn from "../auth/SignIn";
+import SignUp from "../auth/SignUp";
 
-const mnPnlProps = [
+// Settings
+const mainPanelProps = [
   {
     path: "/",
     text: "home",
-    icon: "fa-home",
+    icon: "fas fa-home",
   },
   {
-    path: "/read-more",
+    path: "read-more",
     text: "read more",
-    icon: "fa-info-circle",
+    icon: "fas fa-info-circle",
   },
 ];
 
-const gstPnlProps = [
+const mainUserPanelProps = [
+  {
+    path: "dashboard",
+    text: "dashboard",
+  },
+];
+
+const authGuestPanelProps = [
+  {
+    path: "sign-in",
+    icon: "fas fa-sign-in-alt",
+    text: "sign in",
+  },
   {
     path: "sign-up",
     text: "sign up",
+    icon: "fab fa-wpforms",
   },
 ];
 
-const Navbar = (props) => {
+const authUserPanelProps = [
+  {
+    path: "sign-out",
+    text: "sign out",
+    icon: "fas fa-sign-out-alt",
+  },
+];
+
+const Navbar = function (props) {
+  // Redux
+  const {
+    auth: {
+      isAuthenticated,
+      // loading
+    },
+    signOut,
+  } = props;
+
   // States
-  const [hidden, setHidden] = useState(true);
+  const [nav3dOpen, setNav3dOpen] = useState(false);
 
   // References
-  const mnPnl = useRef(null);
-  const mnInd = useRef(null);
-  const authLnks = useRef([]);
-  const smNav = useRef(null);
-  const smBtn = useRef(null);
+  const triggeringElement = useRef(null);
 
-  // Set indicator's initial state
-  const setInitialIndicator = (parPad, pthEl) => {
-    // Initial settings
-    mnInd.current.style.transition = "none";
-    mnInd.current.style.opacity = 0;
-    mnInd.current.style.width = `${pthEl.offsetWidth}px`;
-    mnInd.current.style.transform = `translateX(${
-      pthEl.offsetLeft - parPad
-    }px)`;
+  // Close 3d navbar | (max-width: 991px)
+  const closeNav3d = useCallback(() => {
+    setNav3dOpen(false);
 
-    // Manage indicator's initial transitions
-    setTimeout(() => {
-      mnInd.current.style.transition =
-        "width 0.4s, transform 0.4s, opacity 0.4s";
-      mnInd.current.style.opacity = 1;
-    }, 10);
-  };
+    if (props.main.current)
+      props.main.current.classList.remove("main--is-active");
+  }, [props.main]);
 
-  // componentDidMount - Keep CSS from refreshing
-  useEffect(() => {
-    // Initial settings
-    const pthnm = window.location.pathname;
-    const allowedPthnms = ["/", "/read-more"];
-
-    // Get an element corresponding to the pathname
-    const pthEl = document.querySelector(`a[href="${pthnm}"]`);
-    if (pthEl) {
-      if (allowedPthnms.includes(pthnm)) {
-        // setTimeout - Solution to indicator's initial styles
-        setTimeout(() => {
-          // Get an element's padding value - The nearest ancestor that has a position other than static
-          const parPad = parseInt(
-            getComputedStyle(mnInd.current.offsetParent).paddingLeft,
-            10
-          );
-          setInitialIndicator(parPad, pthEl);
-        }, 10);
-      } else {
-        // Set indicator's flag to handle transitions
-        mnInd.current.flag = true;
-        // Set link's state to active for the authentication part of the navigation
-        pthEl.classList.add("top-nav__lnk--auth-is-active");
-      }
-    }
-  }, []);
-
-  // Manage the navigation bar's states (@media (max-width: 991px))
-  const handleMainButtonClick = (e) => {
-    e.currentTarget.classList.toggle("button--nav-mn-is-active");
-
-    mnPnl.current.classList.toggle("top-nav__mn-pnl--is-extended");
-    smNav.current.classList.toggle("navbar-3d--is-extended");
-  };
-
-  // Close the navigation bar and remove the indicator when the link is clicked
-  const handleSmallLinksClick = () => {
-    mnInd.current.style.display = "none";
-
-    smBtn.current.classList.remove("button--nav-mn-is-active");
-
-    mnPnl.current.classList.remove("top-nav__mn-pnl--is-extended");
-    smNav.current.classList.remove("navbar-3d--is-extended");
-  };
-
-  // Remove CSS when the window is resized ***
+  // Remove classes related to 3d navbar when the window is resized ***
   const handleWindowResize = useCallback(() => {
     if (window.matchMedia("(min-width: 992px)").matches) {
-      mnPnl.current.classList.remove("top-nav__mn-pnl--is-extended");
-      smNav.current.classList.remove("navbar-3d--is-extended");
-      smBtn.current.classList.remove("button--nav-mn-is-active");
+      closeNav3d();
     }
-  }, []);
+  }, [closeNav3d]);
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
 
-    return () => {
-      window.removeEventListener("click", handleWindowResize);
-    };
+    return () => window.removeEventListener("click", handleWindowResize);
   }, [handleWindowResize]);
   // End ***
 
-  // Close the sign-in form when the click is detected outside ***
-  const handleDocumentClick = useCallback((el, e) => {
-    if (
-      el.firstChild.classList.contains("button--nav-auth-is-active") &&
-      !el.contains(e.target)
-    ) {
-      el.firstChild.classList.remove("button--nav-auth-is-active");
-      el.lastChild.classList.remove("sign-in--nav-is-extended");
+  // Remove class after a few seconds
+  const removeClassTime = (el, className) => el.classList.remove(className);
 
-      setHidden((prevHidden) => !prevHidden);
-    }
-  }, []);
+  // Close 3d navbar using keyboard | (max-width: 991px)
+  const handleMainButtonKeyDown = (e) => {
+    switch (e.which) {
+      case 27:
+        if (nav3dOpen) {
+          e.currentTarget.classList.toggle("button--nav-main-is-active");
+          setTimeout(
+            removeClassTime.bind(
+              null,
+              e.currentTarget,
+              "button--nav-main-is-active"
+            ),
+            1000
+          );
 
-  useEffect(() => {
-    const authBtnCtr = document.querySelector(".top-nav__btn");
-    if (authBtnCtr) {
-      document.addEventListener(
-        "click",
-        handleDocumentClick.bind(null, authBtnCtr)
-      );
-
-      return () => {
-        window.removeEventListener("click", handleDocumentClick);
-      };
-    }
-  }, [handleDocumentClick]);
-  // End ***
-
-  // Set the indicator when the link is clicked
-  const handleLinksClick = (e) => {
-    // Remove the active state from the authentication part of the navigation
-    authLnks.current.forEach((authLnk) => {
-      authLnk.classList.remove("top-nav__lnk--auth-is-active");
-    });
-    // Restore the indicator
-    mnInd.current.style.display = "block";
-    // Get an element's padding value - The nearest ancestor that has a position other than static
-    const parPad = parseInt(
-      getComputedStyle(mnInd.current.offsetParent).paddingLeft,
-      10
-    );
-
-    // Manage the indicator
-    if (mnInd.current.flag) {
-      setInitialIndicator(parPad, e.currentTarget);
-      mnInd.current.flag = false;
-    } else {
-      mnInd.current.style.transition = "width 0.4s, transform 0.4s";
-      mnInd.current.style.width = `${e.currentTarget.offsetWidth}px`;
-      mnInd.current.style.transform = `translateX(${
-        e.currentTarget.offsetLeft - parPad
-      }px)`;
+          closeNav3d();
+        }
+        break;
+      default:
+        break;
     }
   };
 
-  // Set the active state when the link is clicked
-  const handleAuthenticationLinkClick = (e) => {
-    // Remove the indicator
-    mnInd.current.style.display = "none";
-    mnInd.current.flag = true;
-    // Remove the active state from the authentication part of the navigation
-    authLnks.current.forEach((authLnk) => {
-      authLnk.classList.remove("top-nav__lnk--auth-is-active");
-    });
-    // Add the active state to the current element
-    e.currentTarget.classList.add("top-nav__lnk--auth-is-active");
-  };
-
-  // Open and close the sign-in form when the button is clicked
-  const handleSignInButtonClick = (e) => {
-    e.currentTarget.classList.toggle("button--nav-auth-is-active");
-    e.currentTarget.parentElement.lastChild.classList.toggle(
-      "sign-in--nav-is-extended"
+  // Toggle 3d navbar | (max-width: 991px)
+  const handleMainButtonClick = (e) => {
+    e.currentTarget.classList.toggle("button--nav-main-is-active");
+    setTimeout(
+      removeClassTime.bind(null, e.currentTarget, "button--nav-main-is-active"),
+      1000
     );
 
-    setHidden((prevHidden) => !prevHidden);
+    setNav3dOpen((prevState) => !prevState);
+
+    if (props.main.current)
+      props.main.current.classList.toggle("main--is-active");
+  };
+
+  // Sign out
+  const handleSignOutLinkClick = () => {
+    signOut();
+  };
+
+  // Close 3d navbar after link click | (max-width: 991px)
+  const handleNav3dLinkClick = () => {
+    closeNav3d();
+  };
+
+  // Close 3d navbar and sign out after link click | (max-width: 991px)
+  const handleSignOutNav3dLinkClick = () => {
+    handleSignOutLinkClick();
+    handleNav3dLinkClick();
   };
 
   // Variables
-  const mnMnu = mnPnlProps.map((param) => (
-    <li className="top-nav__itm" key={param.path}>
+  const mainMenu = mainPanelProps.map((prop) => (
+    <li className="navbar__item" key={prop.path}>
       <NavLink
         exact
-        className="top-nav__lnk txt txt--nav"
-        to={param.path}
-        onClick={handleLinksClick}
-        activeClassName="top-nav__lnk--is-active"
+        to={prop.path}
+        activeClassName="navbar__link--is-active"
+        className="navbar__link"
+        // Prevent dragging
+        draggable={false}
+        onDragStart={() => false}
       >
-        <i className={`top-nav__icon fas ${param.icon}`}></i>{" "}
-        <span className="top-nav__txt">{param.text}</span>
+        {prop.icon && <i className={`navbar__icon ${prop.icon}`}></i>}
+        <span
+          className={`navbar__text ${
+            prop.icon && "navbar__text--margin-left d-none d-sm-inline"
+          }`}
+        >
+          {prop.text}
+        </span>
       </NavLink>
     </li>
   ));
 
-  const gstMnu = gstPnlProps.map((param, index) => (
-    <li className="top-nav__itm" data-path={`/${param.path}`} key={param.path}>
-      <Link
-        className="top-nav__lnk top-nav__lnk--auth txt txt--nav txt--nav-auth"
-        to={param.path}
-        onClick={handleAuthenticationLinkClick}
-        ref={(el) => (authLnks.current[index] = el)}
+  const mainUserMenu = mainUserPanelProps.map((prop) => (
+    <li className="navbar__item" key={prop.path}>
+      <NavLink
+        exact
+        to={prop.path}
+        activeClassName="navbar__link--is-active"
+        className="navbar__link"
+        // Prevent dragging
+        draggable={false}
+        onDragStart={() => false}
       >
-        {param.text}
-      </Link>
+        {prop.icon && <i className={`navbar__icon ${prop.icon}`}></i>}
+        <span
+          className={`navbar__text ${
+            prop.icon && "navbar__text--margin-left d-none d-sm-inline"
+          }`}
+        >
+          {prop.text}
+        </span>
+      </NavLink>
+    </li>
+  ));
+
+  const authUserMenu = authUserPanelProps.map((prop) => (
+    <li className="navbar__item" key={prop.path}>
+      <NavLink
+        exact
+        to={prop.path}
+        activeClassName="navbar__link--is-active"
+        className="navbar__link"
+        onClick={prop.text === "sign out" && handleSignOutLinkClick}
+        // Prevent dragging
+        draggable={false}
+        onDragStart={() => false}
+      >
+        {prop.icon && <i className={`navbar__icon ${prop.icon}`}></i>}
+        <span
+          className={`navbar__text ${prop.icon && "navbar__text--margin-left"}`}
+        >
+          {prop.text}
+        </span>
+      </NavLink>
     </li>
   ));
 
   return (
-    <header>
-      <nav className="top-nav">
+    <header className="header">
+      <nav className="nav">
         <div className="container">
-          {/* fixed-top */}
-          <div className="row">
-            <div className="top-nav__cntnr">
-              <Navbar3d
-                bootstrapClasses="col-12 d-lg-none"
-                ref={smNav}
-                click={handleSmallLinksClick}
-              />
-              <div className="top-nav__mn-pnl col-12 col-lg-6" ref={mnPnl}>
-                <ul className="top-nav__lst">{mnMnu}</ul>
-                <Button
-                  categories={["nav-mn"]}
-                  bootstrapClasses="d-lg-none"
-                  ref={smBtn}
-                  click={handleMainButtonClick}
+          <div className="row h-100">
+            <div className="navbar col-12">
+              <div className="row h-100">
+                <Navbar3d
+                  eventTypes={["mousedown", "touchstart", "keydown"]}
+                  bootstrapClasses="col-12 d-lg-none"
+                  listProps={
+                    isAuthenticated ? authUserPanelProps : authGuestPanelProps
+                  }
+                  visible={nav3dOpen}
+                  onClose={closeNav3d}
+                  outsideClickIgnoreClass="navbar-3d-ignore"
+                  signOut={handleSignOutNav3dLinkClick}
+                  onClick={handleNav3dLinkClick}
+                  triggeringElement={triggeringElement}
+                />
+                <CSSTransition
+                  in={nav3dOpen}
+                  timeout={props.transitionDuration}
+                  classNames={props.transitionClassNames}
                 >
-                  <span className="button__burger-ln"></span>
-                  <span className="button__burger-ln"></span>
-                  <span className="button__burger-ln"></span>
-                </Button>
-                <div className="top-nav__ind" ref={mnInd}></div>
-              </div>
-              <div className="top-nav__auth-pnl col-lg-6 d-none d-lg-flex">
-                {props.location.pathname !== "/sign-in" ? (
-                  <div className="top-nav__btn">
+                  <div className="navbar__panel navbar__panel--left col-12 col-lg-6">
+                    {isAuthenticated ? (
+                      <ul className="navbar__list">{mainUserMenu}</ul>
+                    ) : (
+                      <ul className="navbar__list">{mainMenu}</ul>
+                    )}
                     <Button
-                      categories={["nav-auth"]}
-                      textCategories={["nav", "nav-auth"]}
-                      icon="fas fa-angle-down"
-                      iconModifier="nav-sign-in"
-                      rightIcon
-                      click={handleSignInButtonClick}
-                    >
-                      sign in
-                    </Button>
-                    <SignIn categories={["nav"]} hidden={hidden} />
+                      categories={["nav-main"]}
+                      bootstrapClasses="d-lg-none"
+                      outsideClickIgnoreClass="navbar-3d-ignore"
+                      onClick={handleMainButtonClick}
+                      onKeyDown={handleMainButtonKeyDown}
+                      light
+                      hamburger
+                      ref={triggeringElement}
+                    />
                   </div>
-                ) : null}
-                <ul className="top-nav__lst top-nav__lst--auth">{gstMnu}</ul>
+                </CSSTransition>
+
+                <div className="navbar__panel navbar__panel--right col-lg-6 d-none d-lg-flex">
+                  {isAuthenticated ? (
+                    <ul className="navbar__list">{authUserMenu}</ul>
+                  ) : (
+                    props.location.pathname !== "/sign-out" && (
+                      <>
+                        {props.location.pathname !== "/sign-in" && (
+                          <Dropdown
+                            dropdownMenu={<SignIn categories={["nav"]} />}
+                            categories={["nav"]}
+                            buttonCategories={[
+                              "nav-right",
+                              "nav-right-dropdown",
+                            ]}
+                            ignoreReactOnClickOutside="sign-in-ignore"
+                            buttonActiveClass="nav-right-dropdown-is-active"
+                            buttonText="sign in"
+                            uniqueIdOnClickOutside="sign-in"
+                          />
+                        )}
+                        {props.location.pathname !== "/sign-up" && (
+                          <Dropdown
+                            dropdownMenu={<SignUp categories={["nav"]} />}
+                            categories={["nav"]}
+                            buttonCategories={[
+                              "nav-right",
+                              "nav-right-dropdown",
+                            ]}
+                            ignoreReactOnClickOutside="sign-up-ignore"
+                            buttonActiveClass="nav-right-dropdown-is-active"
+                            buttonText="sign up"
+                            uniqueIdOnClickOutside="sign-up"
+                          />
+                        )}
+                      </>
+                    )
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -277,4 +308,22 @@ const Navbar = (props) => {
   );
 };
 
-export default withRouter(Navbar);
+Navbar.defaultProps = {
+  transitionDuration: 400,
+  transitionClassNames: "navbar__main-panel",
+};
+
+Navbar.propTypes = {
+  main: PropTypes.object,
+  transitionDuration: PropTypes.number,
+  transitionClassNames: PropTypes.string,
+  // Redux
+  signOut: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { signOut })(withRouter(Navbar));

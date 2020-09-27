@@ -4,7 +4,6 @@
   "description": "Task manager.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
@@ -28,7 +27,8 @@
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.25",
-    "password-validator": "^5.0.3"
+    "password-validator": "^5.0.3",
+    "react-tooltip": "^4.2.10"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",

@@ -1,0 +1,75 @@
+body {
+  /* =============== Variables =============== */
+  $body-background-color: $background-color-light-primary;
+
+  background-color: $body-background-color;
+
+  font-family: "Lato", sans-serif;
+}
+
+.main {
+  @media (max-width: map-get($breakpoints, breakpoint-large)) {
+    @include transition(
+      null,
+      (
+        "property": transform,
+      )
+    );
+
+    /* =============== Modifiers =============== */
+    // State
+    &--is-active {
+      @include transform(translateY($navbar3d-height));
+    }
+    /* =============== End =============== */
+  }
+}
+
+html,
+body,
+#root {
+  @extend %h-100;
+}
+
+#root {
+  @extend %flexbox;
+  @extend %flex-direction-column;
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: next-to-page,
+  $transformsStart: null,
+  $transformsEnd: null,
+  $duration: $transition-duration-tertiary
+);
+
+// @include basicTransition(
+//   $classNames: page,
+//   $transformsStart: translateY(75px),
+//   $transformsEnd: translateY(0)
+// );
+
+.page-enter,
+.page-appear {
+  opacity: 0;
+
+  @include transform(translateY(75px) scale(0.9));
+}
+
+.page-enter-active,
+.page-appear-active {
+  opacity: 1;
+
+  @include transform(translateY(0) scale(1));
+  @include transition(
+    null,
+    (
+      "property": transform,
+      "duration": $transition-duration-tertiary,
+    ),
+    (
+      "property": opacity,
+    )
+  );
+}

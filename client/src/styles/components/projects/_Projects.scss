@@ -1,0 +1,550 @@
+.projects {
+  /* =============== Variables =============== */
+  $input-font-color: $projects-font-color-form-primary;
+  $placeholder-font-color: $projects-font-color-form-secondary;
+  $grid-header-border-color-B: $projects-accents-primary;
+  $header-col-font-color: $projects-font-color-primary;
+  $header-col-border-color-L: $grid-header-border-color-B;
+  $section-header-font-color: $projects-font-color-primary;
+  $section-header-hover-font-color: $projects-accents-secondary;
+  $section-header-border-color-B: $section-header-font-color;
+  $section-header-hover-border-color-B: $section-header-hover-font-color;
+  $grid-project-border-color-B: $projects-accents-primary;
+  $project-col-border-color-L: $grid-project-border-color-B;
+  $project-name-hover-background-color: $projects-accents-primary;
+  $project-name-font-color: $projects-neutral-primary;
+  $project-name-hover-font-color: $project-name-font-color;
+  $project-icon-font-color: $projects-neutral-tertiary;
+  // --Date
+  $project-col-font-color--date: $projects-neutral-secondary;
+  // --Edit
+  $project-icon-font-color--edit: $projects-neutral-primary;
+
+  $projects-border-radius: 15px;
+  $projects-padding-md: 20px;
+  $project-padding-RL-sm: ($projects-padding-md/2);
+  $search-bar-height: 50px;
+  $search-bar-border-radius: ($search-bar-height/2);
+  $search-bar-padding-RL: 15px;
+  $grid-margin-T: 25px;
+  $header-col-padding-T: 5px;
+  $section-header-padding-TB: 15px;
+  $section-information-min-height: 25px;
+  $project-text-width-xl: 300px;
+  $project-text-width-lg: 150px;
+  $project-text-margin-L: 10px;
+
+  // Multiple
+  $option-hover-background-color: $projects-accents-primary;
+
+  $col-padding-TB: 10px;
+  $icon-width: 16px;
+  $option-wrapper-margin-RL: 5px;
+  $option-size: $option-size;
+  // --Grip
+  $icon-margin-L--grip: 8px;
+
+  // First column
+  $first-col-padding-RL: 5px;
+  $first-col-padding-L: $first-col-padding-RL + $icon-width +
+    $icon-margin-L--grip;
+
+  // Using first-col-padding-RL
+  $section-header-padding-RL: $first-col-padding-RL;
+  $project-name-padding-RL: $first-col-padding-RL;
+
+  // Using first-col-padding-L
+  $header-col-padding-L--first-child: $first-col-padding-L;
+  // --Result
+  $project-name-padding-L--result: $first-col-padding-L;
+
+  // Grid-template
+  $name-width-lg: auto;
+  $name-width-md: auto;
+  $name-width-sm: auto;
+  $due-date-width-lg: 100px;
+  $priority-width-lg: 130px;
+  $priority-width-md: 95px;
+  $status-width-lg: 130px;
+  $status-width-md: 95px;
+  $menu-width-lg: 50px;
+  $menu-width-md: 35px;
+  $menu-width-sm: 40px;
+
+  // --Is-dragging
+  $opacity--is-dragging: 0.8;
+
+  $root: &;
+
+  // Projects-border-radius
+  border-radius: $projects-border-radius;
+
+  @extend %box-shadow-light-inset;
+
+  // Projects-padding-md
+  @include space(padding, $gen: $projects-padding-md);
+
+  @media (max-width: map-get($breakpoints, breakpoint-small)) {
+    // Projects-padding-RL-sm
+    @include space(
+      padding,
+      $right: $project-padding-RL-sm,
+      $left: $project-padding-RL-sm
+    );
+  }
+  &__search-bar {
+    // Search-bar-border-radius
+    border-radius: $search-bar-border-radius;
+
+    @extend %box-shadow-light;
+
+    // Search-bar-height
+    @include size($height: $search-bar-height);
+    // Search-bar-padding-RL
+    @include space(
+      padding,
+      $right: $search-bar-padding-RL,
+      $left: $search-bar-padding-RL
+    );
+  }
+
+  &__main-wrapper {
+    @extend %flexbox;
+    @extend %align-items-center;
+  }
+
+  &__input-wrapper {
+    @extend %flexbox;
+    @extend %align-items-center;
+
+    @include position(relative);
+  }
+
+  &__input {
+    color: $input-font-color;
+
+    @extend %input-icon;
+    @extend %box-shadow-light-inset;
+
+    /* =============== Modifiers =============== */
+    &--search {
+      @include size($width: 100%);
+    }
+    /* =============== End =============== */
+  }
+
+  &__placeholder-icon {
+    &:after {
+      @extend %placeholder-icon-settings;
+    }
+  }
+
+  &__placeholder {
+    &:before {
+      color: $placeholder-font-color;
+
+      @extend %placeholder-text-icon;
+    }
+
+    &:after {
+      color: $placeholder-font-color;
+
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f002";
+
+      @extend %placeholder-icon;
+    }
+
+    /* =============== Modifiers =============== */
+    // State
+    &--is-active {
+      &:before {
+        opacity: 0;
+      }
+      &:after {
+        color: $input-font-color;
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__grid {
+    @extend %grid;
+
+    @include grid-template(rows, auto auto auto);
+    @include space(margin, $top: $grid-margin-T);
+  }
+
+  &__grid-header {
+    // Grid-header-border-color-B
+    border-bottom: 1px solid $grid-header-border-color-B;
+
+    @extend %grid;
+
+    @include grid-template(
+      columns,
+      $name-width-lg $due-date-width-lg $priority-width-lg $status-width-lg
+        $menu-width-lg
+    );
+
+    @media (max-width: map-get($breakpoints, breakpoint-medium)) {
+      @include grid-template(
+        columns,
+        $name-width-md $priority-width-md $status-width-md $menu-width-md
+      );
+    }
+
+    @media (max-width: map-get($breakpoints, breakpoint-small)) {
+      @include grid-template(columns, $name-width-sm $menu-width-sm);
+    }
+  }
+
+  &__header-col,
+  &__project-col {
+    // Col-padding-TB
+    @include space(padding, $top: $col-padding-TB, $bottom: $col-padding-TB);
+  }
+
+  &__header-col {
+    // Header-col-border-color-L
+    border-left: 1px solid $header-col-border-color-L;
+    text-align: center;
+    // Header-col-font-color
+    color: $header-col-font-color;
+
+    // Header-col-padding-T
+    @include space(padding, $top: $header-col-padding-T);
+
+    &:first-child {
+      border-left: none;
+      text-align: left;
+
+      // Header-col-padding-L--first-child
+      @include space(padding, $left: $header-col-padding-L--first-child);
+    }
+  }
+
+  &__section {
+    /* =============== Modifiers =============== */
+    // State
+    &--is-dragging {
+      opacity: $opacity--is-dragging;
+
+      #{$root}__section-header {
+        border-bottom: none;
+
+        &--border-bottom {
+          border-bottom: 1px solid $section-header-border-color-B;
+        }
+      }
+
+      #{$root}__section-icon {
+        &--grip {
+          opacity: 1;
+        }
+      }
+
+      #{$root}__grid-project {
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__section-header {
+    color: $section-header-font-color;
+
+    border-bottom: 1px solid $section-header-border-color-B;
+
+    @extend %user-select-none;
+
+    // Section-header-padding-TB & Section-header-padding-RL
+    @include space(
+      padding,
+      $top: $section-header-padding-TB,
+      $right: $section-header-padding-RL,
+      $bottom: $section-header-padding-TB,
+      $left: $section-header-padding-RL
+    );
+    @include transition(
+      null,
+      (
+        "property": color,
+      ),
+      (
+        "property": border-color,
+      )
+    );
+
+    &:hover,
+    /* =============== Modifiers =============== */
+    // State
+    &--is-edited {
+      color: $section-header-hover-font-color;
+
+      border-color: $section-header-hover-border-color-B;
+
+      #{$root}__section-icon {
+        opacity: 1;
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__section-information {
+    min-height: $section-information-min-height;
+
+    @extend %flexbox;
+    @extend %align-items-center;
+    @extend %w-100;
+  }
+
+  &__section-options,
+  &__project-options {
+    @include space(margin, $left: auto);
+  }
+
+  &__section-option-wrapper,
+  &__project-option-wrapper {
+    display: inline-block;
+
+    // Option-wrapper-margin-RL
+    @include space(
+      margin,
+      $right: $option-wrapper-margin-RL,
+      $left: $option-wrapper-margin-RL
+    );
+    @include position(relative);
+  }
+
+  &__section-option,
+  &__project-option {
+    border-radius: 50%;
+    cursor: pointer;
+
+    @extend %flexbox;
+    @extend %justify-content-center;
+    @extend %align-items-center;
+
+    // Option-size
+    @include size($width: $option-size, $height: $option-size);
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      )
+    );
+  }
+
+  &__section-option,
+  &__project-option {
+    &:hover {
+      background-color: $option-hover-background-color;
+    }
+  }
+
+  &__section-icon,
+  &__project-icon {
+    text-align: center;
+
+    // Icon-width
+    @include size($width: $icon-width);
+
+    &--grip {
+      z-index: 1;
+
+      // Icon-margin-L--grip
+      @include space(margin, $right: $icon-margin-L--grip);
+    }
+  }
+
+  &__section-icon {
+    /* =============== Modifiers =============== */
+    &--edit,
+    &--delete,
+    &--grip {
+      opacity: 0;
+
+      @include transition(
+        null,
+        (
+          "property": opacity,
+        )
+      );
+    }
+    /* =============== End =============== */
+  }
+
+  &__grid-project {
+    border-bottom: 1px solid $grid-project-border-color-B;
+
+    @extend %grid;
+
+    @include grid-template(
+      columns,
+      $name-width-lg $due-date-width-lg $priority-width-lg $status-width-lg
+        $menu-width-lg
+    );
+
+    @media (max-width: map-get($breakpoints, breakpoint-medium)) {
+      @include grid-template(
+        columns,
+        $name-width-md $priority-width-md $status-width-md $menu-width-md
+      );
+    }
+
+    @media (max-width: map-get($breakpoints, breakpoint-small)) {
+      @include grid-template(columns, $name-width-sm $menu-width-sm);
+    }
+
+    /* =============== Modifiers =============== */
+    // State
+    &--is-dragging {
+      opacity: $opacity--is-dragging;
+      border-bottom: none;
+
+      #{$root}__project-icon {
+        &--grip {
+          opacity: 1;
+        }
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__project-col {
+    border-left: 1px solid $project-col-border-color-L;
+
+    &:first-child {
+      border-left: none;
+
+      @include space(padding, $gen: unset);
+    }
+
+    /* =============== Modifiers =============== */
+    &--options {
+      @extend %flexbox;
+      @extend %justify-content-center;
+      @extend %align-items-center;
+    }
+
+    &--date {
+      color: $project-col-font-color--date;
+
+      @extend %flexbox;
+      @extend %justify-content-center;
+      @extend %align-items-center;
+      @extend %user-select-none;
+
+      @include position(relative);
+
+      &:hover {
+        #{$root}__project-tooltip {
+          opacity: 1;
+        }
+      }
+    }
+
+    &--ellipsis {
+      @include position(relative);
+    }
+    // End ***
+  }
+
+  &__project-name {
+    color: $project-name-font-color;
+
+    @extend %link;
+    @extend %flexbox;
+    @extend %align-items-center;
+    @extend %w-100;
+    @extend %h-100;
+
+    // Project-name-padding-RL
+    @include space(
+      padding,
+      $right: $project-name-padding-RL,
+      $left: $project-name-padding-RL
+    );
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      )
+    );
+
+    &:hover,
+    /* =============== Modifiers =============== */
+    // State
+    &--is-edited {
+      background-color: $project-name-hover-background-color;
+      color: $project-name-hover-font-color;
+
+      text-decoration: none;
+
+      #{$root}__project-icon {
+        opacity: 1;
+      }
+    }
+
+    &--result {
+      // Project-name-padding-L--result
+      @include space(padding, $left: $project-name-padding-L--result);
+    }
+    /* =============== End =============== */
+  }
+
+  &__project-icon {
+    color: $project-icon-font-color;
+
+    /* =============== Modifiers =============== */
+    &--grip,
+    &--edit {
+      opacity: 0;
+
+      @include transition(
+        null,
+        (
+          "property": opacity,
+        )
+      );
+    }
+
+    &--edit {
+      color: $project-icon-font-color--edit;
+    }
+    /* =============== End =============== */
+  }
+
+  &__project-text {
+    white-space: nowrap;
+    overflow: hidden;
+
+    // Project-text-width-xl
+    @include size($width: $project-text-width-xl);
+    // Project-text-margin-L
+    @include space(margin, $left: $project-text-margin-L);
+    @include prefix(
+      (
+        text-overflow: ellipsis,
+      ),
+      o
+    );
+
+    @media (max-width: map-get($breakpoints, breakpoint-large)) {
+      // Project-text-width-lg
+      @include size($width: $project-text-width-lg);
+    }
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: projects,
+  $transformsStart: translateY(25px),
+  $transformsEnd: translateY(0),
+  $duration: 1s
+);

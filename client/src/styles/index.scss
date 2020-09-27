@@ -1,17 +1,52 @@
-@import "./partials/custom";
-@import "~bootstrap/scss/bootstrap";
+/* Vendors 
+============================================================================================== */
+@import "./vendors/bootstrap";
+@import "./vendors/reset-css";
+@import "./vendors/normalize";
+@import "./vendors/fontawesome";
+@import "./vendors/react-datepicker";
+@import "./vendors/react-responsive-modal";
 
-@import "~@fortawesome/fontawesome-free/scss/fontawesome";
-@import "~@fortawesome/fontawesome-free/scss/solid";
-@import "~@fortawesome/fontawesome-free/scss/brands";
+/* Abstracts
+============================================================================================== */
+@import "./abstracts/variables";
+@import "./abstracts/functions";
+@import "./abstracts/mixins";
+@import "./abstracts/placeholders";
 
-@import "./partials/variables";
-@import "./partials/mixins";
+/* Vendors extensions
+============================================================================================== */
+@import "./vendors-extensions/bootstrap";
+@import "./vendors-extensions/reset-css";
+@import "./vendors-extensions/react-datepicker";
 
-@import "./partials/text";
-@import "./partials/App";
-@import "./partials/Navbar";
-@import "./partials/Navbar3d";
-@import "./partials/SignIn";
-@import "./partials/SignUp";
+/* Components
+============================================================================================== */
+/*  =============== Auth =============== */
+@import "./components/auth/SignIn";
+@import "./components/auth/SignUp";
+@import "./components/auth/SignOut";
+/*  =============== Layouts =============== */
+@import "./components/layouts/Alert";
+@import "./components/layouts/DeleteConfirmation";
+@import "./components/layouts/Navbar";
+@import "./components/layouts/Navbar3d";
+@import "./components/layouts/Dropdown";
+@import "./components/layouts/Footer";
+/*  =============== Projects =============== */
+@import "./components/projects/Projects";
+@import "./components/projects/SectionInlineEditForm";
+@import "./components/projects/ProjectInlineEditForm";
+@import "./components/projects/SectionModalAddForm";
+@import "./components/projects/ProjectModalAddForm";
+@import "./components/projects/SectionInlineAdd";
+@import "./components/projects/ProjectMenu";
+/*  =============== Modal =============== */
+@import "./components/modal/AnimatedModal";
+
 @import "./partials/Button";
+@import "./partials/SelectInput";
+
+@import "./normalize";
+@import "./focus";
+@import "./App";

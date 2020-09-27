@@ -1,0 +1,29 @@
+.footer {
+  @include space(margin, $top: auto);
+  @include flex($f-shrink: 0);
+}
+
+.footnote {
+  /* =============== Variables =============== */
+  $copyright-font-color: $footer-font-color-primary;
+
+  $footnote-padding: 20px;
+  $text-margin-L: 5px;
+
+  // Footnote-padding
+  @include space(padding, $gen: $footnote-padding);
+
+  &__copyright {
+    color: $copyright-font-color;
+
+    text-align: center;
+    text-transform: capitalize;
+
+    @extend %w-100;
+  }
+
+  &__text {
+    // Text-margin-L
+    @include space(margin, $left: $text-margin-L);
+  }
+}

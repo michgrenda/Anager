@@ -1,0 +1,65 @@
+.project-menu {
+  /* =============== Variables =============== */
+  $list-background-color: $projects-background-color-primary;
+  $item-hover-background-color: $projects-accents-primary;
+  $item-font-color: $projects-font-color-primary;
+  $item-hover-font-color: $projects-accents-secondary;
+
+  $list-border-radius: 5px;
+  $item-padding-TB: 5px;
+  $item-padding-RL: 6px;
+
+  &__list {
+    background-color: $list-background-color;
+
+    // List-border-radius
+    border-radius: $list-border-radius;
+    overflow: hidden;
+    z-index: 1;
+
+    @extend %box-shadow-light-gentle;
+
+    @include transform-origin($x: right, $y: center);
+    @include position(absolute, $top: 50%, $right: 100%);
+  }
+
+  &__item {
+    text-transform: capitalize;
+    white-space: nowrap;
+    color: $item-font-color;
+    cursor: pointer;
+
+    @extend %user-select-none;
+
+    // Item-padding-TB & Item-padding-RL
+    @include space(
+      padding,
+      $top: $item-padding-TB,
+      $right: $item-padding-RL,
+      $bottom: $item-padding-TB,
+      $left: $item-padding-RL
+    );
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      ),
+      (
+        "property": color,
+      )
+    );
+
+    &:hover {
+      background-color: $item-hover-background-color;
+      color: $item-hover-font-color;
+    }
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: project-menu__list,
+  $transformsStart: translateX(10px) translateY(-50%) scale(0),
+  $transformsEnd: translateX(0) translateY(-50%) scale(1),
+  $done: true
+);

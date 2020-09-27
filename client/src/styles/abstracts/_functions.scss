@@ -1,0 +1,77 @@
+/* General
+============================================================================================== */
+// Merge received properties
+@function mrgProps($props, $dfltProps) {
+  $mrgdProps: ();
+  @each $key, $value in $dfltProps {
+    @if map-has-key($props, $key) {
+      $mrgdProps: map-merge(
+        $mrgdProps,
+        (
+          $key: map-get($props, $key),
+        )
+      );
+    } @else {
+      $mrgdProps: map-merge(
+        $mrgdProps,
+        (
+          $key: $value,
+        )
+      );
+    }
+  }
+
+  @return $mrgdProps;
+}
+
+@function procTrsn($trsn) {
+  // Default values
+  $property: all;
+  $duration: $transition-duration-primary;
+  $timing-function: null;
+  $delay: null;
+  $dfltProps: (
+    "property": $property,
+    "duration": $duration,
+    "timing-function": $timing-function,
+    "delay": $delay,
+  );
+
+  // Merge default values with the ones received
+  $procdProps: mrgProps($trsn, $dfltProps);
+
+  $procdTrsn: ();
+  @each $val in map-values($procdProps) {
+    $procdTrsn: append($procdTrsn, $val);
+  }
+
+  @return $procdTrsn;
+}
+
+@function procBShdw($b-shdw) {
+  // Default values
+  $x-offset: $shadow-x-offset-primary;
+  $y-offset: $shadow-y-offset-primary;
+  $blur: null;
+  $spread: null;
+  $color: null;
+  $inset: null;
+  $dfltProps: (
+    "x-offset": $x-offset,
+    "y-offset": $y-offset,
+    "blur": $blur,
+    "spred": $spread,
+    "color": $color,
+    "inset": $inset,
+  );
+
+  // Merge default values with the ones received
+  $procdProps: mrgProps($b-shdw, $dfltProps);
+
+  $procdBShdw: ();
+  @each $val in map-values($procdProps) {
+    $procdBShdw: append($procdBShdw, $val);
+  }
+
+  @return $procdBShdw;
+}

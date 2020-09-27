@@ -1,0 +1,88 @@
+.delete-confirmation {
+  /* =============== Variables =============== */
+  $delete-confirmation-background-color: $delete-confirmation-background-color-primary;
+  $header-background-color: $alert-danger;
+  $header-font-color: $delete-confirmation-font-color-primary;
+  $information-font-color: $delete-confirmation-font-color-secondary;
+
+  $delete-confirmation-width: 375px;
+  $delete-confirmation-border-radius: 10px;
+  $delete-confirmation-position-R: calc(100% + 10px);
+  $header-padding: 10px;
+  $header-margin-B: 5px;
+  $btn-wrapper-margin-RL: 5px;
+  $general-padding-TB: 5px;
+  $general-padding-RL: 10px;
+
+  /* =============== Placeholders =============== */
+  %general-padding {
+    @include space(
+      padding,
+      $top: $general-padding-TB,
+      $right: $general-padding-RL,
+      $bottom: $general-padding-TB,
+      $left: $general-padding-RL
+    );
+  }
+
+  background-color: $delete-confirmation-background-color;
+
+  // Delete-confirmation-border-radius
+  border-radius: $delete-confirmation-border-radius;
+  overflow: hidden;
+  text-align: center;
+  z-index: 1;
+
+  @extend %box-shadow-light-gentle;
+
+  // Delete-confirmation-width
+  @include size($width: $delete-confirmation-width);
+  @include transform-origin($x: right, $y: center);
+  // Delete-confirmation-position-R
+  @include position(
+    absolute,
+    $top: 50%,
+    $right: $delete-confirmation-position-R
+  );
+
+  &__header {
+    background-color: $header-background-color;
+    color: $header-font-color;
+
+    font-weight: 700;
+
+    // Header-padding
+    @include space(padding, $gen: $header-padding);
+    // Header-margin-B
+    @include space(margin, $bottom: $header-margin-B);
+  }
+
+  &__information {
+    color: $information-font-color;
+
+    @extend %general-padding;
+  }
+
+  &__btns {
+    @extend %flexbox;
+    @extend %justify-content-center;
+    @extend %general-padding;
+  }
+
+  &__btn-wrapper {
+    // Btn-wrapper-margin-RL
+    @include space(
+      margin,
+      $right: $btn-wrapper-margin-RL,
+      $left: $btn-wrapper-margin-RL
+    );
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: delete-confirmation,
+  $transformsStart: translateX(10px) translateY(-50%) scale(0),
+  $transformsEnd: translateX(0) translateY(-50%) scale(1),
+  $done: true
+);

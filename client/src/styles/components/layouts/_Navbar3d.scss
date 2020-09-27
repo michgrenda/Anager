@@ -1,0 +1,68 @@
+.navbar-3d {
+  /* =============== Variables =============== */
+  $list-background-color: $navigation-background-color-primary;
+
+  $navbar3d-height: $navbar3d-height;
+
+  @extend %flexbox;
+
+  // Navbar3d-height
+  @include size($height: $navbar3d-height);
+  @include position(absolute);
+  @include hardware($bf-vsby: false, $pers: 1000px);
+
+  &__list {
+    background-color: $list-background-color;
+
+    @extend %flexbox;
+    @extend %w-100;
+
+    @include transform-origin($x: center, $y: bottom);
+    @include position(relative);
+    @include hardware;
+  }
+
+  &__item {
+    @include flex($f-grow: 1, $f-basis: 0);
+  }
+
+  &__link {
+    overflow: hidden;
+
+    @extend %navigation-link;
+    @extend %flexbox;
+    @extend %justify-content-center;
+    @extend %align-items-center;
+    @extend %flex-direction-column;
+    @extend %w-100;
+    @extend %h-100;
+
+    @include position(relative);
+    @include transition(
+      null,
+      (
+        "property": color,
+      )
+    );
+
+    /* =============== Modifiers =============== */
+    // State
+    // Indicator
+    &--is-active {
+      &:before {
+        @extend %navigation-indicator--right;
+      }
+    }
+    /* =============== End =============== */
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: navbar-3d,
+  $transformsStart: translateY(-$navbar3d-height),
+  $transformsEnd: translateY(0),
+  $opacity: false
+);
+
+@include nav3dListTransition;

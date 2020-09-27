@@ -1,0 +1,541 @@
+.select-input {
+  /* =============== Variables =============== */
+  // --Default-light
+  $header-font-color--default-light: $select-input-font-color-primary;
+  $title-wrapper-background-color--default-light: $select-input-background-color-primary;
+  $title-wrapper-hover-font-color--default-light: $select-input-font-color-tertiary;
+  $list-background-color--default-light: $select-input-background-color-primary;
+  $item-hover-background-color--default-light: $select-input-accents-primary;
+  $item-font-color--default-light: $title-wrapper-hover-font-color--default-light;
+  $item-hover-font-color--default-light: $header-font-color--default-light;
+
+  // --Default-dark
+  $header-font-color--default-dark: $select-input-font-color-secondary;
+  $title-wrapper-background-color--default-dark: $select-input-background-color-secondary;
+  $title-wrapper-hover-font-color--default-dark: $select-input-font-color-tertiary;
+  $list-background-color--default-dark: $select-input-background-color-secondary;
+  $item-hover-background-color--default-dark: $select-input-accents-primary;
+  $item-font-color--default-dark: $title-wrapper-hover-font-color--default-dark;
+  $item-hover-font-color--default-dark: $header-font-color--default-dark;
+
+  // --Project
+  $title-font-color--project: $projects-font-color-tertiary;
+  $title-hover-font-color--project: $title-font-color--project;
+  // --Project-modal-add
+  $header-font-color--project-modal-add: $projects-neutral-secondary;
+  $title-hover-background-color--project-modal-add: $header-font-color--project-modal-add;
+  $title-hover-font-color--project-modal-add: $projects-font-color-tertiary;
+  $title-border-color-B--project-modal-add: $title-hover-background-color--project-modal-add;
+
+  $title-wrapper-border-radius: 0.75rem;
+  $title-wrapper-padding-TB: 0.375rem;
+  $title-wrapper-padding-RL: 0.75rem;
+
+  $list-border-radius: 5px;
+  $list-margin-T: 10px;
+  $item-padding-TB: 5px;
+  $item-padding-RL: 6px;
+  $icon-width: 10px;
+  $icon-margin-L: 5px;
+  // --Projects-main
+  $title-wrapper-padding-RL--projects-main: 5px;
+  // --Project
+  $title-width--project: 90px;
+  $title-width--project-md: 70px;
+  $title-height--project: 25px;
+  $title-border-radius--project: ($title-height--project/2);
+  $title-padding-RL--project: 5px;
+  $list-width--project: 105px;
+  // --Project-modal-add
+  $title-wrapper-width--project-modal-add: 125px;
+  $title-wrapper-height--project-modal-add: 36px;
+  $title-wrapper-border-radius--project-modal-add: (
+    $title-wrapper-height--project-modal-add/2
+  );
+  $title-wrapper-padding-RL--project-modal-add: 5px;
+
+  /* =============== Mixins =============== */
+  @mixin select-state($root, $name, $color, $darken-color) {
+    &--#{$name} {
+      #{$root}__header {
+        color: $color;
+
+        &:hover {
+          color: $darken-color;
+          #{$root}__title-wrapper {
+            background-color: $darken-color;
+          }
+        }
+      }
+
+      #{$root}__title-wrapper {
+        background-color: $color;
+      }
+    }
+  }
+
+  @mixin item-state($name, $color) {
+    &--#{$name} {
+      &:hover {
+        color: $color;
+      }
+    }
+  }
+
+  $root: &;
+
+  @include position(relative);
+
+  /* =============== Modifiers =============== */
+  &--default-light {
+    #{$root}__header {
+      color: $header-font-color--default-light;
+
+      &:hover {
+        #{$root}__title-wrapper {
+          color: $title-wrapper-hover-font-color--default-light;
+        }
+      }
+    }
+
+    #{$root}__title-wrapper {
+      background-color: $title-wrapper-background-color--default-light;
+
+      @extend %box-shadow-light;
+    }
+
+    #{$root}__list {
+      background-color: $list-background-color--default-light;
+
+      @extend %box-shadow-light-gentle;
+    }
+
+    #{$root}__item {
+      color: $item-font-color--default-light;
+
+      &:hover {
+        // background-color: $item-hover-background-color--default-light;
+        color: $item-hover-font-color--default-light;
+      }
+
+      &--selected {
+        background-color: $item-hover-background-color--default-light;
+      }
+    }
+  }
+
+  &--default-dark {
+    #{$root}__header {
+      color: $header-font-color--default-dark;
+
+      &:hover {
+        #{$root}__title-wrapper {
+          color: $title-wrapper-hover-font-color--default-dark;
+        }
+      }
+    }
+
+    #{$root}__title-wrapper {
+      background-color: $title-wrapper-background-color--default-dark;
+
+      @extend %box-shadow-dark;
+    }
+
+    #{$root}__list {
+      background-color: $list-background-color--default-dark;
+
+      @extend %box-shadow-dark-gentle;
+    }
+
+    #{$root}__item {
+      color: $item-font-color--default-dark;
+
+      &:hover {
+        // background-color: $item-hover-background-color--default-dark;
+        color: $item-hover-font-color--default-dark;
+      }
+
+      &--selected {
+        background-color: $item-hover-background-color--default-dark;
+      }
+    }
+  }
+  /* =============== End =============== */
+
+  /* =============== Projects Modifiers =============== */
+  &--projects-main {
+    #{$root}__title-wrapper {
+      // Title-wrapper-padding-RL--projects-main
+      @include space(
+        padding,
+        $right: $title-wrapper-padding-RL--projects-main,
+        $left: $title-wrapper-padding-RL--projects-main
+      );
+      @include box-shadow(none);
+    }
+
+    #{$root}__list {
+      left: 50%;
+
+      @include size($width: unset);
+    }
+
+    #{$root}__item {
+      white-space: nowrap;
+    }
+
+    #{$root}__icon {
+      display: none;
+    }
+  }
+
+  &--project,
+  &--project-modal-add {
+    #{$root}__item {
+      @include item-state(low, $project-low);
+      @include item-state(medium, $project-medium);
+      @include item-state(high, $project-high);
+
+      @include item-state(proposed, $project-proposed);
+      @include item-state(active, $project-active);
+      @include item-state(on-hold, $project-on-hold);
+      @include item-state(completed, $project-completed);
+      @include item-state(archived, $project-archived);
+      @include item-state(canceled, $project-canceled);
+    }
+  }
+
+  &--project {
+    #{$root}__header {
+      &:hover {
+        #{$root}__title-wrapper {
+          color: $title-hover-font-color--project;
+        }
+      }
+    }
+
+    #{$root}__title-wrapper {
+      color: $title-font-color--project;
+
+      border: none; // Ripple
+      // Title-border-radius--project
+      border-radius: $title-border-radius--project;
+
+      // Title-width--project & Title-height--project
+      @include size(
+        $width: $title-width--project,
+        $height: $title-height--project
+      );
+      // Title-padding-RL--project
+      @include space(
+        padding,
+        $top: unset,
+        $right: $title-padding-RL--project,
+        $bottom: unset,
+        $left: $title-padding-RL--project
+      );
+      @include box-shadow(none);
+
+      @media (max-width: map-get($breakpoints, breakpoint-medium)) {
+        @include size($width: $title-width--project-md);
+      }
+    }
+
+    #{$root}__list {
+      left: 50%;
+
+      // List-width--project
+      @include size($width: $list-width--project);
+    }
+
+    #{$root}__icon {
+      display: none;
+    }
+  }
+
+  &--project-modal-add {
+    #{$root}__header {
+      color: $header-font-color--project-modal-add;
+
+      &:hover {
+        #{$root}__title-wrapper {
+          background-color: $title-hover-background-color--project-modal-add;
+          color: $title-hover-font-color--project-modal-add;
+        }
+      }
+    }
+
+    #{$root}__title-wrapper {
+      border-color: $title-border-color-B--project-modal-add;
+      // Title-wrapper-border-radius--project-modal-add
+      border-radius: $title-wrapper-border-radius--project-modal-add;
+
+      // Title-wrapper-width--project-modal-add & Title-wrapper-height--project-modal-add
+      @include size(
+        $width: $title-wrapper-width--project-modal-add,
+        $height: $title-wrapper-height--project-modal-add
+      );
+      // Title-wrapper-padding-RL--project-modal-add
+      @include space(
+        padding,
+        $right: $title-wrapper-padding-RL--project-modal-add,
+        $left: $title-wrapper-padding-RL--project-modal-add
+      );
+      @include box-shadow(none);
+    }
+  }
+
+  @include select-state($root, low, $project-low, $project-low-darken);
+  @include select-state($root, medium, $project-medium, $project-medium-darken);
+  @include select-state($root, high, $project-high, $project-high-darken);
+
+  @include select-state(
+    $root,
+    proposed,
+    $project-proposed,
+    $project-proposed-darken
+  );
+  @include select-state($root, active, $project-active, $project-active-darken);
+  @include select-state(
+    $root,
+    on-hold,
+    $project-on-hold,
+    $project-on-hold-darken
+  );
+  @include select-state(
+    $root,
+    completed,
+    $project-completed,
+    $project-completed-darken
+  );
+  @include select-state(
+    $root,
+    archived,
+    $project-archived,
+    $project-archived-darken
+  );
+  @include select-state(
+    $root,
+    canceled,
+    $project-canceled,
+    $project-canceled-darken
+  );
+
+  &--low,
+  &--medium,
+  &--high,
+  &-proposed,
+  &--active,
+  &--on-hold,
+  &--completed,
+  &--canceled,
+  &--archived {
+    #{$root}__title-wrapper {
+      border: none;
+      color: $project-font-color-status-priority;
+    }
+  }
+  /* =============== End =============== */
+
+  &__header {
+    cursor: pointer;
+
+    @extend %inline-flexbox;
+    @extend %align-items-center;
+  }
+
+  &__title-wrapper {
+    border: 1px solid transparent;
+    // Title-wrapper-border-radius
+    border-radius: $title-wrapper-border-radius;
+
+    @extend %inline-flexbox;
+    @extend %justify-content-center;
+    @extend %align-items-center;
+    @extend %user-select-none;
+
+    // Title-wrapper-padding-TB & Title-wrapper-padding-RL
+    @include space(
+      padding,
+      $top: $title-wrapper-padding-TB,
+      $right: $title-wrapper-padding-RL,
+      $bottom: $title-wrapper-padding-TB,
+      $left: $title-wrapper-padding-RL
+    );
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      ),
+      (
+        "property": color,
+      ),
+      (
+        "property": border-color,
+      )
+    );
+  }
+
+  &__title {
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+
+    @include prefix(
+      (
+        text-overflow: ellipsis,
+      ),
+      o
+    );
+  }
+
+  &__icon {
+    // Icon-margin-L
+    @include space(margin, $left: $icon-margin-L);
+
+    @include transition(
+      null,
+      (
+        "property": transform,
+      ),
+      (
+        "property": color,
+      )
+    );
+  }
+
+  &__list {
+    // List-border-radius
+    border-radius: $list-border-radius;
+    overflow: hidden;
+    z-index: 1;
+
+    @extend %w-100;
+    @extend %user-select-none;
+
+    // List-margin-T
+    @include space(margin, $top: $list-margin-T);
+    @include transform-origin($x: top, $y: center);
+    @include position(absolute);
+  }
+
+  &__item {
+    text-transform: capitalize;
+    cursor: pointer;
+
+    // Item-padding-TB & Item-padding-RL
+    @include space(
+      padding,
+      $top: $item-padding-TB,
+      $right: $item-padding-RL,
+      $bottom: $item-padding-TB,
+      $left: $item-padding-RL
+    );
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      ),
+      (
+        "property": color,
+      )
+    );
+  }
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: select-input__icon,
+  $transformsStart: rotateZ(0deg),
+  $transformsEnd: rotateZ(-180deg),
+  $opacity: false,
+  $done: true
+);
+
+.select-input__list-enter {
+  z-index: 2;
+
+  @include transform(scale(0));
+}
+
+.select-input__list-enter-active {
+  z-index: 2;
+
+  @include transform(scale(1));
+  @include transition(
+    null,
+    (
+      "property": transform,
+    )
+  );
+}
+
+.select-input__list-exit {
+  z-index: 1;
+
+  @include transform(scale(1));
+}
+
+.select-input__list-exit-active {
+  z-index: 1;
+
+  @include transform(scale(0));
+  @include transition(
+    null,
+    (
+      "property": transform,
+    )
+  );
+}
+
+/* ***===================== React transition group --Project =====================*** */
+.select-input__list--project-enter {
+  z-index: 2;
+
+  @include transform(translateX(-50%) scale(0));
+}
+
+.select-input__list--project-enter-active {
+  z-index: 2;
+
+  @include transform(translateX(-50%) scale(1));
+  @include transition(
+    null,
+    (
+      "property": transform,
+    )
+  );
+}
+
+.select-input__list--project-enter-done {
+  z-index: 2;
+
+  @include transform(translateX(-50%) scale(1));
+}
+
+.select-input__list--project-exit {
+  z-index: 1;
+
+  @include transform(translateX(-50%) scale(1));
+}
+
+.select-input__list--project-exit-active {
+  z-index: 1;
+
+  @include transform(translateX(-50%) scale(0));
+  @include transition(
+    null,
+    (
+      "property": transform,
+    )
+  );
+}
+
+/* ***===================== React transition group --Projects-main =====================*** */
+@include basicTransition(
+  $classNames: select-input__list--projects-main,
+  $transformsStart: translateX(-50%) scale(0),
+  $transformsEnd: translateX(-50%) scale(1),
+  $opacity: false,
+  $done: true
+);

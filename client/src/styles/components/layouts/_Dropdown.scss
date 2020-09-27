@@ -1,0 +1,14 @@
+.dropdown {
+  /* =============== Navbar Modifiers =============== */
+  &--nav {
+    @extend %h-100;
+  }
+  /* =============== End =============== */
+}
+
+/* ***===================== React transition group =====================*** */
+@include basicTransition(
+  $classNames: dropdown-menu,
+  $transformsStart: translateX(25px) translateY(-25px) scale(0),
+  $transformsEnd: translateX(0) translateY(0) scale(1)
+);

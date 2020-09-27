@@ -1,0 +1,119 @@
+.project-add-form {
+  /* =============== Variables =============== */
+  $welcome-text-font-color: $projects-font-color-secondary;
+  $input-font-color: $projects-font-color-form-primary;
+  $placeholder-font-color: $projects-font-color-form-secondary;
+
+  $input-date-padding-RL: $input-padding-RL-secondary;
+  $select-wrapper-width: $input-width-primary;
+  $select-wrapper-margin-B: $input-margin-B-primary;
+  // --Text-area
+  $placeholder-position-T--text-area: $text-area-padding-TB-primary;
+
+  @extend %form;
+
+  &__header {
+    @include size($width: $input-width-primary);
+  }
+
+  &__welcome-text {
+    color: $welcome-text-font-color;
+
+    @extend %welcome-text;
+
+    /* =============== Modifiers =============== */
+    &--main {
+      @extend %welcome-text--main;
+    }
+    /* =============== End =============== */
+  }
+
+  &__input-wrapper {
+    z-index: 1;
+
+    @extend %input-wrapper;
+  }
+
+  &__input {
+    color: $input-font-color;
+
+    @extend %input-no-icon;
+    @extend %box-shadow-light-inset;
+
+    /* =============== Modifiers =============== */
+    &--text-area {
+      @extend %text-area;
+    }
+
+    &--date {
+      // Input-date-padding-RL
+      @include space(
+        padding,
+        $right: $input-date-padding-RL,
+        $left: $input-date-padding-RL
+      );
+    }
+    /* =============== End =============== */
+  }
+
+  &__placeholder-icon {
+    &:after {
+      @extend %placeholder-icon-settings;
+    }
+  }
+
+  &__placeholder {
+    &:before {
+      color: $placeholder-font-color;
+
+      @extend %placeholder-text-no-icon;
+    }
+
+    /* =============== Modifiers =============== */
+    &--text-area {
+      &:before {
+        @include transform(unset);
+        // Placeholder-position-T--text-area
+        top: $placeholder-position-T--text-area;
+      }
+    }
+
+    &--date {
+      &:before {
+        // Input-date-padding-RL
+        left: $input-date-padding-RL;
+      }
+
+      &:after {
+        color: $placeholder-font-color;
+
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f073";
+
+        @extend %placeholder-icon;
+      }
+    }
+
+    // State
+    &--is-active {
+      &:before {
+        opacity: 0;
+      }
+      &:after {
+        color: $input-font-color;
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__select-wrapper {
+    @extend %flexbox;
+
+    @include justify-content(space-around, null, distribute);
+    // Select-wrapper-width
+    @include size($width: $select-wrapper-width);
+    // Select-wrapper-margin-B
+    @include space(margin, $bottom: $select-wrapper-margin-B);
+  }
+}
