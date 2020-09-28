@@ -5,6 +5,7 @@ import {
   ADD_PROJECT,
   PROJECT_ERROR,
   UPDATE_PROJECT,
+  DELETE_PROJECT,
 } from "./types";
 
 // Get all user's projects
@@ -62,6 +63,30 @@ export const updateProject = (formData, projectId) => async (dispatch) => {
 
     dispatch({
       type: UPDATE_PROJECT,
+      payload: res.data,
+    });
+
+    return Promise.resolve(res.data);
+  } catch (error) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: {
+        msg: error.response.statusText,
+        status: error.response.status,
+      },
+    });
+
+    return Promise.reject(error);
+  }
+};
+
+// Delete project
+export const deleteProject = (projectId) => async (dispatch) => {
+  try {
+    const res = await api.delete(`/projects/${projectId}`);
+
+    dispatch({
+      type: DELETE_PROJECT,
       payload: res.data,
     });
 

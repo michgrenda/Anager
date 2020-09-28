@@ -5,7 +5,7 @@ document.body.addEventListener("mousedown", function () {
 
 // Re-enable focus styling when Tab is pressed
 document.body.addEventListener("keydown", function (e) {
-  if (e.which === 9) {
+  if (e.which === 9 || e.key === "Tab") {
     document.body.classList.remove("using-mouse");
     document.body.classList.add("using-keyboard");
   }

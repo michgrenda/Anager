@@ -3,10 +3,12 @@ import {
   ADD_PROJECT,
   PROJECT_ERROR,
   UPDATE_PROJECT,
+  DELETE_PROJECT,
 } from "../actions/types";
 
 const initialState = {
   project: null,
+  deletedProject: null,
   projects: [],
   loading: true,
   error: {},
@@ -31,6 +33,15 @@ export default function (state = initialState, action) {
       };
     case UPDATE_PROJECT:
       return { ...state, project: payload, loading: false };
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        deletedProject: payload,
+        projects: state.projects.filter(
+          (project) => project._id !== payload._id
+        ),
+        loading: false,
+      };
     case PROJECT_ERROR:
       return {
         ...state,

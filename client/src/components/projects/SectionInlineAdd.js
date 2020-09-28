@@ -2,17 +2,11 @@ import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import onClickOutside from "react-onclickoutside";
-// Redux
-import { connect } from "react-redux";
-import { addSection } from "../../actions/sections";
 // Components
 import Button from "../Button";
 
 // Form ***
 const Form = function (props) {
-  // Redux
-  const { addSection } = props;
-
   // States
   const [sectionName, setSectionName] = useState("");
 
@@ -36,7 +30,8 @@ const Form = function (props) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    addSection({ name: sectionName })
+    props
+      .addSection({ name: sectionName })
       .then(() => closeForm())
       .catch((error) => console.log(error));
   };
@@ -95,7 +90,6 @@ Form.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   onExited: PropTypes.func.isRequired,
-  // Redux
   addSection: PropTypes.func.isRequired,
 };
 
@@ -103,9 +97,8 @@ const clickOutsideConfig = {
   handleClickOutside: () => Form.handleClickOutside,
 };
 
-const EnhancedForm = connect(null, { addSection })(
-  onClickOutside(Form, clickOutsideConfig)
-);
+const EnhancedForm = onClickOutside(Form, clickOutsideConfig);
+
 // End ***
 
 const SectionInlineAdd = (props) => {
@@ -170,6 +163,7 @@ const SectionInlineAdd = (props) => {
         onExited={restoreAddSection}
         transitionDuration={props.transitionDuration}
         transitionClassNames={props.transitionClassNames}
+        addSection={props.addSection}
       />
     </section>
   );
@@ -183,6 +177,7 @@ SectionInlineAdd.defaultProps = {
 SectionInlineAdd.propTypes = {
   transitionDuration: PropTypes.number,
   transitionClassNames: PropTypes.string,
+  addSection: PropTypes.func.isRequired,
 };
 
 export default SectionInlineAdd;

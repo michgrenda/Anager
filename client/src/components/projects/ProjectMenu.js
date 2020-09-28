@@ -36,6 +36,8 @@ const Menu = function (props) {
         }
         break;
       case 13:
+        e.preventDefault();
+
         handleItemClick();
         break;
       case 27:
@@ -48,11 +50,17 @@ const Menu = function (props) {
     }
   };
 
-  // Close menu after click
-  const handleItemClick = () => {
-    focusTriggeringElement();
+  // Close menu and call an action after click
+  const handleItemClick = (option) => {
+    if (option !== "delete project") {
+      focusTriggeringElement();
 
-    props.triggeringElementOnClick();
+      props.onClose();
+    } else
+      props
+        .deleteFunction()
+        .then(() => props.onClose())
+        .catch((error) => console.log(error));
   };
 
   // React-onClickOutside
@@ -76,7 +84,7 @@ const Menu = function (props) {
     <li
       className="project-menu__item"
       key={item.option}
-      onClick={handleItemClick}
+      onClick={handleItemClick.bind(null, item.option)}
       onKeyDown={handleItemKeyDown}
       tabIndex={0}
       ref={
@@ -110,8 +118,8 @@ Menu.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   uniqueId: PropTypes.string.isRequired,
-  triggeringElementOnClick: PropTypes.func.isRequired,
   triggeringElement: PropTypes.object.isRequired,
+  deleteFunction: PropTypes.func.isRequired,
 };
 
 const clickOutsideConfig = {
@@ -164,10 +172,10 @@ const ProjectMenu = function (props) {
         onClose={closeMenu}
         outsideClickIgnoreClass={props.ignoreReactOnClickOutside}
         uniqueId={props.projectId}
-        triggeringElementOnClick={handleButtonClickToggle}
         triggeringElement={triggeringElement}
         transitionDuration={props.transitionDuration}
         transitionClassNames={props.transitionClassNames}
+        deleteFunction={props.deleteFunction}
       />
     </div>
   );
@@ -183,6 +191,7 @@ ProjectMenu.propTypes = {
   transitionClassNames: PropTypes.string,
   projectId: PropTypes.string.isRequired,
   ignoreReactOnClickOutside: PropTypes.string.isRequired,
+  deleteFunction: PropTypes.func.isRequired,
 };
 
 export default ProjectMenu;

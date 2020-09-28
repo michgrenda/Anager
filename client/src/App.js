@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import { BounceLoader } from "react-spinners";
 // Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -14,16 +15,7 @@ import SignOut from "./components/auth/SignOut";
 import Projects from "./components/projects/Projects";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import Footer from "./components/layouts/Footer";
-
-function NoMatch() {
-  // let location = useLocation();
-
-  return (
-    <div>
-      <h3>No match for</h3>
-    </div>
-  );
-}
+import PageNotFound from "./components/routing/PageNotFound";
 
 const routes = [
   {
@@ -54,7 +46,7 @@ const routes = [
     path: "/",
     exact: false,
     privatePath: false,
-    component: NoMatch,
+    component: PageNotFound,
   },
 ];
 
@@ -140,7 +132,13 @@ const App = () => {
               <Footer />
             </CSSTransition>
           </>
-        ) : null}
+        ) : (
+          <BounceLoader
+            css="margin: auto auto;"
+            size={150}
+            color="rgba(173, 191, 204, 0.25)"
+          />
+        )}
       </BrowserRouter>
     </Provider>
   );

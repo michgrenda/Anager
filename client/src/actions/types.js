@@ -10,6 +10,7 @@ export const LOGOUT = "LOGOUT";
 export const GET_PROJECTS = "GET_PROJECTS";
 export const ADD_PROJECT = "ADD_PROJECT";
 export const UPDATE_PROJECT = "UPDATE_PROJECT";
+export const DELETE_PROJECT = "DELETE_PROJECT";
 export const PROJECT_ERROR = "PROJECT_ERROR";
 export const GET_SECTIONS = "GET_SECTIONS";
 export const ADD_SECTION = "ADD_SECTION";

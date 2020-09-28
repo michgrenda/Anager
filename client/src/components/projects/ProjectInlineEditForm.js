@@ -2,16 +2,10 @@ import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import onClickOutside from "react-onclickoutside";
-// Redux
-import { connect } from "react-redux";
-import { updateProject } from "../../actions/projects";
 // Components
 import Button from "./../Button";
 
 const ProjectInlineEditForm = function (props) {
-  // Redux
-  const { updateProject } = props;
-
   // States
   const [inputValue, setInputValue] = useState(props.projectName);
 
@@ -29,7 +23,8 @@ const ProjectInlineEditForm = function (props) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    updateProject({ name: inputValue }, props.projectId)
+    props
+      .updateProject({ name: inputValue }, props.projectId)
       .then((updatedProject) => {
         setInputValue(updatedProject.name);
 
@@ -150,7 +145,6 @@ ProjectInlineEditForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   onExited: PropTypes.func.isRequired,
   triggeringElement: PropTypes.object.isRequired,
-  // Redux
   updateProject: PropTypes.func.isRequired,
 };
 
@@ -159,6 +153,4 @@ const clickOutsideConfig = {
     ProjectInlineEditForm[`handleClickOutside${props.projectId}`],
 };
 
-export default connect(null, { updateProject })(
-  onClickOutside(ProjectInlineEditForm, clickOutsideConfig)
-);
+export default onClickOutside(ProjectInlineEditForm, clickOutsideConfig);

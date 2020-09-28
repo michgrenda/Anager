@@ -28,19 +28,19 @@ const mainPanelProps = [
 
 const mainUserPanelProps = [
   {
-    path: "dashboard",
+    path: "/dashboard",
     text: "dashboard",
   },
 ];
 
 const authGuestPanelProps = [
   {
-    path: "sign-in",
+    path: "/sign-in",
     icon: "fas fa-sign-in-alt",
     text: "sign in",
   },
   {
-    path: "sign-up",
+    path: "/sign-up",
     text: "sign up",
     icon: "fab fa-wpforms",
   },
@@ -48,7 +48,7 @@ const authGuestPanelProps = [
 
 const authUserPanelProps = [
   {
-    path: "sign-out",
+    path: "/sign-out",
     text: "sign out",
     icon: "fas fa-sign-out-alt",
   },

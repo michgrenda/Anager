@@ -3,16 +3,10 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import onClickOutside from "react-onclickoutside";
-// Redux
-import { connect } from "react-redux";
-import { deleteSection } from "../../actions/sections";
 // Components
 import Button from "../Button";
 
 const DeleteConfirmation = function (props) {
-  // Redux
-  const { deleteSection } = props;
-
   // Manage received modifiers
   const { categories } = props;
 
@@ -28,21 +22,22 @@ const DeleteConfirmation = function (props) {
 
   // Delete section
   const handleDeleteButtonClick = () => {
-    deleteSection({ cascade: true }, props.sectionId)
-      .then(() => closeDeleteSection())
+    props
+      .deleteFunction()
+      .then(() => closeDeleteConfirmation())
       .catch((error) => console.log(error));
   };
 
   // Close delete section after button click
-  const handleCancelButtonClick = () => closeDeleteSection();
+  const handleCancelButtonClick = () => closeDeleteConfirmation();
 
-  // Close delete section using keyboard
-  const handleDeleteSectionKeyDownClose = (e) => {
+  // Close delete confirmation using keyboard
+  const handleDeleteConfirmationKeyDown = (e) => {
     switch (e.which) {
       case 27:
-        closeDeleteSection();
+        closeDeleteConfirmation();
 
-        const button = props.triggeringElement.current[props.sectionId];
+        const button = props.triggeringElement.current[props.uniqueId];
         if (button) button.focus();
         break;
       default:
@@ -50,24 +45,24 @@ const DeleteConfirmation = function (props) {
     }
   };
 
-  // Close delete section
-  const closeDeleteSection = () =>
-    props.onClose((prevState) => ({ ...prevState, [props.sectionId]: false }));
+  // Close delete confirmation
+  const closeDeleteConfirmation = () =>
+    props.onClose((prevState) => ({ ...prevState, [props.uniqueId]: false }));
 
   // React-onClickOutside
-  DeleteConfirmation[`handleClickOutside${props.sectionId}`] = (e) => {
+  DeleteConfirmation[`handleClickOutside${props.uniqueId}`] = (e) => {
     if (e.type === "keydown") {
       switch (e.which) {
         case 27:
-          closeDeleteSection();
+          closeDeleteConfirmation();
           break;
         case 13:
-          closeDeleteSection();
+          closeDeleteConfirmation();
           break;
         default:
           break;
       }
-    } else closeDeleteSection();
+    } else closeDeleteConfirmation();
   };
 
   return (
@@ -80,7 +75,7 @@ const DeleteConfirmation = function (props) {
     >
       <section
         className={`delete-confirmation ${modifiers}`}
-        onKeyDown={handleDeleteSectionKeyDownClose}
+        onKeyDown={handleDeleteConfirmationKeyDown}
       >
         <header className="delete-confirmation__header">
           <h2>Are you sure you want to delete this {props.elementName}?</h2>
@@ -120,7 +115,7 @@ DeleteConfirmation.defaultProps = {
 
 DeleteConfirmation.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.string),
-  sectionId: PropTypes.string.isRequired,
+  uniqueId: PropTypes.string.isRequired,
   visible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   transitionDuration: PropTypes.number,
@@ -128,15 +123,12 @@ DeleteConfirmation.propTypes = {
   triggeringElement: PropTypes.object.isRequired,
   elementName: PropTypes.string,
   information: PropTypes.string,
-  // Redux
-  deleteSection: PropTypes.func.isRequired,
+  deleteFunction: PropTypes.func.isRequired,
 };
 
 const clickOutsideConfig = {
   handleClickOutside: ({ props }) =>
-    DeleteConfirmation[`handleClickOutside${props.sectionId}`],
+    DeleteConfirmation[`handleClickOutside${props.uniqueId}`],
 };
 
-export default connect(null, { deleteSection })(
-  onClickOutside(DeleteConfirmation, clickOutsideConfig)
-);
+export default onClickOutside(DeleteConfirmation, clickOutsideConfig);

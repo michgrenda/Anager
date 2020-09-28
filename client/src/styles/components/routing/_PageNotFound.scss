@@ -1,0 +1,103 @@
+.page-not-found {
+  /* =============== Variables =============== */
+  $text-font-color: $routing-font-color-primary;
+  $link-font-color: $routing-font-color-primary;
+  $link-hover-font-color: $routing-accents-primary;
+  $line-background-color: $link-font-color;
+  $line-hover-background-color: $link-hover-font-color;
+
+  $number-404-margin-B: 10px;
+  $link-padding-TB: 7px;
+  $link-padding-RL: 25px;
+  $link-margin-T: 30px;
+  $line-height: 1px;
+  $line-border-radius: $line-border-radius-primary;
+  // --Main
+  $text-margin-B--main: 10px;
+
+  @extend %flexbox;
+  @extend %align-items-center;
+  @extend %flex-direction-column;
+  @extend %w-100;
+
+  &__404 {
+    font-size: 68px;
+
+    // Number-404-margin-B
+    @include space(margin, $bottom: $number-404-margin-B);
+  }
+
+  &__text {
+    color: $text-font-color;
+
+    text-align: center;
+
+    &--main {
+      font-size: 34px;
+
+      // Text-margin-B--main
+      @include space(margin, $bottom: $text-margin-B--main);
+    }
+  }
+
+  &__link {
+    color: $link-font-color;
+
+    font-size: 17px;
+
+    // Link-padding-TB & Link-padding-RL
+    @include space(
+      padding,
+      $top: $link-padding-TB,
+      $right: $link-padding-RL,
+      $bottom: $link-padding-TB,
+      $left: $link-padding-RL
+    );
+    // Link-margin-T
+    @include space(margin, $top: $link-margin-T);
+    @include position(relative);
+    @include transition(
+      null,
+      (
+        "property": color,
+      )
+    );
+
+    &:after {
+      content: "";
+      background-color: $line-background-color;
+
+      // Line-border-radius
+      border-radius: $line-border-radius;
+      z-index: -1;
+
+      @extend %w-100;
+
+      // Line-height
+      @include size($height: $line-height);
+      @include transform(scaleX(0.5));
+      @include position(absolute, $bottom: 0, $left: 0);
+      @include transition(
+        null,
+        (
+          "property": transform,
+        ),
+        (
+          "property": background-color,
+        )
+      );
+    }
+
+    &:hover {
+      color: $link-hover-font-color;
+
+      text-decoration: none;
+
+      &:after {
+        background-color: $line-hover-background-color;
+
+        @include transform(scaleX(1));
+      }
+    }
+  }
+}

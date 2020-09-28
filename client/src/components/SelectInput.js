@@ -51,7 +51,8 @@ const List = function (props) {
       props.setData(key, title);
       props.setHeaderTitle(title);
     }
-    props.triggeringElementOnClick();
+
+    props.onClose();
   };
 
   const handleItemMouseOver = (e) => {
@@ -125,7 +126,6 @@ List.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   uniqueId: PropTypes.string.isRequired,
-  triggeringElementOnClick: PropTypes.func.isRequired,
   triggeringElement: PropTypes.object.isRequired,
   headerTitle: PropTypes.string.isRequired,
   setHeaderTitle: PropTypes.func.isRequired,
@@ -226,7 +226,6 @@ const SelectInput = function (props) {
         onClose={closeList}
         outsideClickIgnoreClass={props.ignoreReactOnClickOutside}
         uniqueId={props.uniqueIdOnClickOutside}
-        triggeringElementOnClick={handleSelectInputClick}
         triggeringElement={triggeringElement}
         headerTitle={headerTitle}
         setHeaderTitle={setHeaderTitle}

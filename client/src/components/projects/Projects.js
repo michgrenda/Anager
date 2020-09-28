@@ -11,8 +11,18 @@ import { CSSTransition } from "react-transition-group";
 import Ripple from "@intereact/ripple";
 // Redux
 import { connect } from "react-redux";
-import { getSections } from "../../actions/sections";
-import { getProjects, updateProject } from "../../actions/projects";
+import {
+  getSections,
+  addSection,
+  updateSection,
+  deleteSection,
+} from "../../actions/sections";
+import {
+  getProjects,
+  addProject,
+  updateProject,
+  deleteProject,
+} from "../../actions/projects";
 // Dnd
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 // Components
@@ -87,7 +97,9 @@ const Projects = (props) => {
   // Redux
   const {
     getSections,
-    updateProject,
+    addSection,
+    updateSection,
+    deleteSection,
     sections: {
       sections,
       section,
@@ -96,6 +108,9 @@ const Projects = (props) => {
       loading: loadingSections,
     },
     getProjects,
+    addProject,
+    updateProject,
+    deleteProject,
     projects: { projects, project, loading: loadingProjects },
   } = props;
 
@@ -396,7 +411,7 @@ const Projects = (props) => {
           <Ripple>
             {(ripples) => (
               <Link
-                to={`/${project._id}`}
+                to={`${props.match.url}/${project._id}`}
                 className={`projects__project-name projects__project-name--result ${
                   projectInlineEditOpen[project._id] &&
                   "projects__project-name--is-edited"
@@ -406,6 +421,7 @@ const Projects = (props) => {
                 onDragStart={() => false}
                 onClick={preventLinkDefaultBehaviour.bind(null, project._id)}
               >
+                {console.log(props.match)}
                 <i className="projects__project-icon far fa-check-circle"></i>
                 {!projectNameHidden[project._id] && (
                   <span className="projects__project-text">{project.name}</span>
@@ -420,6 +436,7 @@ const Projects = (props) => {
                   onExited={restoreProjectName.bind(null, project._id)}
                   outsideClickIgnoreClass={`edit-project-ignore-${project._id}`}
                   triggeringElement={editProjectBtns}
+                  updateProject={updateProject}
                 />
 
                 <div className="projects__project-options">
@@ -491,6 +508,7 @@ const Projects = (props) => {
           <ProjectMenu
             projectId={project._id}
             ignoreReactOnClickOutside={`project-menu-ignore-${project._id}`}
+            deleteFunction={() => deleteProject(project._id)}
           />
         </div>
       </div>
@@ -519,7 +537,7 @@ const Projects = (props) => {
                 <Ripple>
                   {(ripples) => (
                     <Link
-                      to={`/${project._id}`}
+                      to={`${props.match.url}/${project._id}`}
                       className={`projects__project-name ${
                         projectInlineEditOpen[project._id] &&
                         "projects__project-name--is-edited"
@@ -553,6 +571,7 @@ const Projects = (props) => {
                         onExited={restoreProjectName.bind(null, project._id)}
                         outsideClickIgnoreClass={`edit-project-ignore-${project._id}`}
                         triggeringElement={editProjectBtns}
+                        updateProject={updateProject}
                       />
                       <div className="projects__project-options">
                         <div className="projects__project-option-wrapper">
@@ -623,6 +642,7 @@ const Projects = (props) => {
                 <ProjectMenu
                   projectId={project._id}
                   ignoreReactOnClickOutside={`project-menu-ignore-${project._id}`}
+                  deleteFunction={() => deleteProject(project._id)}
                 />
               </div>
             </div>
@@ -801,6 +821,7 @@ const Projects = (props) => {
                         onExited={restoreSectionName.bind(null, section._id)}
                         outsideClickIgnoreClass={`edit-section-ignore-${section._id}`}
                         triggeringElement={editSectionBtns}
+                        updateSection={updateSection}
                       />
                       <div className="projects__section-options">
                         <div className="projects__section-option-wrapper">
@@ -843,13 +864,16 @@ const Projects = (props) => {
                           <DeleteConfirmation
                             categories={["projects-section"]}
                             eventTypes={["mousedown", "touchstart", "keydown"]}
-                            sectionId={section._id}
+                            uniqueId={section._id}
                             onClose={setDeleteSectionOpen}
                             visible={deleteSectionOpen[section._id]}
                             outsideClickIgnoreClass={`delete-ignore-${section._id}`}
                             triggeringElement={deleteSectionBtns}
                             elementName="section"
                             information="All projects associated with this section will be permanently deleted."
+                            deleteFunction={() =>
+                              deleteSection({ cascade: true }, section._id)
+                            }
                           />
                         </div>
                       </div>
@@ -1012,7 +1036,7 @@ const Projects = (props) => {
                         )}
                       </Droppable>
                     </DragDropContext>
-                    <SectionInlineAdd />
+                    <SectionInlineAdd addSection={addSection} />
                   </>
                 ) : (
                   <section className="projects__results-list">
@@ -1036,6 +1060,7 @@ const Projects = (props) => {
         onClose={setModalOpen}
         visible={modalOpen["section"]}
         indicator="section"
+        addSection={addSection}
       />
       <ProjectModalAddForm
         onClose={setModalOpen}
@@ -1043,6 +1068,7 @@ const Projects = (props) => {
         priorityProps={priorityProps}
         statusProps={statusProps}
         indicator="project"
+        addProject={addProject}
       />
     </section>
   );
@@ -1053,8 +1079,13 @@ Projects.propTypes = {
   projects: PropTypes.object,
   sections: PropTypes.object,
   getSections: PropTypes.func.isRequired,
+  updateSection: PropTypes.func.isRequired,
+  addSection: PropTypes.func.isRequired,
+  deleteSection: PropTypes.func.isRequired,
   getProjects: PropTypes.func.isRequired,
+  addProject: PropTypes.func.isRequired,
   updateProject: PropTypes.func.isRequired,
+  deleteProject: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -1064,6 +1095,11 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getSections,
+  addSection,
+  updateSection,
+  deleteSection,
   getProjects,
+  addProject,
   updateProject,
+  deleteProject,
 })(Projects);

@@ -1,8 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-// Redux
-import { connect } from "react-redux";
-import { addProject } from "../../actions/projects";
 // Components
 import Button from "../Button";
 import DateInput from "../DateInput";
@@ -19,9 +16,6 @@ const initialState = {
 };
 
 const ProjectModalAddForm = function (props) {
-  // Redux
-  const { addProject } = props;
-
   // States
   const [formData, setFormData] = useState(initialState);
 
@@ -91,14 +85,15 @@ const ProjectModalAddForm = function (props) {
   // Create project
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    addProject({
-      name,
-      description,
-      deadline,
-      priority,
-      status,
-      offset,
-    })
+    props
+      .addProject({
+        name,
+        description,
+        deadline,
+        priority,
+        status,
+        offset,
+      })
       .then(() => {
         setFormData(initialState);
 
@@ -209,8 +204,7 @@ ProjectModalAddForm.propTypes = {
   priorityProps: PropTypes.arrayOf(PropTypes.object).isRequired,
   statusProps: PropTypes.arrayOf(PropTypes.object).isRequired,
   indicator: PropTypes.string.isRequired,
-  // Redux
   addProject: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addProject })(ProjectModalAddForm);
+export default ProjectModalAddForm;

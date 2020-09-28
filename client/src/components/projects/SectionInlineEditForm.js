@@ -2,16 +2,10 @@ import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import onClickOutside from "react-onclickoutside";
-// Redux
-import { connect } from "react-redux";
-import { updateSection } from "../../actions/sections";
 // Components
 import Button from "./../Button";
 
 const SectionInlineEditForm = function (props) {
-  // Redux
-  const { updateSection } = props;
-
   // States
   const [inputValue, setInputValue] = useState(props.sectionName);
 
@@ -29,7 +23,8 @@ const SectionInlineEditForm = function (props) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    updateSection({ name: inputValue }, props.sectionId)
+    props
+      .updateSection({ name: inputValue }, props.sectionId)
       .then((updatedSection) => {
         setInputValue(updatedSection.name);
 
@@ -143,7 +138,6 @@ SectionInlineEditForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   onExited: PropTypes.func.isRequired,
   triggeringElement: PropTypes.object.isRequired,
-  // Redux
   updateSection: PropTypes.func.isRequired,
 };
 
@@ -152,6 +146,4 @@ const clickOutsideConfig = {
     SectionInlineEditForm[`handleClickOutside${props.sectionId}`],
 };
 
-export default connect(null, { updateSection })(
-  onClickOutside(SectionInlineEditForm, clickOutsideConfig)
-);
+export default onClickOutside(SectionInlineEditForm, clickOutsideConfig);

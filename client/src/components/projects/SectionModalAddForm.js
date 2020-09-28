@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-// Redux
-import { connect } from "react-redux";
-import { addSection } from "../../actions/sections";
 // Components
 import Button from "../Button";
 import AnimatedModal from "../modal/AnimatedModal";
@@ -12,9 +9,6 @@ const initialState = {
 };
 
 const SectionModalAddForm = function (props) {
-  // Redux
-  const { addSection } = props;
-
   // States
   const [formData, setFormData] = useState(initialState);
 
@@ -51,9 +45,10 @@ const SectionModalAddForm = function (props) {
   // Create section
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    addSection({
-      name,
-    })
+    props
+      .addSection({
+        name,
+      })
       .then(() => {
         setFormData(initialState);
 
@@ -114,8 +109,7 @@ SectionModalAddForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   transitionDuration: PropTypes.number,
   indicator: PropTypes.string.isRequired,
-  // Redux
   addSection: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addSection })(SectionModalAddForm);
+export default SectionModalAddForm;

@@ -131,6 +131,16 @@ $modal-background-color-tertiary: $background-color-dark-primary;
 // -----------------------------------------------------------------
 // (Modal)              | Container (--Defult-dark), Close-icon (--Defult-dark), Close-icon (--Default-light - Hover)
 
+/* Routing
+============================================================================================== */
+$routing-font-color-primary: $font-color-light-primary;
+// -----------------------------------------------------------------
+// (PageNotFound)       |   Text, Link, Line
+
+$routing-accents-primary: $accents-primary;
+// -----------------------------------------------------------------
+// (PageNotFound)       |   Link (Hover - Font-color), Line (Hover - Background-color)
+
 /* Navigation
 ============================================================================================== */
 $navigation-background-color-primary: $background-color-light-primary;

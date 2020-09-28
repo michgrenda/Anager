@@ -69,6 +69,20 @@ body.using-keyboard {
     }
   }
 
+  .page-not-found {
+    &__link {
+      &:focus {
+        color: $routing-accents-primary;
+
+        &:after {
+          background-color: $routing-accents-primary;
+
+          @include transform(scaleX(1));
+        }
+      }
+    }
+  }
+
   .button {
     $root: ".button";
 

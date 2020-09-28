@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useHistory, Link } from "react-router-dom";
-// Components
-import Button from "../Button";
 
 const SignOut = () => {
   // State

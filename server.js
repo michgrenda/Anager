@@ -2,6 +2,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const infoColors = require("./config/chalk/variables");
 const app = express();
+const path = require("path");
 
 // Connect database
 connectDB();
