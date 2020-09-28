@@ -163,6 +163,7 @@
       &:before {
         opacity: 0;
       }
+
       &:after {
         color: $input-font-color;
       }
@@ -375,6 +376,10 @@
           "property": opacity,
         )
       );
+
+      @media (hover: none) and (pointer: coarse) {
+        opacity: 1;
+      }
     }
     /* =============== End =============== */
   }
@@ -512,6 +517,10 @@
           "property": opacity,
         )
       );
+
+      @media (hover: none) and (pointer: coarse) {
+        opacity: 1;
+      }
     }
 
     &--edit {

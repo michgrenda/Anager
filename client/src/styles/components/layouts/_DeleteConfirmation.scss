@@ -5,7 +5,8 @@
   $header-font-color: $delete-confirmation-font-color-primary;
   $information-font-color: $delete-confirmation-font-color-secondary;
 
-  $delete-confirmation-width: 375px;
+  $delete-confirmation-width-md: 375px;
+  $delete-confirmation-width-sm: 225px;
   $delete-confirmation-border-radius: 10px;
   $delete-confirmation-position-R: calc(100% + 10px);
   $header-padding: 10px;
@@ -35,8 +36,8 @@
 
   @extend %box-shadow-light-gentle;
 
-  // Delete-confirmation-width
-  @include size($width: $delete-confirmation-width);
+  // Delete-confirmation-width-md: 375px;
+  @include size($width: $delete-confirmation-width-md);
   @include transform-origin($x: right, $y: center);
   // Delete-confirmation-position-R
   @include position(
@@ -44,6 +45,11 @@
     $top: 50%,
     $right: $delete-confirmation-position-R
   );
+
+  @media (max-width: map-get($breakpoints, breakpoint-small)) {
+    // Delete-confirmation-width-sm
+    @include size($width: $delete-confirmation-width-sm);
+  }
 
   &__header {
     background-color: $header-background-color;

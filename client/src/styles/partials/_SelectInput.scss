@@ -324,7 +324,7 @@
   &--low,
   &--medium,
   &--high,
-  &-proposed,
+  &--proposed,
   &--active,
   &--on-hold,
   &--completed,
@@ -455,13 +455,13 @@
 .select-input__list-enter {
   z-index: 2;
 
-  @include transform(scale(0));
+  @include transform(translateY(-10px) scale(0));
 }
 
 .select-input__list-enter-active {
   z-index: 2;
 
-  @include transform(scale(1));
+  @include transform(translateY(0) scale(1));
   @include transition(
     null,
     (
@@ -473,13 +473,13 @@
 .select-input__list-exit {
   z-index: 1;
 
-  @include transform(scale(1));
+  @include transform(translateY(0) scale(1));
 }
 
 .select-input__list-exit-active {
   z-index: 1;
 
-  @include transform(scale(0));
+  @include transform(translateY(-10px) scale(0));
   @include transition(
     null,
     (
@@ -492,13 +492,13 @@
 .select-input__list--project-enter {
   z-index: 2;
 
-  @include transform(translateX(-50%) scale(0));
+  @include transform(translateX(-50%) translateY(-10px) scale(0));
 }
 
 .select-input__list--project-enter-active {
   z-index: 2;
 
-  @include transform(translateX(-50%) scale(1));
+  @include transform(translateX(-50%) translateY(0) scale(1));
   @include transition(
     null,
     (
@@ -510,19 +510,19 @@
 .select-input__list--project-enter-done {
   z-index: 2;
 
-  @include transform(translateX(-50%) scale(1));
+  @include transform(translateX(-50%) translateY(0) scale(1));
 }
 
 .select-input__list--project-exit {
   z-index: 1;
 
-  @include transform(translateX(-50%) scale(1));
+  @include transform(translateX(-50%) translateY(0) scale(1));
 }
 
 .select-input__list--project-exit-active {
   z-index: 1;
 
-  @include transform(translateX(-50%) scale(0));
+  @include transform(translateX(-50%) translateY(-10px) scale(0));
   @include transition(
     null,
     (
@@ -534,8 +534,8 @@
 /* ***===================== React transition group --Projects-main =====================*** */
 @include basicTransition(
   $classNames: select-input__list--projects-main,
-  $transformsStart: translateX(-50%) scale(0),
-  $transformsEnd: translateX(-50%) scale(1),
+  $transformsStart: translateX(-50%) translateY(-10px) scale(0),
+  $transformsEnd: translateX(-50%) translateY(0) scale(1),
   $opacity: false,
   $done: true
 );

@@ -39,6 +39,8 @@ import ProjectMenu from "./ProjectMenu";
 // Portal
 const draggableRoot = document.getElementById("draggable-root");
 
+const touch = matchMedia("(hover: none) and (pointer: coarse)").matches;
+console.log(touch);
 // Settings
 const addProps = [
   {
@@ -550,10 +552,12 @@ const Projects = (props) => {
                         project._id
                       )}
                       style={{ position: "relative" }}
+                      {...(touch && provided.dragHandleProps)}
                     >
                       <i
                         className="projects__project-icon projects__project-icon--grip fas fa-grip-vertical"
-                        {...provided.dragHandleProps}
+                        {...(!touch && provided.dragHandleProps)}
+                        // style={{ visibility: touch && "hidden" }}
                       ></i>
                       <i className="projects__project-icon far fa-check-circle"></i>
                       {!projectNameHidden[project._id] && (
@@ -798,11 +802,13 @@ const Projects = (props) => {
                     deleteSectionOpen[section._id]) &&
                   "projects__section-header--is-edited"
                 }`}
+                {...(touch && provided.dragHandleProps)}
               >
                 <div className="projects__section-information">
                   <i
                     className="projects__section-icon projects__section-icon--grip fas fa-grip-vertical"
-                    {...provided.dragHandleProps}
+                    {...(!touch && provided.dragHandleProps)}
+                    // style={{ visibility: touch && "hidden" }}
                   ></i>
                   {!sectionNameHidden[section._id] && (
                     <span className="projects__section-text">
