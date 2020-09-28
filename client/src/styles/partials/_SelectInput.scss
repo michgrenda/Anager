@@ -47,7 +47,6 @@
   $title-padding-RL--project: 5px;
   $list-width--project: 105px;
   // --Project-modal-add
-  $title-wrapper-width--project-modal-add: 125px;
   $title-wrapper-height--project-modal-add: 36px;
   $title-wrapper-border-radius--project-modal-add: (
     $title-wrapper-height--project-modal-add/2
@@ -272,7 +271,8 @@
 
       // Title-wrapper-width--project-modal-add & Title-wrapper-height--project-modal-add
       @include size(
-        $width: $title-wrapper-width--project-modal-add,
+        // $width: $title-wrapper-width--project-modal-add,
+        $width: 100%,
         $height: $title-wrapper-height--project-modal-add
       );
       // Title-wrapper-padding-RL--project-modal-add
@@ -340,7 +340,7 @@
   &__header {
     cursor: pointer;
 
-    @extend %inline-flexbox;
+    @extend %flexbox;
     @extend %align-items-center;
   }
 
@@ -349,7 +349,7 @@
     // Title-wrapper-border-radius
     border-radius: $title-wrapper-border-radius;
 
-    @extend %inline-flexbox;
+    @extend %flexbox;
     @extend %justify-content-center;
     @extend %align-items-center;
     @extend %user-select-none;

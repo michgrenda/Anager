@@ -108,87 +108,97 @@ const ProjectModalAddForm = function (props) {
 
   return (
     <AnimatedModal visible={props.visible} onClose={closeProjectAddForm}>
-      <form className="project-add-form" onSubmit={handleFormSubmit}>
-        <header className="project-add-form__header">
-          <h2 className="project-add-form__welcome-text project-add-form__welcome-text--main">
-            Welcome
-          </h2>
-          <h2 className="project-add-form__welcome-text">
-            Create project here
-          </h2>
-        </header>
-        <div className="project-add-form__input-wrapper">
-          <input
-            className="project-add-form__input"
-            type="text"
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            onChange={handleInputChange}
-            name="name"
-            value={formData["name"]}
-            required
-          />
-          <span
-            className="project-add-form__placeholder"
-            data-placeholder="Name"
-          ></span>
+      <div className="container">
+        <div className="row">
+          <form className="project-add-form col-12" onSubmit={handleFormSubmit}>
+            <div className="row">
+              <header className="project-add-form__header col-12">
+                <h2 className="project-add-form__welcome-text project-add-form__welcome-text--main">
+                  Welcome
+                </h2>
+                <h2 className="project-add-form__welcome-text">
+                  Create project here
+                </h2>
+              </header>
+              <div className="project-add-form__input-wrapper col-12">
+                <input
+                  className="project-add-form__input"
+                  type="text"
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                  onChange={handleInputChange}
+                  name="name"
+                  value={formData["name"]}
+                  required
+                />
+                <span
+                  className="project-add-form__placeholder"
+                  data-placeholder="Name"
+                ></span>
+              </div>
+              <div className="project-add-form__input-wrapper col-12">
+                <textarea
+                  className="project-add-form__input project-add-form__input--text-area"
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                  onChange={handleInputChange}
+                  name="description"
+                  value={formData["description"]}
+                  rows={5}
+                  maxLength={125}
+                ></textarea>
+                <span
+                  className="project-add-form__placeholder project-add-form__placeholder--text-area"
+                  data-placeholder="Description"
+                ></span>
+              </div>
+              <div className="project-add-form__input-wrapper col-12">
+                <DateInput
+                  className="project-add-form__input project-add-form__input--date"
+                  onFocus={handleDateFocus}
+                  onBlur={handleDateBlur}
+                  onChange={handleDateChange}
+                  clickOutside={handleDateClickOutside}
+                />
+                <span
+                  className="project-add-form__placeholder project-add-form__placeholder-icon project-add-form__placeholder--date"
+                  data-placeholder="Date"
+                  ref={datePlaceholder}
+                ></span>
+              </div>
+              <div className="project-add-form__select-input-wrapper col-12 col-sm-6">
+                <SelectInput
+                  categories={["project-modal-add"]}
+                  title="select priority"
+                  listProps={props.priorityProps}
+                  setData={setSelectedData}
+                  uniqueIdOnClickOutside="priority"
+                  ignoreReactOnClickOutside={`header-priority-ignore`}
+                />
+              </div>
+              <div className="project-add-form__select-input-wrapper col-12 col-sm-6">
+                <SelectInput
+                  categories={["project-modal-add"]}
+                  title="select status"
+                  listProps={props.statusProps}
+                  setData={setSelectedData}
+                  uniqueIdOnClickOutside="status"
+                  ignoreReactOnClickOutside={`header-status-ignore`}
+                />
+              </div>
+              <div className="project-add-form__btn-wrapper col-12">
+                <Button
+                  categories={["projects-create", "default-light"]}
+                  type="submit"
+                  light
+                >
+                  create project
+                </Button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div className="project-add-form__input-wrapper">
-          <textarea
-            className="project-add-form__input project-add-form__input--text-area"
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            onChange={handleInputChange}
-            name="description"
-            value={formData["description"]}
-            rows={5}
-            maxLength={125}
-          ></textarea>
-          <span
-            className="project-add-form__placeholder project-add-form__placeholder--text-area"
-            data-placeholder="Description"
-          ></span>
-        </div>
-        <div className="project-add-form__input-wrapper">
-          <DateInput
-            className="project-add-form__input project-add-form__input--date"
-            onFocus={handleDateFocus}
-            onBlur={handleDateBlur}
-            onChange={handleDateChange}
-            clickOutside={handleDateClickOutside}
-          />
-          <span
-            className="project-add-form__placeholder project-add-form__placeholder-icon project-add-form__placeholder--date"
-            data-placeholder="Date"
-            ref={datePlaceholder}
-          ></span>
-        </div>
-        <div className="project-add-form__select-wrapper">
-          <SelectInput
-            categories={["project-modal-add"]}
-            title="select priority"
-            listProps={props.priorityProps}
-            setData={setSelectedData}
-            uniqueIdOnClickOutside="priority"
-            ignoreReactOnClickOutside={`header-priority-ignore`}
-          />
-          <SelectInput
-            categories={["project-modal-add"]}
-            title="select status"
-            listProps={props.statusProps}
-            setData={setSelectedData}
-            uniqueIdOnClickOutside="status"
-            ignoreReactOnClickOutside={`header-status-ignore`}
-          />
-        </div>
-        <Button
-          categories={["projects-create", "default-light"]}
-          type="submit"
-          light
-        >
-          create project
-        </Button>
-      </form>
+      </div>
     </AnimatedModal>
   );
 };

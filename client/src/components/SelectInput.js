@@ -188,7 +188,7 @@ const SelectInput = function (props) {
         props.defaultLight && !props.defaultDark
           ? "select-input--default-light"
           : props.defaultDark && "select-input--default-dark"
-      } ${modifiers} ${
+      } ${modifiers} ${props.bootstrapClasses} ${
         !headerTitle.startsWith("select") &&
         `select-input--${headerTitle.replace(/ /g, "-")}`
       }`}
@@ -262,6 +262,7 @@ SelectInput.propTypes = {
   defaultLight: PropTypes.bool,
   defaultDark: PropTypes.bool,
   ripples: PropTypes.bool,
+  bootstrapClasses: PropTypes.string,
 };
 
 export default SelectInput;

@@ -5,16 +5,12 @@
   $placeholder-font-color: $projects-font-color-form-secondary;
 
   $input-date-padding-RL: $input-padding-RL-secondary;
-  $select-wrapper-width: $input-width-primary;
-  $select-wrapper-margin-B: $input-margin-B-primary;
+  $select-input-wrapper-padding-RL: 10px;
+  $select-input-wrapper-margin-B: $input-margin-B-primary;
   // --Text-area
   $placeholder-position-T--text-area: $text-area-padding-TB-primary;
 
   @extend %form;
-
-  &__header {
-    @include size($width: $input-width-primary);
-  }
 
   &__welcome-text {
     color: $welcome-text-font-color;
@@ -39,6 +35,9 @@
 
     @extend %input-no-icon;
     @extend %box-shadow-light-inset;
+
+    // Input-width
+    @include size($width: 100%); // Override
 
     /* =============== Modifiers =============== */
     &--text-area {
@@ -107,13 +106,23 @@
     /* =============== End =============== */
   }
 
-  &__select-wrapper {
-    @extend %flexbox;
+  &__select-input-wrapper {
+    // Select-input-wrapper-padding-RL
+    @include space(
+      padding,
+      $right: $select-input-wrapper-padding-RL,
+      $left: $select-input-wrapper-padding-RL
+    );
+    // Select-input-wrapper-margin-B
+    @include space(margin, $bottom: $select-input-wrapper-margin-B);
 
-    @include justify-content(space-around, null, distribute);
-    // Select-wrapper-width
-    @include size($width: $select-wrapper-width);
-    // Select-wrapper-margin-B
-    @include space(margin, $bottom: $select-wrapper-margin-B);
+    @media (max-width: map-get($breakpoints, breakpoint-small)) {
+      @include space(padding, $right: unset, $left: unset);
+    }
+  }
+
+  &__btn-wrapper {
+    @extend %flexbox;
+    @extend %justify-content-center;
   }
 }

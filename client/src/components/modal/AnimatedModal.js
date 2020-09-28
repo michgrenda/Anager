@@ -26,7 +26,7 @@ const AnimatedModal = (props) => {
       closeOnEsc={false} // Propagation problem
       animationDuration={props.animationDuration}
       closeIcon={modalCloseIcon}
-      container={document.querySelector(".modal-root")}
+      container={document.querySelector("#modal-root")}
       classNames={{
         overlay: `modal__overlay ${modifiers} ${
           props.defaultLight && !props.defaultDark

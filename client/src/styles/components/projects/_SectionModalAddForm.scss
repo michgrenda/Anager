@@ -6,10 +6,6 @@
 
   @extend %form;
 
-  &__header {
-    @include size($width: $input-width-primary);
-  }
-
   &__welcome-text {
     color: $welcome-text-font-color;
 
@@ -33,6 +29,9 @@
 
     @extend %input-no-icon;
     @extend %box-shadow-light-inset;
+
+    // Input-width
+    @include size($width: 100%); // Override
   }
 
   &__placeholder {
@@ -50,5 +49,10 @@
       }
     }
     /* =============== End =============== */
+  }
+
+  &__btn-wrapper {
+    @extend %flexbox;
+    @extend %justify-content-center;
   }
 }
