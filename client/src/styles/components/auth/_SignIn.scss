@@ -55,6 +55,8 @@
     &:before {
       color: $placeholder-font-color;
 
+      transform-style: preserve-3d;
+
       @extend %placeholder-text-no-icon;
     }
 
