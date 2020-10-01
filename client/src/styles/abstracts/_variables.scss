@@ -4,6 +4,9 @@ $breakpoints: (
   breakpoint-small: 575px,
 );
 
+// Amount
+$darken-lighten-primary: 5%;
+
 // Palette
 $color-athens-gray: #ecf0f3;
 $color-heather: #adbfcc;
@@ -24,7 +27,7 @@ $color-silver: #bababa;
 $color-transparentized-nepal: transparentize($color-nepal, 0.5);
 $color-transparentized-port-gore: transparentize($color-port-gore, 0.5);
 $color-transparentized-heather: transparentize($color-heather, 0.75);
-$color-transparentized-black: transparentize($color-black, 0.7);
+$color-transparentized-black: transparentize($color-black, 0.75);
 
 /* Light Theme
 ============================================================================================== */
@@ -75,23 +78,23 @@ $alert-danger: $color-medium-carmine;
 // Status & Priority Pallete
 $project-font-color-status-priority: $color-athens-gray;
 $project-low: #3da4ed;
-$project-low-darken: darken($project-low, 5%);
+$project-low-darken: darken($project-low, $darken-lighten-primary);
 $project-medium: #ffe311;
-$project-medium-darken: darken($project-medium, 5%);
+$project-medium-darken: darken($project-medium, $darken-lighten-primary);
 $project-high: #f45c43;
-$project-high-darken: darken($project-high, 5%);
+$project-high-darken: darken($project-high, $darken-lighten-primary);
 $project-proposed: #fdac0e;
-$project-proposed-darken: darken($project-proposed, 5%);
+$project-proposed-darken: darken($project-proposed, $darken-lighten-primary);
 $project-active: #a5cc82;
-$project-active-darken: darken($project-active, 5%);
+$project-active-darken: darken($project-active, $darken-lighten-primary);
 $project-on-hold: #1ae8d9;
-$project-on-hold-darken: darken($project-on-hold, 5%);
+$project-on-hold-darken: darken($project-on-hold, $darken-lighten-primary);
 $project-completed: #53db57;
-$project-completed-darken: darken($project-completed, 5%);
+$project-completed-darken: darken($project-completed, $darken-lighten-primary);
 $project-archived: #a09d9c;
-$project-archived-darken: darken($project-archived, 5%);
+$project-archived-darken: darken($project-archived, $darken-lighten-primary);
 $project-canceled: #c4c2c4;
-$project-canceled-darken: darken($project-canceled, 5%);
+$project-canceled-darken: darken($project-canceled, $darken-lighten-primary);
 
 // Form
 $input-width-primary: 300px;
@@ -206,24 +209,28 @@ $alert-font-color-primary: $font-color-dark-primary;
 $delete-confirmation-background-color-primary: $background-color-light-primary;
 // -----------------------------------------------------------------
 // (DeleteConfirmation) |   Delete-confirmation
+// (Button)             |   Button (--Cancel)
 
-$delete-confirmation-neutral-primary: $gray-dark;
+$delete-confirmation-background-color-secondary: $background-color-dark-primary;
 // -----------------------------------------------------------------
-// (Button)             |   Button (--Cancel - Background-color)
-
-// alert-danger
-// -----------------------------------------------------------------
-// (DeleteConfirmation) |   Header
 // (Button)             |   Button (--Delete)
 
 $delete-confirmation-font-color-primary: $font-color-dark-primary;
 // -----------------------------------------------------------------
-// (DeleteConfirmation) |   Header
 // (Button)             |   Button (--Delete-confirmation (--Delete & --Cancel))
 
 $delete-confirmation-font-color-secondary: $font-color-light-primary;
 // -----------------------------------------------------------------
 // (DeleteConfirmation) |   Information
+
+$delete-confirmation-font-color-tertiary: $font-color-light-secondary;
+// -----------------------------------------------------------------
+// (DeleteConfirmation) |   Header
+// (Button)             |   Button (--Cancel)
+
+$delete-confirmation-accents-primary: $color-transparentized-heather;
+// -----------------------------------------------------------------
+// (Button)             |   Information (Border-top, Border-bottom)
 
 /* Select Input - Default
 ============================================================================================== */

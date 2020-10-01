@@ -1,18 +1,18 @@
 .delete-confirmation {
   /* =============== Variables =============== */
   $delete-confirmation-background-color: $delete-confirmation-background-color-primary;
-  $header-background-color: $alert-danger;
-  $header-font-color: $delete-confirmation-font-color-primary;
+  $header-font-color: $delete-confirmation-font-color-tertiary;
   $information-font-color: $delete-confirmation-font-color-secondary;
+  $information-border-color-T: $delete-confirmation-accents-primary;
+  $information-border-color-B: $information-border-color-T;
 
   $delete-confirmation-width-md: 375px;
   $delete-confirmation-width-sm: 225px;
   $delete-confirmation-border-radius: 10px;
   $delete-confirmation-position-R: calc(100% + 10px);
-  $header-padding: 10px;
-  $header-margin-B: 5px;
+  $header-padding: 14px;
   $btn-wrapper-margin-RL: 5px;
-  $general-padding-TB: 5px;
+  $general-padding-TB: 12px;
   $general-padding-RL: 10px;
 
   /* =============== Placeholders =============== */
@@ -52,19 +52,19 @@
   }
 
   &__header {
-    background-color: $header-background-color;
     color: $header-font-color;
 
     font-weight: 700;
 
     // Header-padding
     @include space(padding, $gen: $header-padding);
-    // Header-margin-B
-    @include space(margin, $bottom: $header-margin-B);
   }
 
   &__information {
     color: $information-font-color;
+
+    border-top: 1px solid $information-border-color-T;
+    border-bottom: 1px solid $information-border-color-B;
 
     @extend %general-padding;
   }

@@ -41,9 +41,11 @@
   // --Delete-confirmation (--Delete & --Cancel)
   $button-font-color--delete-confirmation: $delete-confirmation-font-color-primary;
   // --Delete
-  $button-background-color--delete: $alert-danger;
+  $button-background-color--delete: $delete-confirmation-background-color-secondary;
   // --Cancel
-  $button-background-color--cancel: $delete-confirmation-neutral-primary;
+  $button-background-color--cancel: $delete-confirmation-background-color-primary;
+  $button-font-color--cancel: $delete-confirmation-font-color-tertiary;
+  $button-border-color--cancel: $button-font-color--cancel;
 
   $button-border-radius: 0.25rem;
   $button-padding-TB: 0.375rem;
@@ -544,7 +546,9 @@
   }
 
   &--cancel {
-    background-color: $button-background-color--cancel;
+    color: $button-font-color--cancel;
+
+    border: 1px solid $button-border-color--cancel;
 
     &:hover {
       background-color: darken($button-background-color--cancel, 5%);

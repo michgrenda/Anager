@@ -137,13 +137,19 @@ body.using-keyboard {
 
     &--delete {
       &:focus {
-        background-color: darken($alert-danger, 5%);
+        background-color: darken(
+          $delete-confirmation-background-color-secondary,
+          5%
+        );
       }
     }
 
     &--cancel {
       &:focus {
-        background-color: darken($delete-confirmation-neutral-primary, 5%);
+        background-color: darken(
+          $delete-confirmation-background-color-primary,
+          5%
+        );
       }
     }
   }

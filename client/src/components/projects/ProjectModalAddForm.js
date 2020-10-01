@@ -174,6 +174,7 @@ const ProjectModalAddForm = function (props) {
                   setData={setSelectedData}
                   uniqueIdOnClickOutside="priority"
                   ignoreReactOnClickOutside={`header-priority-ignore`}
+                  ripples={false}
                 />
               </div>
               <div className="project-add-form__select-input-wrapper col-12 col-sm-6">
@@ -184,14 +185,11 @@ const ProjectModalAddForm = function (props) {
                   setData={setSelectedData}
                   uniqueIdOnClickOutside="status"
                   ignoreReactOnClickOutside={`header-status-ignore`}
+                  ripples={false}
                 />
               </div>
               <div className="project-add-form__btn-wrapper col-12">
-                <Button
-                  categories={["projects-create", "default-light"]}
-                  type="submit"
-                  light
-                >
+                <Button categories={["projects-create"]} type="submit" light>
                   create project
                 </Button>
               </div>

@@ -92,11 +92,7 @@ const SectionModalAddForm = function (props) {
                 ></span>
               </div>
               <div className="section-add-form__btn-wrapper col-12">
-                <Button
-                  categories={["projects-create", "default-light"]}
-                  type="submit"
-                  light
-                >
+                <Button categories={["projects-create"]} type="submit" light>
                   create section
                 </Button>
               </div>
