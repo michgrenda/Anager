@@ -52,10 +52,10 @@
   }
 
   &__placeholder {
+    @include transform(translate3d(0, 0, 0));
+
     &:before {
       color: $placeholder-font-color;
-
-      transform-style: preserve-3d;
 
       @extend %placeholder-text-no-icon;
     }
