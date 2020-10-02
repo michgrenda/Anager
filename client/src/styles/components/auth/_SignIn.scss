@@ -41,6 +41,8 @@
   }
 
   &__input-wrapper {
+    z-index: 1;
+
     @extend %input-wrapper;
   }
 
@@ -52,9 +54,6 @@
   }
 
   &__placeholder {
-    @include transform(translateZ(0));
-    @include position(relative);
-
     &:before {
       color: $placeholder-font-color;
 

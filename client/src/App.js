@@ -16,6 +16,7 @@ import Projects from "./components/projects/Projects";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import Footer from "./components/layouts/Footer";
 import PageNotFound from "./components/routing/PageNotFound";
+import ScrollToTop from "./ScrollToTop";
 
 const routes = [
   {
@@ -53,6 +54,7 @@ const routes = [
 const App = () => {
   // States
   const [loading, setLoading] = useState(true);
+
   // References
   const main = useRef(null);
 
@@ -75,6 +77,7 @@ const App = () => {
       <BrowserRouter>
         {!loading ? (
           <>
+            <ScrollToTop />
             <CSSTransition
               in
               timeout={transitionDuration}
