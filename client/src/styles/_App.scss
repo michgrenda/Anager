@@ -18,9 +18,9 @@ body {
 
     /* =============== Modifiers =============== */
     // State
-    // &--is-active {
-    //   @include transform(translateY($navbar3d-height));
-    // }
+    &--is-active {
+      @include transform(translateY($navbar3d-height));
+    }
     /* =============== End =============== */
   }
 }
