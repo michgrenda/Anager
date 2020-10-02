@@ -52,7 +52,8 @@
   }
 
   &__placeholder {
-    @include transform(translate3d(0, 0, 0));
+    @include transform(translateZ(0));
+    @include position(relative);
 
     &:before {
       color: $placeholder-font-color;
