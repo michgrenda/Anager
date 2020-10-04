@@ -8,10 +8,13 @@
   $copyright-font-color: $footer-font-color-primary;
 
   $footnote-padding: 20px;
+  $footnote-margin-T: $navbar3d-height;
   $text-margin-L: 5px;
 
   // Footnote-padding
   @include space(padding, $gen: $footnote-padding);
+  // Footnote-margin-T
+  @include space(margin, $top: $footnote-margin-T);
 
   &__copyright {
     color: $copyright-font-color;

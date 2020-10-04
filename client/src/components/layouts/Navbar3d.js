@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
-import onClickOutside from "react-onclickoutside";
+// import onClickOutside from "react-onclickoutside";
 
 const Navbar3d = function (props) {
   // Close 3d navbar using keyboard
@@ -19,21 +19,21 @@ const Navbar3d = function (props) {
     }
   };
 
-  // React-onClickOutside
-  Navbar3d.handleClickOutside = (e) => {
-    if (e.type === "keydown") {
-      switch (e.which) {
-        case 27:
-          props.onClose();
-          break;
-        case 13:
-          props.onClose();
-          break;
-        default:
-          break;
-      }
-    } else props.onClose();
-  };
+  // // React-onClickOutside
+  // Navbar3d.handleClickOutside = (e) => {
+  //   if (e.type === "keydown") {
+  //     switch (e.which) {
+  //       case 27:
+  //         props.onClose();
+  //         break;
+  //       case 13:
+  //         props.onClose();
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   } else props.onClose();
+  // };
 
   // Variables
   const list = props.listProps.map((item) => (
@@ -100,8 +100,10 @@ Navbar3d.propTypes = {
   triggeringElement: PropTypes.object.isRequired,
 };
 
-const clickOutsideConfig = {
-  handleClickOutside: () => Navbar3d.handleClickOutside,
-};
+// const clickOutsideConfig = {
+//   handleClickOutside: () => Navbar3d.handleClickOutside,
+// };
 
-export default onClickOutside(Navbar3d, clickOutsideConfig);
+// export default onClickOutside(Navbar3d, clickOutsideConfig);
+
+export default Navbar3d;

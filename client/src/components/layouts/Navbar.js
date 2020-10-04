@@ -80,15 +80,13 @@ const Navbar = function (props) {
 
   // Remove classes related to 3d navbar when the window is resized ***
   const handleWindowResize = useCallback(() => {
-    if (window.matchMedia("(min-width: 992px)").matches) {
-      closeNav3d();
-    }
+    if (window.matchMedia("(min-width: 992px)").matches) closeNav3d();
   }, [closeNav3d]);
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
 
-    return () => window.removeEventListener("click", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
   }, [handleWindowResize]);
   // End ***
 

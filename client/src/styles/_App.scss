@@ -36,6 +36,11 @@ body,
   @extend %flex-direction-column;
 }
 
+.resize-animation-transition-stopper * {
+  animation: none !important;
+  transition: none !important;
+}
+
 /* ***===================== React transition group =====================*** */
 @include basicTransition(
   $classNames: next-to-page,
@@ -43,12 +48,6 @@ body,
   $transformsEnd: null,
   $duration: $transition-duration-tertiary
 );
-
-// @include basicTransition(
-//   $classNames: page,
-//   $transformsStart: translateY(75px),
-//   $transformsEnd: translateY(0)
-// );
 
 .page-enter,
 .page-appear {

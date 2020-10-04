@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { BounceLoader } from "react-spinners";
@@ -17,8 +17,15 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import Footer from "./components/layouts/Footer";
 import PageNotFound from "./components/routing/PageNotFound";
 import ScrollToTop from "./ScrollToTop";
+import Landing from "./components/layouts/Landing";
 
 const routes = [
+  {
+    path: "/",
+    exact: true,
+    privatePath: false,
+    component: Landing,
+  },
   {
     path: "/sign-up",
     exact: true,
@@ -54,6 +61,7 @@ const routes = [
 const App = () => {
   // States
   const [loading, setLoading] = useState(true);
+  const [resizeTimer, setResizeTimer] = useState(null);
 
   // References
   const main = useRef(null);
@@ -65,6 +73,25 @@ const App = () => {
       .catch((error) => console.log(error))
       .finally(() => setLoading(store.getState().auth.loading));
   }, []);
+
+  // Stop animations during window resizing ***
+  const handleWindowResize = useCallback(() => {
+    document.body.classList.add("resize-animation-transition-stopper");
+
+    clearTimeout(resizeTimer);
+    setResizeTimer(
+      setTimeout(() => {
+        document.body.classList.remove("resize-animation-transition-stopper");
+      }, 400)
+    );
+  }, [resizeTimer]);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, [handleWindowResize]);
+  // End ***
 
   // Variables
   const transitionClassNames = "next-to-page";
@@ -87,7 +114,6 @@ const App = () => {
             >
               <Navbar main={main} />
             </CSSTransition>
-
             <main className="main" ref={main}>
               <div className="container">
                 <div className="row h-100">

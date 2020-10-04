@@ -40,7 +40,7 @@ import ProjectMenu from "./ProjectMenu";
 const draggableRoot = document.getElementById("draggable-root");
 
 const touch = matchMedia("(hover: none) and (pointer: coarse)").matches;
-console.log(touch);
+
 // Settings
 const addProps = [
   {
