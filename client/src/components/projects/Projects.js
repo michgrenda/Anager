@@ -9,6 +9,7 @@ import ReactTooltip from "react-tooltip";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { CSSTransition } from "react-transition-group";
 import Ripple from "@intereact/ripple";
+import { TOUCH } from "../../touch";
 // Redux
 import { connect } from "react-redux";
 import {
@@ -39,7 +40,7 @@ import ProjectMenu from "./ProjectMenu";
 // Portal
 const draggableRoot = document.getElementById("draggable-root");
 
-const touch = matchMedia("(hover: none) and (pointer: coarse)").matches;
+// const touch = matchMedia("(hover: none) and (pointer: coarse)").matches;
 
 // Settings
 const addProps = [
@@ -552,12 +553,12 @@ const Projects = (props) => {
                         project._id
                       )}
                       style={{ position: "relative" }}
-                      {...(touch && provided.dragHandleProps)}
+                      {...(TOUCH && provided.dragHandleProps)}
                     >
                       <i
                         className="projects__project-icon projects__project-icon--grip fas fa-grip-vertical"
-                        {...(!touch && provided.dragHandleProps)}
-                        // style={{ visibility: touch && "hidden" }}
+                        {...(!TOUCH && provided.dragHandleProps)}
+                        // style={{ visibility: TOUCH && "hidden" }}
                       ></i>
                       <i className="projects__project-icon far fa-check-circle"></i>
                       {!projectNameHidden[project._id] && (
@@ -802,13 +803,13 @@ const Projects = (props) => {
                     deleteSectionOpen[section._id]) &&
                   "projects__section-header--is-edited"
                 }`}
-                {...(touch && provided.dragHandleProps)}
+                {...(TOUCH && provided.dragHandleProps)}
               >
                 <div className="projects__section-information">
                   <i
                     className="projects__section-icon projects__section-icon--grip fas fa-grip-vertical"
-                    {...(!touch && provided.dragHandleProps)}
-                    // style={{ visibility: touch && "hidden" }}
+                    {...(!TOUCH && provided.dragHandleProps)}
+                    // style={{ visibility: TOUCH && "hidden" }}
                   ></i>
                   {!sectionNameHidden[section._id] && (
                     <span className="projects__section-text">

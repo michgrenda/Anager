@@ -502,6 +502,10 @@
       )
     );
 
+    @media (hover: none) and (pointer: coarse) {
+      opacity: 1;
+    }
+
     &:hover {
       background-color: $button-hover-background-color--projects-inline-edit;
 

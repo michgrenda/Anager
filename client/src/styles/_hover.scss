@@ -1,0 +1,419 @@
+// Hover
+// @mixin select-state($root, $name, $color, $darken-color) {
+//   &--#{$name} {
+//     #{$root}__header {
+//       &:focus {
+//         color: $darken-color;
+//         #{$root}__title-wrapper {
+//           background-color: $darken-color;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @mixin item-state($name, $color) {
+//   &--#{$name} {
+//     &:focus {
+//       color: $color;
+//     }
+//   }
+// }
+
+body.no-hover {
+  .navbar,
+  .navbar-3d {
+    &__link {
+      &:hover {
+        color: $navigation-font-color-primary;
+      }
+    }
+  }
+
+  //   .sign-out {
+  //     &__link {
+  //       &:focus {
+  //         color: $authentication-accents-primary;
+
+  //         &:after {
+  //           background-color: $authentication-accents-primary;
+
+  //           @include transform(scaleX(1));
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   .page-not-found {
+  //     &__link {
+  //       &:focus {
+  //         color: $routing-accents-primary;
+
+  //         &:after {
+  //           background-color: $routing-accents-primary;
+
+  //           @include transform(scaleX(1));
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   .button {
+  //     $root: ".button";
+
+  //     &--default-light,
+  //     &--default-dark {
+  //       &:focus {
+  //         color: $button-accents-primary;
+
+  //         #{$root}__burger-line,
+  //         #{$root}__plus-line {
+  //           background-color: $button-accents-primary;
+  //         }
+  //       }
+  //     }
+
+  //     &--section-inline-add {
+  //       &:focus {
+  //         background-color: $projects-accents-primary;
+
+  //         #{$root}__plus-line {
+  //           background-color: darken($projects-neutral-tertiary, 15%);
+  //         }
+  //       }
+  //     }
+
+  //     &--section-inline-edit,
+  //     &--project-inline-edit {
+  //       &:focus {
+  //         background-color: $projects-accents-primary;
+
+  //         opacity: 1;
+  //       }
+  //     }
+
+  //     &--section-inline-edit {
+  //       &:focus {
+  //         color: $projects-accents-secondary;
+  //       }
+  //     }
+
+  //     &--project-inline-edit {
+  //       &:focus {
+  //         color: $projects-neutral-primary;
+  //       }
+  //     }
+
+  //     &--project-ellipsis {
+  //       &:focus {
+  //         background-color: $projects-accents-primary;
+  //       }
+  //     }
+
+  //     &--delete {
+  //       &:focus {
+  //         background-color: darken(
+  //           $delete-confirmation-background-color-secondary,
+  //           5%
+  //         );
+  //       }
+  //     }
+
+  //     &--cancel {
+  //       &:focus {
+  //         background-color: darken(
+  //           $delete-confirmation-background-color-primary,
+  //           5%
+  //         );
+  //       }
+  //     }
+  //   }
+
+  //   .projects {
+  //     $root: ".projects";
+
+  //     &__project-col {
+  //       &:focus {
+  //         outline: $outline;
+  //       }
+  //     }
+
+  //     &__section-icon,
+  //     &__project-icon {
+  //       &:focus {
+  //         outline: $outline;
+  //       }
+
+  //       &--grip {
+  //         &:focus {
+  //           opacity: 1;
+  //         }
+  //       }
+  //     }
+
+  //     &__section-option,
+  //     &__project-option {
+  //       &:focus {
+  //         outline: $outline;
+  //         background-color: $projects-accents-primary;
+
+  //         #{$root}__section-icon {
+  //           &--edit,
+  //           &--delete {
+  //             opacity: 1;
+  //           }
+  //         }
+
+  //         #{$root}__project-icon {
+  //           &--edit {
+  //             opacity: 1;
+  //           }
+  //         }
+  //       }
+  //     }
+
+  //     &__project-name {
+  //       &:focus {
+  //         outline: $outline;
+  //         background-color: $projects-accents-primary;
+  //       }
+  //     }
+  //   }
+
+  //   .section-inline-add {
+  //     $root: ".section-inline-add";
+
+  //     #{$root}__information {
+  //       &:focus {
+  //         outline: $outline;
+  //         color: darken($projects-neutral-tertiary, 15%);
+
+  //         #{$root}__plus-line {
+  //           background-color: darken($projects-neutral-tertiary, 15%);
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   .react-datepicker {
+  //     &__day,
+  //     &__month-text,
+  //     &__quarter-text,
+  //     &__year-text {
+  //       &:focus {
+  //         outline: $outline;
+  //         background-color: $color-transparentized-heather;
+
+  //         border-radius: 50%;
+  //       }
+
+  //       &--selected,
+  //       &--in-selecting-range,
+  //       &--in-range {
+  //         &:focus {
+  //           background-color: lighten($background-color-dark-primary, 10%);
+  //         }
+  //       }
+
+  //       &--keyboard-selected {
+  //         &:focus {
+  //           background-color: $color-transparentized-heather;
+  //           color: $font-color-light-primary;
+  //         }
+  //       }
+  //     }
+
+  //     &__day {
+  //       &--today {
+  //         &:focus {
+  //           background-color: lighten($background-color-dark-primary, 10%);
+  //           color: $font-color-dark-primary;
+  //         }
+  //       }
+  //       /* =============== End =============== */
+  //     }
+
+  //     &__navigation {
+  //       &:focus {
+  //         outline: $outline;
+  //       }
+
+  //       &--previous {
+  //         &:focus {
+  //           border-right-color: $font-color-light-primary;
+  //         }
+  //       }
+
+  //       &--next {
+  //         &:focus {
+  //           border-left-color: $font-color-light-primary;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   .modal {
+  //     $root: ".modal";
+
+  //     &__overlay {
+  //       &--default-light {
+  //         #{$root}__close-button {
+  //           &:focus {
+  //             #{$root}__close-icon {
+  //               &:after,
+  //               &:before {
+  //                 background-color: $modal-background-color-tertiary;
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+
+  //       &--default-dark {
+  //         #{$root}__close-button {
+  //           &:focus {
+  //             #{$root}__close-icon {
+  //               &:after,
+  //               &:before {
+  //                 background-color: $modal-background-color-secondary;
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //       /* =============== End =============== */
+  //     }
+  //   }
+
+  //   .project-menu {
+  //     &__item {
+  //       &:focus {
+  //         outline: $outline;
+  //         background-color: $projects-accents-primary;
+  //         color: $projects-accents-secondary;
+  //       }
+  //     }
+  //   }
+
+  //   .select-input {
+  //     $root: ".select-input";
+
+  //     &--default-light,
+  //     &--default-dark {
+  //       #{$root}__header {
+  //         &:focus {
+  //           outline: $outline;
+
+  //           #{$root}__title-wrapper {
+  //             color: $select-input-font-color-tertiary;
+  //           }
+  //         }
+  //       }
+
+  //       #{$root}__item {
+  //         &:focus {
+  //           outline: $outline;
+  //         }
+  //       }
+  //     }
+
+  //     &--default-light {
+  //       #{$root}__item {
+  //         &:focus {
+  //           color: $select-input-font-color-primary;
+  //         }
+  //       }
+  //     }
+
+  //     &--default-dark {
+  //       #{$root}__item {
+  //         &:focus {
+  //           color: $select-input-font-color-secondary;
+  //         }
+  //       }
+  //     }
+
+  //     &--project,
+  //     &--project-modal-add {
+  //       #{$root}__item {
+  //         @include item-state(low, $project-low);
+  //         @include item-state(medium, $project-medium);
+  //         @include item-state(high, $project-high);
+
+  //         @include item-state(proposed, $project-proposed);
+  //         @include item-state(active, $project-active);
+  //         @include item-state(on-hold, $project-on-hold);
+  //         @include item-state(completed, $project-completed);
+  //         @include item-state(archived, $project-archived);
+  //         @include item-state(canceled, $project-canceled);
+  //       }
+  //     }
+
+  //     &--project-modal-add {
+  //       #{$root}__header {
+  //         &:focus {
+  //           #{$root}__title-wrapper {
+  //             background-color: $projects-neutral-secondary;
+  //             color: $projects-font-color-tertiary;
+  //           }
+  //         }
+  //       }
+  //     }
+
+  //     &--project {
+  //       #{$root}__header {
+  //         &:focus {
+  //           #{$root}__title-wrapper {
+  //             color: $projects-font-color-tertiary;
+  //           }
+  //         }
+  //       }
+  //     }
+
+  //     @include select-state($root, low, $project-low, $project-low-darken);
+  //     @include select-state(
+  //       $root,
+  //       medium,
+  //       $project-medium,
+  //       $project-medium-darken
+  //     );
+  //     @include select-state($root, high, $project-high, $project-high-darken);
+
+  //     @include select-state(
+  //       $root,
+  //       proposed,
+  //       $project-proposed,
+  //       $project-proposed-darken
+  //     );
+  //     @include select-state(
+  //       $root,
+  //       active,
+  //       $project-active,
+  //       $project-active-darken
+  //     );
+  //     @include select-state(
+  //       $root,
+  //       on-hold,
+  //       $project-on-hold,
+  //       $project-on-hold-darken
+  //     );
+  //     @include select-state(
+  //       $root,
+  //       completed,
+  //       $project-completed,
+  //       $project-completed-darken
+  //     );
+  //     @include select-state(
+  //       $root,
+  //       archived,
+  //       $project-archived,
+  //       $project-archived-darken
+  //     );
+  //     @include select-state(
+  //       $root,
+  //       canceled,
+  //       $project-canceled,
+  //       $project-canceled-darken
+  //     );
+  //   }
+}

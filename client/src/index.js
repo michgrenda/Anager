@@ -5,6 +5,8 @@ import "./styles/index.scss";
 // Focus
 import "focus-visible";
 import "./focus";
+// Hover
+import "./hover";
 // Components
 import App from "./App";
 
