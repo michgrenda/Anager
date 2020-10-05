@@ -132,18 +132,20 @@
 
     @extend %box-shadow-light;
 
-    &:hover {
-      color: $button-hover-font-color--default-light;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $button-hover-font-color--default-light;
+
+        #{$root}__burger-line,
+        #{$root}__plus-line {
+          background-color: $line-hover-background-color--default-light;
+        }
+      }
 
       #{$root}__burger-line,
       #{$root}__plus-line {
-        background-color: $line-hover-background-color--default-light;
+        background-color: $line-background-color--default-light;
       }
-    }
-
-    #{$root}__burger-line,
-    #{$root}__plus-line {
-      background-color: $line-background-color--default-light;
     }
   }
 
@@ -153,18 +155,20 @@
 
     @extend %box-shadow-dark;
 
-    &:hover {
-      color: $button-hover-font-color--default-light;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $button-hover-font-color--default-light;
+
+        #{$root}__burger-line,
+        #{$root}__plus-line {
+          background-color: $line-hover-background-color--default-dark;
+        }
+      }
 
       #{$root}__burger-line,
       #{$root}__plus-line {
-        background-color: $line-hover-background-color--default-dark;
+        background-color: $line-background-color--default-dark;
       }
-    }
-
-    #{$root}__burger-line,
-    #{$root}__plus-line {
-      background-color: $line-background-color--default-dark;
     }
   }
 
@@ -441,8 +445,10 @@
     );
     @include space(padding, $gen: unset);
 
-    &:hover {
-      background-color: $button-hover-background-color--project-ellipsis;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $button-hover-background-color--project-ellipsis;
+      }
     }
   }
 
@@ -468,11 +474,13 @@
       );
     }
 
-    &:hover {
-      background-color: $button-hover-background-color--section-inline-add;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $button-hover-background-color--section-inline-add;
 
-      #{$root}__plus-line {
-        background-color: $plus-line-hover-background-color--section-inline-add;
+        #{$root}__plus-line {
+          background-color: $plus-line-hover-background-color--section-inline-add;
+        }
       }
     }
   }
@@ -482,7 +490,7 @@
     background-color: transparent;
 
     border-radius: 50%;
-    opacity: 0;
+    // opacity: 0;
 
     // Button-size--projects-inline-edit
     @include size(
@@ -502,13 +510,15 @@
       )
     );
 
-    @media (hover: none) and (pointer: coarse) {
-      opacity: 1;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $button-hover-background-color--projects-inline-edit;
+
+        opacity: 1;
+      }
     }
 
-    &:hover {
-      background-color: $button-hover-background-color--projects-inline-edit;
-
+    @media (hover: none) and (pointer: coarse) {
       opacity: 1;
     }
   }
@@ -516,16 +526,20 @@
   &--section-inline-edit {
     color: $button-font-color--section-inline-edit;
 
-    &:hover {
-      color: $button-hover-font-color--section-inline-edit;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $button-hover-font-color--section-inline-edit;
+      }
     }
   }
 
   &--project-inline-edit {
     color: $button-font-color--project-inline-edit;
 
-    &:hover {
-      color: $button-hover-font-color--project-inline-edit;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $button-hover-font-color--project-inline-edit;
+      }
     }
   }
 
@@ -544,8 +558,10 @@
   &--delete {
     background-color: $button-background-color--delete;
 
-    &:hover {
-      background-color: darken($button-background-color--delete, 5%);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: darken($button-background-color--delete, 5%);
+      }
     }
   }
 
@@ -554,8 +570,10 @@
 
     border: 1px solid $button-border-color--cancel;
 
-    &:hover {
-      background-color: darken($button-background-color--cancel, 5%);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: darken($button-background-color--cancel, 5%);
+      }
     }
   }
   /* =============== End =============== */

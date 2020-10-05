@@ -282,10 +282,7 @@
     );
 
     @media (hover: hover) and (pointer: fine) {
-      &:hover,
-    /* =============== Modifiers =============== */
-    // State
-    &--is-edited {
+      &:hover {
         color: $section-header-hover-font-color;
 
         border-color: $section-header-hover-border-color-B;
@@ -294,8 +291,20 @@
           opacity: 1;
         }
       }
-      /* =============== End =============== */
     }
+
+    /* =============== Modifiers =============== */
+    // State
+    &--is-edited {
+      color: $section-header-hover-font-color;
+
+      border-color: $section-header-hover-border-color-B;
+
+      #{$root}__section-icon {
+        opacity: 1;
+      }
+    }
+    /* =============== End =============== */
   }
 
   &__section-information {
@@ -345,8 +354,10 @@
 
   &__section-option,
   &__project-option {
-    &:hover {
-      background-color: $option-hover-background-color;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $option-hover-background-color;
+      }
     }
   }
 
@@ -446,14 +457,6 @@
       @extend %justify-content-center;
       @extend %align-items-center;
       @extend %user-select-none;
-
-      @include position(relative);
-
-      &:hover {
-        #{$root}__project-tooltip {
-          opacity: 1;
-        }
-      }
     }
 
     &--ellipsis {
@@ -484,14 +487,31 @@
       )
     );
 
-    &:hover,
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $project-name-hover-background-color;
+        color: $project-name-hover-font-color;
+
+        text-decoration: none;
+
+        #{$root}__project-icon {
+          opacity: 1;
+        }
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      &:hover {
+        color: $project-name-font-color;
+
+        text-decoration: none;
+      }
+    }
+
     /* =============== Modifiers =============== */
     // State
     &--is-edited {
       background-color: $project-name-hover-background-color;
-      color: $project-name-hover-font-color;
-
-      text-decoration: none;
 
       #{$root}__project-icon {
         opacity: 1;

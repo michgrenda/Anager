@@ -5,9 +5,11 @@
   $input-border-color-B: $projects-accents-secondary;
   $input-shadow-color: $input-border-color-B;
 
-  &:hover {
-    .button--section-inline-edit {
-      opacity: 1;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      .button--section-inline-edit {
+        opacity: 1;
+      }
     }
   }
 

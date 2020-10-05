@@ -92,7 +92,6 @@ const SectionInlineEditForm = function (props) {
       unmountOnExit
       onExited={props.onExited}
       onEntered={onEntered}
-      nodeRef={input}
     >
       <div
         className="section-inline-edit"

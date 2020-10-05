@@ -57,11 +57,13 @@
       )
     );
 
-    &:hover {
-      color: $informartion-hover-font-color;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $informartion-hover-font-color;
 
-      #{$root}__plus-line {
-        background-color: $plus-line-hover-background-color;
+        #{$root}__plus-line {
+          background-color: $plus-line-hover-background-color;
+        }
       }
     }
   }

@@ -49,9 +49,11 @@
       )
     );
 
-    &:hover {
-      background-color: $item-hover-background-color;
-      color: $item-hover-font-color;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $item-hover-background-color;
+        color: $item-hover-font-color;
+      }
     }
   }
 }

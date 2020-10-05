@@ -39,10 +39,18 @@
       )
     );
 
-    &:hover {
-      background-color: $color-transparentized-heather;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $color-transparentized-heather;
 
-      border-radius: 50%;
+        border-radius: 50%;
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      &:hover {
+        border-radius: 50%;
+      }
     }
 
     /* =============== Modifiers =============== */
@@ -52,9 +60,18 @@
       background-color: $background-color-dark-primary;
       color: $font-color-dark-primary;
 
-      &:hover {
-        background-color: lighten($background-color-dark-primary, 10%);
-        color: $font-color-dark-primary;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background-color: lighten($background-color-dark-primary, 10%);
+          color: $font-color-dark-primary;
+        }
+      }
+
+      @media (hover: none) and (pointer: coarse) {
+        &:hover {
+          background-color: $background-color-dark-primary;
+          color: $font-color-dark-primary;
+        }
       }
     }
 
@@ -62,9 +79,18 @@
       background-color: lighten($background-color-dark-primary, 10%);
       color: $font-color-dark-primary;
 
-      &:hover {
-        background-color: $color-transparentized-heather;
-        color: $font-color-light-primary;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background-color: $color-transparentized-heather;
+          color: $font-color-light-primary;
+        }
+      }
+
+      @media (hover: none) and (pointer: coarse) {
+        &:hover {
+          background-color: lighten($background-color-dark-primary, 10%);
+          color: $font-color-dark-primary;
+        }
       }
     }
     /* =============== End =============== */
@@ -76,9 +102,18 @@
       background-color: $background-color-dark-primary;
       color: $font-color-dark-primary;
 
-      &:hover {
-        background-color: lighten($background-color-dark-primary, 10%);
-        color: $font-color-dark-primary;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background-color: lighten($background-color-dark-primary, 10%);
+          color: $font-color-dark-primary;
+        }
+      }
+
+      @media (hover: none) and (pointer: coarse) {
+        &:hover {
+          background-color: $background-color-dark-primary;
+          color: $font-color-dark-primary;
+        }
       }
     }
     /* =============== End =============== */
@@ -101,8 +136,16 @@
         )
       );
 
-      &:hover {
-        border-right-color: $font-color-light-primary;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          border-right-color: $font-color-light-primary;
+        }
+      }
+
+      @media (hover: none) and (pointer: coarse) {
+        &:hover {
+          border-right-color: $font-color-dark-primary;
+        }
       }
     }
 
@@ -117,8 +160,16 @@
         )
       );
 
-      &:hover {
-        border-left-color: $font-color-light-primary;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          border-left-color: $font-color-light-primary;
+        }
+      }
+
+      @media (hover: none) and (pointer: coarse) {
+        &:hover {
+          border-left-color: $font-color-dark-primary;
+        }
       }
     }
     /* =============== End =============== */

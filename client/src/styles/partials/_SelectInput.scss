@@ -59,10 +59,12 @@
       #{$root}__header {
         color: $color;
 
-        &:hover {
-          color: $darken-color;
-          #{$root}__title-wrapper {
-            background-color: $darken-color;
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            color: $darken-color;
+            #{$root}__title-wrapper {
+              background-color: $darken-color;
+            }
           }
         }
       }
@@ -75,8 +77,10 @@
 
   @mixin item-state($name, $color) {
     &--#{$name} {
-      &:hover {
-        color: $color;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: $color;
+        }
       }
     }
   }
@@ -90,9 +94,11 @@
     #{$root}__header {
       color: $header-font-color--default-light;
 
-      &:hover {
-        #{$root}__title-wrapper {
-          color: $title-wrapper-hover-font-color--default-light;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          #{$root}__title-wrapper {
+            color: $title-wrapper-hover-font-color--default-light;
+          }
         }
       }
     }
@@ -112,9 +118,11 @@
     #{$root}__item {
       color: $item-font-color--default-light;
 
-      &:hover {
-        // background-color: $item-hover-background-color--default-light;
-        color: $item-hover-font-color--default-light;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          // background-color: $item-hover-background-color--default-light;
+          color: $item-hover-font-color--default-light;
+        }
       }
 
       &--selected {
@@ -127,9 +135,11 @@
     #{$root}__header {
       color: $header-font-color--default-dark;
 
-      &:hover {
-        #{$root}__title-wrapper {
-          color: $title-wrapper-hover-font-color--default-dark;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          #{$root}__title-wrapper {
+            color: $title-wrapper-hover-font-color--default-dark;
+          }
         }
       }
     }
@@ -149,9 +159,11 @@
     #{$root}__item {
       color: $item-font-color--default-dark;
 
-      &:hover {
-        // background-color: $item-hover-background-color--default-dark;
-        color: $item-hover-font-color--default-dark;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          // background-color: $item-hover-background-color--default-dark;
+          color: $item-hover-font-color--default-dark;
+        }
       }
 
       &--selected {
@@ -206,9 +218,11 @@
 
   &--project {
     #{$root}__header {
-      &:hover {
-        #{$root}__title-wrapper {
-          color: $title-hover-font-color--project;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          #{$root}__title-wrapper {
+            color: $title-hover-font-color--project;
+          }
         }
       }
     }
@@ -256,10 +270,12 @@
     #{$root}__header {
       color: $header-font-color--project-modal-add;
 
-      &:hover {
-        #{$root}__title-wrapper {
-          background-color: $title-hover-background-color--project-modal-add;
-          color: $title-hover-font-color--project-modal-add;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          #{$root}__title-wrapper {
+            background-color: $title-hover-background-color--project-modal-add;
+            color: $title-hover-font-color--project-modal-add;
+          }
         }
       }
     }

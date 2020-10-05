@@ -92,7 +92,6 @@ const ProjectInlineEditForm = function (props) {
       unmountOnExit
       onExited={props.onExited}
       onEntered={onEntered}
-      nodeRef={input}
     >
       <div
         className="project-inline-edit"
