@@ -410,9 +410,12 @@ const Projects = (props) => {
   const createResultsList = (elements) => {
     return elements.map((project) => (
       <div className="projects__grid-project" key={project._id}>
-        <div className="projects__project-col">
-          <Ripple>
-            {(ripples) => (
+        <Ripple>
+          {(ripples) => (
+            <div
+              className="projects__project-col"
+              style={{ position: "relative" }}
+            >
               <Link
                 to={`${props.match.url}/${project._id}`}
                 className={`projects__project-name projects__project-name--result ${
@@ -441,7 +444,6 @@ const Projects = (props) => {
                   triggeringElement={editProjectBtns}
                   updateProject={updateProject}
                 />
-
                 <div className="projects__project-options">
                   <div className="projects__option-wrapper">
                     <div
@@ -462,9 +464,9 @@ const Projects = (props) => {
                   </div>
                 </div>
               </Link>
-            )}
-          </Ripple>
-        </div>
+            </div>
+          )}
+        </Ripple>
         <div
           className="projects__project-col projects__project-col--date d-none d-md-flex"
           data-tip={moment(project.deadline).format("D MMM YYYY")}
@@ -536,9 +538,13 @@ const Projects = (props) => {
               )}
               ref={provided.innerRef}
             >
-              <div className="projects__project-col">
-                <Ripple>
-                  {(ripples) => (
+              <Ripple>
+                {(ripples) => (
+                  <div
+                    className="projects__project-col"
+                    style={{ position: "relative" }}
+                  >
+                    {ripples}
                     <Link
                       to={`${props.match.url}/${project._id}`}
                       className={`projects__project-name ${
@@ -552,7 +558,6 @@ const Projects = (props) => {
                         null,
                         project._id
                       )}
-                      style={{ position: "relative" }}
                       {...(TOUCH && provided.dragHandleProps)}
                     >
                       <i
@@ -566,7 +571,7 @@ const Projects = (props) => {
                           {project.name}
                         </span>
                       )}
-                      {ripples}
+
                       <ProjectInlineEditForm
                         eventTypes={["mousedown", "touchstart", "keydown"]}
                         projectId={project._id}
@@ -600,9 +605,9 @@ const Projects = (props) => {
                         </div>
                       </div>
                     </Link>
-                  )}
-                </Ripple>
-              </div>
+                  </div>
+                )}
+              </Ripple>
               <div
                 className="projects__project-col projects__project-col--date d-none d-md-flex"
                 data-tip={moment(project.deadline).format("D MMM YYYY")}
@@ -794,100 +799,113 @@ const Projects = (props) => {
               )}
               ref={provided.innerRef}
             >
-              <header
-                className={`projects__section-header ${
-                  section.projects.length &&
-                  "projects__section-header--border-bottom"
-                } ${
-                  (sectionInlineEditOpen[section._id] ||
-                    deleteSectionOpen[section._id]) &&
-                  "projects__section-header--is-edited"
-                }`}
-                {...(TOUCH && provided.dragHandleProps)}
-              >
-                <div className="projects__section-information">
-                  <i
-                    className="projects__section-icon projects__section-icon--grip fas fa-grip-vertical"
-                    {...(!TOUCH && provided.dragHandleProps)}
-                    // style={{ visibility: TOUCH && "hidden" }}
-                  ></i>
-                  {!sectionNameHidden[section._id] && (
-                    <span className="projects__section-text">
-                      {section.name}
-                    </span>
-                  )}
+              <Ripple size={TOUCH ? "cover" : 0}>
+                {(ripples) => (
+                  <header
+                    className={`projects__section-header ${
+                      section.projects.length &&
+                      "projects__section-header--border-bottom"
+                    } ${
+                      (sectionInlineEditOpen[section._id] ||
+                        deleteSectionOpen[section._id]) &&
+                      "projects__section-header--is-edited"
+                    }`}
+                    {...(TOUCH && provided.dragHandleProps)}
+                    style={{ position: "relative" }}
+                  >
+                    {ripples}
+                    <div className="projects__section-information">
+                      <i
+                        className="projects__section-icon projects__section-icon--grip fas fa-grip-vertical"
+                        {...(!TOUCH && provided.dragHandleProps)}
+                        // style={{ visibility: TOUCH && "hidden" }}
+                      ></i>
+                      {!sectionNameHidden[section._id] && (
+                        <span className="projects__section-text">
+                          {section.name}
+                        </span>
+                      )}
 
-                  {section._id !== "noSection" && (
-                    <>
-                      <SectionInlineEditForm
-                        eventTypes={["mousedown", "touchstart", "keydown"]}
-                        sectionId={section._id}
-                        sectionName={section.name}
-                        onClose={setSectionInlineEditOpen}
-                        visible={sectionInlineEditOpen[section._id]}
-                        onExited={restoreSectionName.bind(null, section._id)}
-                        outsideClickIgnoreClass={`edit-section-ignore-${section._id}`}
-                        triggeringElement={editSectionBtns}
-                        updateSection={updateSection}
-                      />
-                      <div className="projects__section-options">
-                        <div className="projects__section-option-wrapper">
-                          <div
-                            className={`projects__section-option edit-section-ignore-${section._id}`}
-                            onClick={handleSectionInlineEditClick.bind(
-                              null,
-                              section._id
-                            )}
-                            onKeyDown={handleSectionInlineEditKeyDown.bind(
-                              null,
-                              section._id
-                            )}
-                            tabIndex={0}
-                            ref={(el) =>
-                              (editSectionBtns.current[section._id] = el)
-                            }
-                          >
-                            <i className="projects__section-icon projects__section-icon--edit far fa-edit"></i>
-                          </div>
-                        </div>
-                        <div className="projects__section-option-wrapper">
-                          <div
-                            className={`projects__section-option delete-ignore-${section._id}`}
-                            onClick={handleDeleteSectionClick.bind(
-                              null,
-                              section._id
-                            )}
-                            onKeyDown={handleDeleteSectionKeyDown.bind(
-                              null,
-                              section._id
-                            )}
-                            tabIndex={0}
-                            ref={(el) =>
-                              (deleteSectionBtns.current[section._id] = el)
-                            }
-                          >
-                            <i className="projects__section-icon projects__section-icon--delete far fa-trash-alt"></i>
-                          </div>
-                          <DeleteConfirmation
-                            categories={["projects-section"]}
+                      {section._id !== "noSection" && (
+                        <>
+                          <SectionInlineEditForm
                             eventTypes={["mousedown", "touchstart", "keydown"]}
-                            uniqueId={section._id}
-                            onClose={setDeleteSectionOpen}
-                            visible={deleteSectionOpen[section._id]}
-                            outsideClickIgnoreClass={`delete-ignore-${section._id}`}
-                            triggeringElement={deleteSectionBtns}
-                            elementName="section"
-                            information="All projects associated with this section will be permanently deleted."
-                            deleteFunction={() =>
-                              deleteSection({ cascade: true }, section._id)
-                            }
+                            sectionId={section._id}
+                            sectionName={section.name}
+                            onClose={setSectionInlineEditOpen}
+                            visible={sectionInlineEditOpen[section._id]}
+                            onExited={restoreSectionName.bind(
+                              null,
+                              section._id
+                            )}
+                            outsideClickIgnoreClass={`edit-section-ignore-${section._id}`}
+                            triggeringElement={editSectionBtns}
+                            updateSection={updateSection}
                           />
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </header>
+                          <div className="projects__section-options">
+                            <div className="projects__section-option-wrapper">
+                              <div
+                                className={`projects__section-option edit-section-ignore-${section._id}`}
+                                onClick={handleSectionInlineEditClick.bind(
+                                  null,
+                                  section._id
+                                )}
+                                onKeyDown={handleSectionInlineEditKeyDown.bind(
+                                  null,
+                                  section._id
+                                )}
+                                tabIndex={0}
+                                ref={(el) =>
+                                  (editSectionBtns.current[section._id] = el)
+                                }
+                              >
+                                <i className="projects__section-icon projects__section-icon--edit far fa-edit"></i>
+                              </div>
+                            </div>
+                            <div className="projects__section-option-wrapper">
+                              <div
+                                className={`projects__section-option delete-ignore-${section._id}`}
+                                onClick={handleDeleteSectionClick.bind(
+                                  null,
+                                  section._id
+                                )}
+                                onKeyDown={handleDeleteSectionKeyDown.bind(
+                                  null,
+                                  section._id
+                                )}
+                                tabIndex={0}
+                                ref={(el) =>
+                                  (deleteSectionBtns.current[section._id] = el)
+                                }
+                              >
+                                <i className="projects__section-icon projects__section-icon--delete far fa-trash-alt"></i>
+                              </div>
+                              <DeleteConfirmation
+                                categories={["projects-section"]}
+                                eventTypes={[
+                                  "mousedown",
+                                  "touchstart",
+                                  "keydown",
+                                ]}
+                                uniqueId={section._id}
+                                onClose={setDeleteSectionOpen}
+                                visible={deleteSectionOpen[section._id]}
+                                outsideClickIgnoreClass={`delete-ignore-${section._id}`}
+                                triggeringElement={deleteSectionBtns}
+                                elementName="section"
+                                information="All projects associated with this section will be permanently deleted."
+                                deleteFunction={() =>
+                                  deleteSection({ cascade: true }, section._id)
+                                }
+                              />
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </header>
+                )}
+              </Ripple>
               <Droppable droppableId={section._id} type="droppableSubItem">
                 {(provided, snapshot) => (
                   <div
@@ -930,14 +948,20 @@ const Projects = (props) => {
 
   const makeSkeletonBody = (amount) => {
     const rows = [];
-    for (let i = 0; i < amount; ++i) {
+
+    for (let counter = 0; counter < amount; ++counter) {
       rows.push(
-        <React.Fragment key={i}>
-          <h2 style={{ fontSize: 32 }}>{<Skeleton />}</h2>
-          <div style={{ padding: "5px 30px" }}>{<Skeleton count={5} />}</div>
-        </React.Fragment>
+        <section key={counter}>
+          <h2 style={{ fontSize: 32 }}>
+            <Skeleton />
+          </h2>
+          <div style={{ padding: "5px 30px" }}>
+            <Skeleton count={5} />
+          </div>
+        </section>
       );
     }
+
     return rows;
   };
 
@@ -947,9 +971,12 @@ const Projects = (props) => {
       highlightColor="rgba(236, 240, 243, 0.75)"
     >
       <div style={{ fontSize: 20, lineHeight: 2 }}>
-        <h1 style={{ fontSize: 64, marginTop: "unset", marginBottom: 20 }}>
-          {<Skeleton />}
-        </h1>
+        <header>
+          <h1 style={{ fontSize: 64, marginTop: "unset", marginBottom: 20 }}>
+            {<Skeleton />}
+          </h1>
+        </header>
+
         {makeSkeletonBody(2)}
       </div>
     </SkeletonTheme>

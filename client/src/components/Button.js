@@ -1,6 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import Ripple from "@intereact/ripple";
+import { TOUCH } from "../touch";
 
 const Button = React.forwardRef((props, ref) => {
   // Manage received modifiers
@@ -39,54 +41,60 @@ const Button = React.forwardRef((props, ref) => {
   };
 
   return (
-    <button
-      className={`button ${
-        props.defaultLight && !props.defaultDark
-          ? "button--default-light"
-          : props.defaultDark && "button--default-dark"
-      } ${modifiers} ${props.bootstrapClasses} ${
-        props.outsideClickIgnoreClass
-      }`}
-      ref={ref}
-      onClick={handleButtonClick}
-      onKeyDown={props.onKeyDown}
-      onFocus={props.focus}
-      onBlur={props.blur}
-      type={props.type}
-    >
-      <span
-        className={`button__content ${
-          props.rightIcon && "button__content--reverse-children"
-        }`}
-      >
-        {props.icon && <i className={`button__icon ${props.icon}`}></i>}
-        {props.hamburger ? (
-          <span className="button__children">
-            <span className="button__burger-line"></span>
-            <span className="button__burger-line"></span>
-            <span className="button__burger-line"></span>
-          </span>
-        ) : props.plus ? (
-          <span className="button__children">
-            <span className="button__plus-line"></span>
-            <span className="button__plus-line"></span>
-          </span>
-        ) : props.children ? (
+    <Ripple size={props.ripples || TOUCH ? "cover" : 0}>
+      {(ripples) => (
+        <button
+          className={`button ${
+            props.defaultLight && !props.defaultDark
+              ? "button--default-light"
+              : props.defaultDark && "button--default-dark"
+          } ${modifiers} ${props.bootstrapClasses} ${
+            props.outsideClickIgnoreClass
+          }`}
+          ref={ref}
+          onClick={handleButtonClick}
+          onKeyDown={props.onKeyDown}
+          onFocus={props.focus}
+          onBlur={props.blur}
+          type={props.type}
+          style={{ position: "relative" }}
+        >
+          {ripples}
           <span
-            className={
-              props.icon &&
-              `button__text ${
-                props.rightIcon
-                  ? "button__text--margin-right"
-                  : "button__text--margin-left"
-              }`
-            }
+            className={`button__content ${
+              props.rightIcon && "button__content--reverse-children"
+            }`}
           >
-            {props.children}
+            {props.icon && <i className={`button__icon ${props.icon}`}></i>}
+            {props.hamburger ? (
+              <span className="button__children">
+                <span className="button__burger-line"></span>
+                <span className="button__burger-line"></span>
+                <span className="button__burger-line"></span>
+              </span>
+            ) : props.plus ? (
+              <span className="button__children">
+                <span className="button__plus-line"></span>
+                <span className="button__plus-line"></span>
+              </span>
+            ) : props.children ? (
+              <span
+                className={
+                  props.icon &&
+                  `button__text ${
+                    props.rightIcon
+                      ? "button__text--margin-right"
+                      : "button__text--margin-left"
+                  }`
+                }
+              >
+                {props.children}
+              </span>
+            ) : null}
           </span>
-        ) : null}
-      </span>
-    </button>
+        </button>
+      )}
+    </Ripple>
   );
 });
 
@@ -96,6 +104,7 @@ Button.defaultProps = {
   darkActiveClassName: "button--dark-is-active",
   defaultLight: true,
   defaultDark: false,
+  ripples: false,
 };
 
 Button.propTypes = {
@@ -112,6 +121,7 @@ Button.propTypes = {
   outsideClickIgnoreClass: PropTypes.string,
   lightActiveClassName: PropTypes.string,
   darkActiveClassName: PropTypes.string,
+  ripples: PropTypes.bool,
 };
 
 export default Button;

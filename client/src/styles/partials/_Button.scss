@@ -38,10 +38,9 @@
   // --Project-inline-edit
   $button-font-color--project-inline-edit: $projects-neutral-primary;
   $button-hover-font-color--project-inline-edit: $button-font-color--project-inline-edit;
-  // --Delete-confirmation (--Delete & --Cancel)
-  $button-font-color--delete-confirmation: $delete-confirmation-font-color-primary;
   // --Delete
   $button-background-color--delete: $delete-confirmation-background-color-secondary;
+  $button-font-color--delete: $delete-confirmation-font-color-primary;
   // --Cancel
   $button-background-color--cancel: $delete-confirmation-background-color-primary;
   $button-font-color--cancel: $delete-confirmation-font-color-tertiary;
@@ -141,11 +140,11 @@
           background-color: $line-hover-background-color--default-light;
         }
       }
+    }
 
-      #{$root}__burger-line,
-      #{$root}__plus-line {
-        background-color: $line-background-color--default-light;
-      }
+    #{$root}__burger-line,
+    #{$root}__plus-line {
+      background-color: $line-background-color--default-light;
     }
   }
 
@@ -164,11 +163,11 @@
           background-color: $line-hover-background-color--default-dark;
         }
       }
+    }
 
-      #{$root}__burger-line,
-      #{$root}__plus-line {
-        background-color: $line-background-color--default-dark;
-      }
+    #{$root}__burger-line,
+    #{$root}__plus-line {
+      background-color: $line-background-color--default-dark;
     }
   }
 
@@ -545,8 +544,6 @@
 
   &--delete,
   &--cancel {
-    color: $button-font-color--delete-confirmation;
-
     // Button-border-radius--delete-confirmation
     border-radius: $button-border-radius--delete-confirmation;
 
@@ -557,6 +554,7 @@
 
   &--delete {
     background-color: $button-background-color--delete;
+    color: $button-font-color--delete;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
@@ -566,6 +564,7 @@
   }
 
   &--cancel {
+    background-color: $button-background-color--cancel;
     color: $button-font-color--cancel;
 
     border: 1px solid $button-border-color--cancel;

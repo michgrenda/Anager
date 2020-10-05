@@ -8,18 +8,25 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   /*  =============== Variables =============== */
-  // (Transition)
-  $transitionDelayTime: 9999s;
+  $transition-delay: 9999s;
+  $transition-duration: $transition-duration-primary;
 
-  @include transition(
-    null,
-    (
-      "property": background-color,
-      "delay": $transitionDelayTime,
-    ),
-    (
-      "property": color,
-      "delay": $transitionDelayTime,
-    )
-  );
+  -webkit-transition: background-color $transition-duration $transition-delay,
+    color $transition-duration $transition-delay !important;
+  -o-transition: background-color $transition-duration $transition-delay,
+    color $transition-duration $transition-delay !important;
+  transition: background-color $transition-duration $transition-delay,
+    color $transition-duration $transition-delay !important;
+
+  // @include transition(
+  //   null,
+  //   (
+  //     "property": background-color,
+  //     "delay": $transition-delay,
+  //   ),
+  //   (
+  //     "property": color,
+  //     "delay": $transition-delay,
+  //   )
+  // );
 }
