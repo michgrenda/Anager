@@ -235,7 +235,7 @@
 
   // Input-border-radius
   border-radius: $input-border-radius;
-  -webkit-appearance: none;
+  -webkit-appearance: none; // Safari
 
   @extend %input-basic;
 

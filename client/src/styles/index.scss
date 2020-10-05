@@ -22,18 +22,18 @@
 
 /* Components
 ============================================================================================== */
-/*  =============== Auth =============== */
+/* =============== Auth =============== */
 @import "./components/auth/SignIn";
 @import "./components/auth/SignUp";
 @import "./components/auth/SignOut";
-/*  =============== Layouts =============== */
+/* =============== Layouts =============== */
 @import "./components/layouts/Alert";
 @import "./components/layouts/DeleteConfirmation";
 @import "./components/layouts/Navbar";
 @import "./components/layouts/Navbar3d";
 @import "./components/layouts/Dropdown";
 @import "./components/layouts/Footer";
-/*  =============== Projects =============== */
+/* =============== Projects =============== */
 @import "./components/projects/Projects";
 @import "./components/projects/SectionInlineEditForm";
 @import "./components/projects/ProjectInlineEditForm";
@@ -41,9 +41,9 @@
 @import "./components/projects/ProjectModalAddForm";
 @import "./components/projects/SectionInlineAdd";
 @import "./components/projects/ProjectMenu";
-/*  =============== Modal =============== */
+/* =============== Modal =============== */
 @import "./components/modal/AnimatedModal";
-/*  =============== Routing =============== */
+/* =============== Routing =============== */
 @import "./components/routing/PageNotFound";
 
 @import "./partials/Button";

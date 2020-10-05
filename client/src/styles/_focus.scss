@@ -117,18 +117,6 @@ body.using-keyboard {
       }
     }
 
-    &--section-inline-edit {
-      &:focus {
-        color: $projects-accents-secondary;
-      }
-    }
-
-    &--project-inline-edit {
-      &:focus {
-        color: $projects-neutral-primary;
-      }
-    }
-
     &--project-ellipsis {
       &:focus {
         background-color: $projects-accents-primary;
@@ -263,15 +251,10 @@ body.using-keyboard {
         outline: $outline;
       }
 
-      &--previous {
-        &:focus {
-          border-right-color: $font-color-light-primary;
-        }
-      }
-
+      &--previous,
       &--next {
         &:focus {
-          border-left-color: $font-color-light-primary;
+          border-right-color: $font-color-light-primary;
         }
       }
     }

@@ -41,7 +41,7 @@
   }
 
   &__input-wrapper {
-    z-index: 1;
+    z-index: 1; // Safari
 
     @extend %input-wrapper;
   }

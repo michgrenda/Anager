@@ -1,24 +1,24 @@
 // Hover
-// @mixin select-state($root, $name, $color, $darken-color) {
-//   &--#{$name} {
-//     #{$root}__header {
-//       &:focus {
-//         color: $darken-color;
-//         #{$root}__title-wrapper {
-//           background-color: $darken-color;
-//         }
-//       }
-//     }
-//   }
-// }
+@mixin select-state($root, $name, $color) {
+  &--#{$name} {
+    #{$root}__header {
+      &:hover {
+        color: $color;
+        #{$root}__title-wrapper {
+          background-color: $color;
+        }
+      }
+    }
+  }
+}
 
-// @mixin item-state($name, $color) {
-//   &--#{$name} {
-//     &:focus {
-//       color: $color;
-//     }
-//   }
-// }
+@mixin item-state($name) {
+  &--#{$name} {
+    &:hover {
+      color: $select-input-font-color-tertiary;
+    }
+  }
+}
 
 body.no-hover {
   .navbar,
@@ -30,390 +30,293 @@ body.no-hover {
     }
   }
 
-  //   .sign-out {
-  //     &__link {
-  //       &:focus {
-  //         color: $authentication-accents-primary;
+  .sign-out {
+    &__link {
+      &:hover {
+        color: $authentication-font-color-secondary;
 
-  //         &:after {
-  //           background-color: $authentication-accents-primary;
+        &:after {
+          background-color: $authentication-font-color-secondary;
 
-  //           @include transform(scaleX(1));
-  //         }
-  //       }
-  //     }
-  //   }
+          @include transform(scaleX(0.5));
+        }
+      }
+    }
+  }
 
-  //   .page-not-found {
-  //     &__link {
-  //       &:focus {
-  //         color: $routing-accents-primary;
+  .page-not-found {
+    &__link {
+      &:hover {
+        color: $routing-font-color-primary;
 
-  //         &:after {
-  //           background-color: $routing-accents-primary;
+        &:after {
+          background-color: $routing-font-color-primary;
 
-  //           @include transform(scaleX(1));
-  //         }
-  //       }
-  //     }
-  //   }
+          @include transform(scaleX(0.5));
+        }
+      }
+    }
+  }
 
-  //   .button {
-  //     $root: ".button";
+  .button {
+    $root: ".button";
 
-  //     &--default-light,
-  //     &--default-dark {
-  //       &:focus {
-  //         color: $button-accents-primary;
+    &--default-light {
+      &:hover {
+        color: $button-font-color-primary;
 
-  //         #{$root}__burger-line,
-  //         #{$root}__plus-line {
-  //           background-color: $button-accents-primary;
-  //         }
-  //       }
-  //     }
+        #{$root}__burger-line,
+        #{$root}__plus-line {
+          background-color: $button-background-color-secondary;
+        }
+      }
+    }
 
-  //     &--section-inline-add {
-  //       &:focus {
-  //         background-color: $projects-accents-primary;
+    &--default-dark {
+      &:hover {
+        color: $button-font-color-secondary;
 
-  //         #{$root}__plus-line {
-  //           background-color: darken($projects-neutral-tertiary, 15%);
-  //         }
-  //       }
-  //     }
+        #{$root}__burger-line,
+        #{$root}__plus-line {
+          background-color: $button-background-color-primary;
+        }
+      }
+    }
 
-  //     &--section-inline-edit,
-  //     &--project-inline-edit {
-  //       &:focus {
-  //         background-color: $projects-accents-primary;
+    &--section-inline-add {
+      &:hover {
+        background-color: transparent;
 
-  //         opacity: 1;
-  //       }
-  //     }
+        #{$root}__plus-line {
+          background-color: $projects-neutral-tertiary;
+        }
+      }
+    }
 
-  //     &--section-inline-edit {
-  //       &:focus {
-  //         color: $projects-accents-secondary;
-  //       }
-  //     }
+    &--section-inline-edit,
+    &--project-inline-edit {
+      &:hover {
+        background-color: transparent;
+      }
+    }
 
-  //     &--project-inline-edit {
-  //       &:focus {
-  //         color: $projects-neutral-primary;
-  //       }
-  //     }
+    &--project-ellipsis {
+      &:hover {
+        background-color: transparent;
+      }
+    }
 
-  //     &--project-ellipsis {
-  //       &:focus {
-  //         background-color: $projects-accents-primary;
-  //       }
-  //     }
+    &--delete {
+      &:hover {
+        background-color: $delete-confirmation-background-color-secondary;
+      }
+    }
 
-  //     &--delete {
-  //       &:focus {
-  //         background-color: darken(
-  //           $delete-confirmation-background-color-secondary,
-  //           5%
-  //         );
-  //       }
-  //     }
+    &--cancel {
+      &:hover {
+        background-color: $delete-confirmation-background-color-primary;
+      }
+    }
+  }
 
-  //     &--cancel {
-  //       &:focus {
-  //         background-color: darken(
-  //           $delete-confirmation-background-color-primary,
-  //           5%
-  //         );
-  //       }
-  //     }
-  //   }
+  .projects {
+    $root: ".projects";
 
-  //   .projects {
-  //     $root: ".projects";
+    &__section-option,
+    &__project-option {
+      &:hover {
+        background-color: transparent;
+      }
+    }
 
-  //     &__project-col {
-  //       &:focus {
-  //         outline: $outline;
-  //       }
-  //     }
+    &__project-name {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
 
-  //     &__section-icon,
-  //     &__project-icon {
-  //       &:focus {
-  //         outline: $outline;
-  //       }
+  .section-inline-add {
+    $root: ".section-inline-add";
 
-  //       &--grip {
-  //         &:focus {
-  //           opacity: 1;
-  //         }
-  //       }
-  //     }
+    #{$root}__information {
+      &:hover {
+        color: $projects-neutral-tertiary;
 
-  //     &__section-option,
-  //     &__project-option {
-  //       &:focus {
-  //         outline: $outline;
-  //         background-color: $projects-accents-primary;
+        #{$root}__plus-line {
+          background-color: $projects-neutral-tertiary;
+        }
+      }
+    }
+  }
 
-  //         #{$root}__section-icon {
-  //           &--edit,
-  //           &--delete {
-  //             opacity: 1;
-  //           }
-  //         }
+  .react-datepicker {
+    &__day,
+    &__month-text,
+    &__quarter-text,
+    &__year-text {
+      &:hover {
+        background-color: transparent;
 
-  //         #{$root}__project-icon {
-  //           &--edit {
-  //             opacity: 1;
-  //           }
-  //         }
-  //       }
-  //     }
+        border-radius: 50%;
+      }
 
-  //     &__project-name {
-  //       &:focus {
-  //         outline: $outline;
-  //         background-color: $projects-accents-primary;
-  //       }
-  //     }
-  //   }
+      &--selected,
+      &--in-selecting-range,
+      &--in-range {
+        &:hover {
+          background-color: $background-color-dark-primary;
+        }
+      }
 
-  //   .section-inline-add {
-  //     $root: ".section-inline-add";
+      &--keyboard-selected {
+        &:hover {
+          background-color: transparent;
+          color: $font-color-light-primary;
+        }
+      }
+    }
 
-  //     #{$root}__information {
-  //       &:focus {
-  //         outline: $outline;
-  //         color: darken($projects-neutral-tertiary, 15%);
+    &__day {
+      &--today {
+        &:hover {
+          background-color: $background-color-dark-primary;
+          color: $font-color-dark-primary;
+        }
+      }
+      /* =============== End =============== */
+    }
 
-  //         #{$root}__plus-line {
-  //           background-color: darken($projects-neutral-tertiary, 15%);
-  //         }
-  //       }
-  //     }
-  //   }
+    &__navigation {
+      &--previous,
+      &--next {
+        &:hover {
+          border-right-color: $font-color-dark-primary;
+        }
+      }
+    }
+  }
 
-  //   .react-datepicker {
-  //     &__day,
-  //     &__month-text,
-  //     &__quarter-text,
-  //     &__year-text {
-  //       &:focus {
-  //         outline: $outline;
-  //         background-color: $color-transparentized-heather;
+  .modal {
+    $root: ".modal";
 
-  //         border-radius: 50%;
-  //       }
+    &__overlay {
+      &--default-light {
+        #{$root}__close-button {
+          &:hover {
+            #{$root}__close-icon {
+              &:after,
+              &:before {
+                background-color: $modal-background-color-secondary;
+              }
+            }
+          }
+        }
+      }
 
-  //       &--selected,
-  //       &--in-selecting-range,
-  //       &--in-range {
-  //         &:focus {
-  //           background-color: lighten($background-color-dark-primary, 10%);
-  //         }
-  //       }
+      &--default-dark {
+        #{$root}__close-button {
+          &:hover {
+            #{$root}__close-icon {
+              &:after,
+              &:before {
+                background-color: $modal-background-color-tertiary;
+              }
+            }
+          }
+        }
+      }
+      /* =============== End =============== */
+    }
+  }
 
-  //       &--keyboard-selected {
-  //         &:focus {
-  //           background-color: $color-transparentized-heather;
-  //           color: $font-color-light-primary;
-  //         }
-  //       }
-  //     }
+  .project-menu {
+    &__item {
+      &:hover {
+        background-color: transparent;
+        color: $projects-font-color-primary;
+      }
+    }
+  }
 
-  //     &__day {
-  //       &--today {
-  //         &:focus {
-  //           background-color: lighten($background-color-dark-primary, 10%);
-  //           color: $font-color-dark-primary;
-  //         }
-  //       }
-  //       /* =============== End =============== */
-  //     }
+  .select-input {
+    $root: ".select-input";
 
-  //     &__navigation {
-  //       &:focus {
-  //         outline: $outline;
-  //       }
+    &--default-light {
+      #{$root}__header {
+        &:hover {
+          #{$root}__title-wrapper {
+            color: $select-input-font-color-primary;
+          }
+        }
+      }
+    }
 
-  //       &--previous {
-  //         &:focus {
-  //           border-right-color: $font-color-light-primary;
-  //         }
-  //       }
+    &--default-dark {
+      #{$root}__header {
+        &:hover {
+          #{$root}__title-wrapper {
+            color: $select-input-font-color-secondary;
+          }
+        }
+      }
+    }
 
-  //       &--next {
-  //         &:focus {
-  //           border-left-color: $font-color-light-primary;
-  //         }
-  //       }
-  //     }
-  //   }
+    &--default-dark,
+    &--default-light {
+      #{$root}__item {
+        &:hover {
+          color: $select-input-font-color-tertiary;
+        }
+      }
+    }
 
-  //   .modal {
-  //     $root: ".modal";
+    &--project,
+    &--project-modal-add {
+      #{$root}__item {
+        @include item-state(low);
+        @include item-state(medium);
+        @include item-state(high);
 
-  //     &__overlay {
-  //       &--default-light {
-  //         #{$root}__close-button {
-  //           &:focus {
-  //             #{$root}__close-icon {
-  //               &:after,
-  //               &:before {
-  //                 background-color: $modal-background-color-tertiary;
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
+        @include item-state(proposed);
+        @include item-state(active);
+        @include item-state(on-hold);
+        @include item-state(completed);
+        @include item-state(archived);
+        @include item-state(canceled);
+      }
+    }
 
-  //       &--default-dark {
-  //         #{$root}__close-button {
-  //           &:focus {
-  //             #{$root}__close-icon {
-  //               &:after,
-  //               &:before {
-  //                 background-color: $modal-background-color-secondary;
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //       /* =============== End =============== */
-  //     }
-  //   }
+    &--project-modal-add {
+      #{$root}__header {
+        &:hover {
+          #{$root}__title-wrapper {
+            background-color: $select-input-background-color-primary;
+            color: $projects-neutral-secondary;
+          }
+        }
+      }
+    }
 
-  //   .project-menu {
-  //     &__item {
-  //       &:focus {
-  //         outline: $outline;
-  //         background-color: $projects-accents-primary;
-  //         color: $projects-accents-secondary;
-  //       }
-  //     }
-  //   }
+    &--project {
+      #{$root}__header {
+        &:hover {
+          #{$root}__title-wrapper {
+            color: $projects-font-color-tertiary;
+          }
+        }
+      }
+    }
 
-  //   .select-input {
-  //     $root: ".select-input";
+    @include select-state($root, low, $project-low);
+    @include select-state($root, medium, $project-medium);
+    @include select-state($root, high, $project-high);
 
-  //     &--default-light,
-  //     &--default-dark {
-  //       #{$root}__header {
-  //         &:focus {
-  //           outline: $outline;
-
-  //           #{$root}__title-wrapper {
-  //             color: $select-input-font-color-tertiary;
-  //           }
-  //         }
-  //       }
-
-  //       #{$root}__item {
-  //         &:focus {
-  //           outline: $outline;
-  //         }
-  //       }
-  //     }
-
-  //     &--default-light {
-  //       #{$root}__item {
-  //         &:focus {
-  //           color: $select-input-font-color-primary;
-  //         }
-  //       }
-  //     }
-
-  //     &--default-dark {
-  //       #{$root}__item {
-  //         &:focus {
-  //           color: $select-input-font-color-secondary;
-  //         }
-  //       }
-  //     }
-
-  //     &--project,
-  //     &--project-modal-add {
-  //       #{$root}__item {
-  //         @include item-state(low, $project-low);
-  //         @include item-state(medium, $project-medium);
-  //         @include item-state(high, $project-high);
-
-  //         @include item-state(proposed, $project-proposed);
-  //         @include item-state(active, $project-active);
-  //         @include item-state(on-hold, $project-on-hold);
-  //         @include item-state(completed, $project-completed);
-  //         @include item-state(archived, $project-archived);
-  //         @include item-state(canceled, $project-canceled);
-  //       }
-  //     }
-
-  //     &--project-modal-add {
-  //       #{$root}__header {
-  //         &:focus {
-  //           #{$root}__title-wrapper {
-  //             background-color: $projects-neutral-secondary;
-  //             color: $projects-font-color-tertiary;
-  //           }
-  //         }
-  //       }
-  //     }
-
-  //     &--project {
-  //       #{$root}__header {
-  //         &:focus {
-  //           #{$root}__title-wrapper {
-  //             color: $projects-font-color-tertiary;
-  //           }
-  //         }
-  //       }
-  //     }
-
-  //     @include select-state($root, low, $project-low, $project-low-darken);
-  //     @include select-state(
-  //       $root,
-  //       medium,
-  //       $project-medium,
-  //       $project-medium-darken
-  //     );
-  //     @include select-state($root, high, $project-high, $project-high-darken);
-
-  //     @include select-state(
-  //       $root,
-  //       proposed,
-  //       $project-proposed,
-  //       $project-proposed-darken
-  //     );
-  //     @include select-state(
-  //       $root,
-  //       active,
-  //       $project-active,
-  //       $project-active-darken
-  //     );
-  //     @include select-state(
-  //       $root,
-  //       on-hold,
-  //       $project-on-hold,
-  //       $project-on-hold-darken
-  //     );
-  //     @include select-state(
-  //       $root,
-  //       completed,
-  //       $project-completed,
-  //       $project-completed-darken
-  //     );
-  //     @include select-state(
-  //       $root,
-  //       archived,
-  //       $project-archived,
-  //       $project-archived-darken
-  //     );
-  //     @include select-state(
-  //       $root,
-  //       canceled,
-  //       $project-canceled,
-  //       $project-canceled-darken
-  //     );
-  //   }
+    @include select-state($root, proposed, $project-proposed);
+    @include select-state($root, active, $project-active);
+    @include select-state($root, on-hold, $project-on-hold);
+    @include select-state($root, completed, $project-completed);
+    @include select-state($root, archived, $project-archived);
+    @include select-state($root, canceled, $project-canceled);
+  }
 }
