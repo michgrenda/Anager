@@ -281,19 +281,21 @@
       )
     );
 
-    &:hover,
+    @media (hover: hover) and (pointer: fine) {
+      &:hover,
     /* =============== Modifiers =============== */
     // State
     &--is-edited {
-      color: $section-header-hover-font-color;
+        color: $section-header-hover-font-color;
 
-      border-color: $section-header-hover-border-color-B;
+        border-color: $section-header-hover-border-color-B;
 
-      #{$root}__section-icon {
-        opacity: 1;
+        #{$root}__section-icon {
+          opacity: 1;
+        }
       }
+      /* =============== End =============== */
     }
-    /* =============== End =============== */
   }
 
   &__section-information {

@@ -156,9 +156,11 @@
   font-size: $link-font-size;
   color: $link-font-color;
 
-  &:hover {
-    text-decoration: none;
-    color: $link-hover-font-color;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      text-decoration: none;
+      color: $link-hover-font-color;
+    }
   }
 }
 

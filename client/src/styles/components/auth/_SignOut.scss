@@ -80,15 +80,17 @@
       );
     }
 
-    &:hover {
-      color: $link-hover-font-color;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $link-hover-font-color;
 
-      text-decoration: none;
+        text-decoration: none;
 
-      &:after {
-        background-color: $line-hover-background-color;
+        &:after {
+          background-color: $line-hover-background-color;
 
-        @include transform(scaleX(1));
+          @include transform(scaleX(1));
+        }
       }
     }
   }
