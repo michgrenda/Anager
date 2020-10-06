@@ -52,6 +52,7 @@ const AnimatedModal = (props) => {
           } ${props.animationDuration}ms`,
         },
       }}
+      onAnimationEnd={props.onAnimationEnd}
     >
       {props.children}
     </ModulesModal>
@@ -88,6 +89,7 @@ AnimatedModal.propTypes = {
   animationModalOut: PropTypes.string,
   modalClassNameIn: PropTypes.string,
   modalClassNameOut: PropTypes.string,
+  onAnimationEnd: PropTypes.func,
 };
 
 export default AnimatedModal;

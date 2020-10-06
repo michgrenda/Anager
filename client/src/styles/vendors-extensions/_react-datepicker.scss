@@ -57,30 +57,35 @@
     &--selected,
     &--in-selecting-range,
     &--in-range {
-      background-color: $background-color-dark-primary;
+      background-color: transparentize($background-color-dark-primary, 0.75);
       color: $font-color-dark-primary;
 
       @media (hover: hover) and (pointer: fine) {
         &:hover {
-          background-color: lighten($background-color-dark-primary, 10%);
+          background-color: transparentize($background-color-dark-primary, 0.5);
           color: $font-color-dark-primary;
         }
       }
 
       @media (hover: none) and (pointer: coarse) {
         &:hover {
-          background-color: $background-color-dark-primary;
+          background-color: transparentize(
+            $background-color-dark-primary,
+            0.75
+          );
           color: $font-color-dark-primary;
         }
       }
     }
 
     &--keyboard-selected {
-      background-color: lighten($background-color-dark-primary, 10%);
+      background-color: transparentize($background-color-dark-primary, 0.25);
       color: $font-color-dark-primary;
 
       @media (hover: hover) and (pointer: fine) {
         &:hover {
+          // background-color: $background-color-dark-primary;
+          // color: $font-color-dark-primary;
           background-color: $color-transparentized-heather;
           color: $font-color-light-primary;
         }
@@ -88,30 +93,10 @@
 
       @media (hover: none) and (pointer: coarse) {
         &:hover {
-          background-color: lighten($background-color-dark-primary, 10%);
-          color: $font-color-dark-primary;
-        }
-      }
-    }
-    /* =============== End =============== */
-  }
-
-  &__day {
-    /* =============== Modifiers =============== */
-    &--today {
-      background-color: $background-color-dark-primary;
-      color: $font-color-dark-primary;
-
-      @media (hover: hover) and (pointer: fine) {
-        &:hover {
-          background-color: lighten($background-color-dark-primary, 10%);
-          color: $font-color-dark-primary;
-        }
-      }
-
-      @media (hover: none) and (pointer: coarse) {
-        &:hover {
-          background-color: $background-color-dark-primary;
+          background-color: transparentize(
+            $background-color-dark-primary,
+            0.25
+          );
           color: $font-color-dark-primary;
         }
       }

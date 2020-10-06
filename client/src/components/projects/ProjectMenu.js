@@ -55,6 +55,8 @@ const Menu = function (props) {
     if (option !== "delete project") {
       focusTriggeringElement();
 
+      props.openDetailView();
+
       props.onClose();
     } else
       props
@@ -120,6 +122,7 @@ Menu.propTypes = {
   uniqueId: PropTypes.string.isRequired,
   triggeringElement: PropTypes.object.isRequired,
   deleteFunction: PropTypes.func.isRequired,
+  openDetailView: PropTypes.func.isRequired,
 };
 
 const clickOutsideConfig = {
@@ -176,6 +179,7 @@ const ProjectMenu = function (props) {
         transitionDuration={props.transitionDuration}
         transitionClassNames={props.transitionClassNames}
         deleteFunction={props.deleteFunction}
+        openDetailView={props.openDetailView}
       />
     </div>
   );
@@ -192,6 +196,7 @@ ProjectMenu.propTypes = {
   projectId: PropTypes.string.isRequired,
   ignoreReactOnClickOutside: PropTypes.string.isRequired,
   deleteFunction: PropTypes.func.isRequired,
+  openDetailView: PropTypes.func.isRequired,
 };
 
 export default ProjectMenu;

@@ -32,6 +32,8 @@ const DateInput = (props) => {
       autoComplete="off"
       name="date"
       ref={dateInput}
+      dateFormat="d MMM yyyy"
+      popperPlacement="bottom"
     />
   );
 };

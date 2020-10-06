@@ -1,0 +1,209 @@
+.project-detail-view {
+  /* =============== Variables =============== */
+  $welcome-text-font-color: $projects-font-color-secondary;
+  $input-font-color: $projects-font-color-form-primary;
+  $placeholder-font-color: $projects-font-color-form-secondary;
+  $react-datepicker-header-background-color: $projects-background-color-primary;
+  $react-datepicker-day-name-time-name-font-color: $projects-font-color-secondary;
+  $react-datepicker-current-month-font-color: $projects-font-color-secondary;
+  // --Previous
+  $react-datepicker-navigation-border-right-color--previous: $projects-accents-secondary;
+  // --Next
+  $react-datepicker-navigation-border-left-color--next: $projects-accents-secondary;
+
+  $input-date-padding-RL: $input-padding-RL-secondary;
+  $select-input-wrapper-padding-RL: 10px;
+  $select-input-wrapper-margin-B: $input-margin-B-primary;
+  // --Text-area
+  $placeholder-position-T--text-area: $text-area-padding-TB-primary;
+
+  @extend %form;
+
+  &__welcome-text {
+    color: $welcome-text-font-color;
+
+    @extend %welcome-text;
+
+    /* =============== Modifiers =============== */
+    &--main {
+      @extend %welcome-text--main;
+    }
+    /* =============== End =============== */
+  }
+
+  &__input-wrapper {
+    z-index: 1;
+
+    @extend %input-wrapper;
+  }
+
+  &__input {
+    color: $input-font-color;
+
+    @extend %input-no-icon;
+    @extend %box-shadow-light-inset;
+
+    // Input-width
+    @include size($width: 100%); // Override
+
+    /* =============== Modifiers =============== */
+    &--text-area {
+      @extend %text-area;
+    }
+
+    &--date {
+      // Input-date-padding-RL
+      @include space(
+        padding,
+        $right: $input-date-padding-RL,
+        $left: $input-date-padding-RL
+      );
+    }
+    /* =============== End =============== */
+  }
+
+  &__placeholder-icon {
+    &:after {
+      @extend %placeholder-icon-settings;
+    }
+  }
+
+  &__placeholder {
+    &:before {
+      color: $placeholder-font-color;
+
+      @extend %placeholder-text-no-icon;
+    }
+
+    /* =============== Modifiers =============== */
+    &--text-area {
+      &:before {
+        @include transform(unset);
+        // Placeholder-position-T--text-area
+        top: $placeholder-position-T--text-area;
+      }
+    }
+
+    &--date {
+      &:before {
+        // Input-date-padding-RL
+        left: $input-date-padding-RL;
+      }
+
+      &:after {
+        color: $placeholder-font-color;
+
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f073";
+
+        @extend %placeholder-icon;
+      }
+    }
+
+    // State
+    &--is-active {
+      &:before {
+        opacity: 0;
+      }
+      &:after {
+        color: $input-font-color;
+      }
+    }
+    /* =============== End =============== */
+  }
+
+  &__select-input-wrapper {
+    // Select-input-wrapper-padding-RL
+    @include space(
+      padding,
+      $right: $select-input-wrapper-padding-RL,
+      $left: $select-input-wrapper-padding-RL
+    );
+    // Select-input-wrapper-margin-B
+    @include space(margin, $bottom: $select-input-wrapper-margin-B);
+
+    @media (max-width: map-get($breakpoints, breakpoint-small)) {
+      @include space(padding, $right: unset, $left: unset);
+    }
+  }
+
+  &__btn-wrapper {
+    @extend %flexbox;
+    @extend %justify-content-center;
+  }
+
+  &__calendar-wrapper {
+    @extend %flexbox;
+    @extend %justify-content-center;
+  }
+
+  &__calendar {
+    border: none;
+
+    @extend %box-shadow-light-inset;
+
+    @include size($width: 100%);
+
+    .react-datepicker {
+      &__header {
+        background-color: $react-datepicker-header-background-color;
+
+        @extend %box-shadow-light;
+      }
+
+      &__month-container {
+        @include size($width: 100%);
+      }
+
+      &__current-month {
+        color: $react-datepicker-current-month-font-color;
+      }
+
+      &__day-name,
+      &__time-name {
+        color: $react-datepicker-day-name-time-name-font-color;
+      }
+
+      &__navigation {
+        /* =============== Modifiers =============== */
+        &--previous {
+          border-right-color: $react-datepicker-navigation-border-right-color--previous;
+
+          // Thing to remember
+
+          // @media (hover: hover) and (pointer: fine) {
+          //   &:hover {
+          //     border-right-color: $font-color-light-primary;
+          //   }
+          // }
+
+          @media (hover: none) and (pointer: coarse) {
+            &:hover {
+              border-right-color: $react-datepicker-navigation-border-right-color--previous;
+            }
+          }
+        }
+
+        &--next {
+          border-left-color: $react-datepicker-navigation-border-left-color--next;
+
+          // Thing to remember
+
+          // @media (hover: hover) and (pointer: fine) {
+          //   &:hover {
+          //     border-left-color: $font-color-light-primary;
+          //   }
+          // }
+
+          @media (hover: none) and (pointer: coarse) {
+            &:hover {
+              border-left-color: $react-datepicker-navigation-border-left-color--next;
+            }
+          }
+        }
+        /* =============== End =============== */
+      }
+    }
+  }
+}

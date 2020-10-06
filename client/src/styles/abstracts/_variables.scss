@@ -292,6 +292,7 @@ $line-border-radius-primary: #{5%}/#{50%};
 $projects-background-color-primary: $background-color-light-primary;
 // -----------------------------------------------------------------
 // (ProjectMenu)        |   List
+// (ProjectDetailView)  |   React-datepicker__header
 
 $projects-font-color-primary: $font-color-light-primary;
 // -----------------------------------------------------------------
@@ -304,6 +305,7 @@ $projects-font-color-secondary: $font-color-light-secondary;
 // -----------------------------------------------------------------
 // (ProjectModalAdd)    |   Welcome-text
 // (SectionModalAdd)    |   Welcome-text
+// (ProjectDetailView)  |   Welcome-text, React-datepicker__day-name, React-datepicker__time-name, React-datepicker__current-month,
 
 $projects-font-color-tertiary: $font-color-dark-primary;
 // -----------------------------------------------------------------
@@ -334,12 +336,14 @@ $projects-font-color-form-primary: $input-font-color-light-primary;
 // (Projects)           |   Input
 // (ProjectModalAdd)    |   Input
 // (SectionModalAdd)    |   Input
+// (ProjectDetailView)  |   Input
 
 $projects-font-color-form-secondary: $placeholder-font-color-light-primary;
 // -----------------------------------------------------------------
 // (Projects)           |   Placeholder
 // (ProjectModalAdd)    |   Placeholder
 // (SectionModalAdd)    |   Placeholder
+// (ProjectDetailView)  |   Placeholder
 
 $projects-accents-primary: $accents-secondary;
 // -----------------------------------------------------------------
@@ -356,6 +360,7 @@ $projects-accents-secondary: $accents-primary;
 // (SectionInlineEdit)  |   Input (Border-bottom, Hover, Focus - Box-shadow)
 // (Button)             |   Button (--Section-inline-edit - Font-color, Hover - Font-color)
 // (ProjectMenu)        |   Item (Hover - Font-color)
+// (ProjectDetailView)  |   React-datepicker__navigation (--Previous - Border-right-color), React-datepicker__navigation (--Next - Border-left-color)
 
 // Projects Global
 $option-size: 25px;

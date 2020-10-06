@@ -224,7 +224,8 @@ body.using-keyboard {
       &--in-selecting-range,
       &--in-range {
         &:focus {
-          background-color: lighten($background-color-dark-primary, 10%);
+          background-color: transparentize($background-color-dark-primary, 0.5);
+          color: $font-color-dark-primary;
         }
       }
 
@@ -236,25 +237,20 @@ body.using-keyboard {
       }
     }
 
-    &__day {
-      &--today {
-        &:focus {
-          background-color: lighten($background-color-dark-primary, 10%);
-          color: $font-color-dark-primary;
-        }
-      }
-      /* =============== End =============== */
-    }
-
     &__navigation {
       &:focus {
         outline: $outline;
       }
 
-      &--previous,
-      &--next {
+      &--previous {
         &:focus {
           border-right-color: $font-color-light-primary;
+        }
+      }
+
+      &--next {
+        &:focus {
+          border-left-color: $font-color-light-primary;
         }
       }
     }

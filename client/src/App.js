@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { BounceLoader } from "react-spinners";
@@ -61,7 +61,6 @@ const routes = [
 const App = () => {
   // States
   const [loading, setLoading] = useState(true);
-  const [resizeTimer, setResizeTimer] = useState(null);
 
   // References
   const main = useRef(null);
@@ -73,25 +72,6 @@ const App = () => {
       .catch((error) => console.log(error))
       .finally(() => setLoading(store.getState().auth.loading));
   }, []);
-
-  // Stop animations during window resizing ***
-  const handleWindowResize = useCallback(() => {
-    document.body.classList.add("resize-animation-transition-stopper");
-
-    clearTimeout(resizeTimer);
-    setResizeTimer(
-      setTimeout(() => {
-        document.body.classList.remove("resize-animation-transition-stopper");
-      }, 400)
-    );
-  }, [resizeTimer]);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, [handleWindowResize]);
-  // End ***
 
   // Variables
   const transitionClassNames = "next-to-page";

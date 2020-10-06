@@ -1,4 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  // useEffect
+} from "react";
 import PropTypes from "prop-types";
 // Components
 import Button from "../Button";
@@ -25,9 +29,11 @@ const ProjectModalAddForm = function (props) {
   const datePlaceholder = useRef(null);
 
   // Set initial state when closing
-  useEffect(() => {
-    if (!props.visible) setFormData(initialState);
-  }, [props.visible]);
+  // useEffect(() => {
+  //   if (!props.visible) setFormData(initialState);
+  // }, [props.visible]);
+
+  const setInitialStateWhenClosing = () => setFormData(initialState);
 
   // Remove placeholder when input is focused
   const handleInputFocus = (e) => {
@@ -107,7 +113,11 @@ const ProjectModalAddForm = function (props) {
     props.onClose((prevState) => ({ ...prevState, [props.indicator]: false }));
 
   return (
-    <AnimatedModal visible={props.visible} onClose={closeProjectAddForm}>
+    <AnimatedModal
+      visible={props.visible}
+      onClose={closeProjectAddForm}
+      onAnimationEnd={setInitialStateWhenClosing}
+    >
       <div className="container">
         <div className="row">
           <form className="project-add-form col-12" onSubmit={handleFormSubmit}>
@@ -201,12 +211,7 @@ const ProjectModalAddForm = function (props) {
   );
 };
 
-ProjectModalAddForm.defaultProps = {
-  transitionDuration: 400,
-};
-
 ProjectModalAddForm.propTypes = {
-  transitionDuration: PropTypes.number,
   visible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   priorityProps: PropTypes.arrayOf(PropTypes.object).isRequired,

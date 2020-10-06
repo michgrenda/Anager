@@ -30,6 +30,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Button from "../Button";
 import ProjectModalAddForm from "./ProjectModalAddForm";
 import SectionModalAddForm from "./SectionModalAddForm";
+import ProjectDetailView from "./ProjectDetailView";
 import SelectInput from "../SelectInput";
 import SectionInlineAdd from "./SectionInlineAdd";
 import SectionInlineEditForm from "./SectionInlineEditForm";
@@ -130,6 +131,7 @@ const Projects = (props) => {
 
   const [projectInlineEditOpen, setProjectInlineEditOpen] = useState({});
   const [projectNameHidden, setProjectNameHidden] = useState({});
+  const [projectDetailViewOpen, setProjectDetailViewOpen] = useState({});
 
   const [modalOpen, setModalOpen] = useState({});
   const [whichModal, setWhichModal] = useState("project");
@@ -427,7 +429,6 @@ const Projects = (props) => {
                 onDragStart={() => false}
                 onClick={preventLinkDefaultBehaviour.bind(null, project._id)}
               >
-                {console.log(props.match)}
                 <i className="projects__project-icon far fa-check-circle"></i>
                 {!projectNameHidden[project._id] && (
                   <span className="projects__project-text">{project.name}</span>
@@ -489,6 +490,7 @@ const Projects = (props) => {
         <ReactTooltip id="date" />
         <div className="projects__project-col projects__project-col--options d-none d-sm-flex">
           <SelectInput
+            key={project.priority} // Re-render
             categories={["project"]}
             title={project.priority}
             listProps={priorityProps}
@@ -500,6 +502,7 @@ const Projects = (props) => {
         </div>
         <div className="projects__project-col projects__project-col--options d-none d-sm-flex">
           <SelectInput
+            key={project.status} // Re-render
             categories={["project"]}
             title={project.status}
             listProps={statusProps}
@@ -514,6 +517,22 @@ const Projects = (props) => {
             projectId={project._id}
             ignoreReactOnClickOutside={`project-menu-ignore-${project._id}`}
             deleteFunction={() => deleteProject(project._id)}
+            openDetailView={() =>
+              setProjectDetailViewOpen((prevState) => ({
+                ...prevState,
+                [project._id]: true,
+              }))
+            }
+          />
+          <ProjectDetailView
+            key={`${project.priority}-${project.status}`} // Re-render
+            onClose={setProjectDetailViewOpen}
+            visible={projectDetailViewOpen[project._id]}
+            priorityProps={priorityProps}
+            statusProps={statusProps}
+            indicator="project"
+            updateProject={updateProject}
+            project={project}
           />
         </div>
       </div>
@@ -628,6 +647,7 @@ const Projects = (props) => {
               <ReactTooltip id="date" />
               <div className="projects__project-col projects__project-col--options d-none d-sm-flex">
                 <SelectInput
+                  key={project.priority} // Re-render
                   categories={["project"]}
                   title={project.priority}
                   listProps={priorityProps}
@@ -639,6 +659,7 @@ const Projects = (props) => {
               </div>
               <div className="projects__project-col projects__project-col--options d-none d-sm-flex">
                 <SelectInput
+                  key={project.status} // Re-render
                   categories={["project"]}
                   title={project.status}
                   listProps={statusProps}
@@ -653,6 +674,23 @@ const Projects = (props) => {
                   projectId={project._id}
                   ignoreReactOnClickOutside={`project-menu-ignore-${project._id}`}
                   deleteFunction={() => deleteProject(project._id)}
+                  openDetailView={() =>
+                    setProjectDetailViewOpen((prevState) => ({
+                      ...prevState,
+                      [project._id]: true,
+                    }))
+                  }
+                />
+
+                <ProjectDetailView
+                  key={`${project.priority}-${project.status}`} // Re-render
+                  onClose={setProjectDetailViewOpen}
+                  visible={projectDetailViewOpen[project._id]}
+                  priorityProps={priorityProps}
+                  statusProps={statusProps}
+                  indicator="project"
+                  updateProject={updateProject}
+                  project={project}
                 />
               </div>
             </div>

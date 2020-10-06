@@ -5,6 +5,8 @@ import "./styles/index.scss";
 // Focus
 import "focus-visible";
 import "./focus";
+// Transition
+import "./transition";
 // Components
 import App from "./App";
 

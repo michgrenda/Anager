@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  // useEffect
+} from "react";
 import PropTypes from "prop-types";
 // Components
 import Button from "../Button";
@@ -14,10 +17,12 @@ const SectionModalAddForm = function (props) {
 
   const { name } = formData;
 
-  // Set initial state when closing
-  useEffect(() => {
-    if (!props.visible) setFormData(initialState);
-  }, [props.visible]);
+  // // Set initial state when closing
+  // useEffect(() => {
+  //   if (!props.visible) setFormData(initialState);
+  // }, [props.visible]);
+
+  const setInitialStateWhenClosing = () => setFormData(initialState);
 
   // Remove placeholder when input is focused
   const handleInputFocus = (e) => {
@@ -62,7 +67,11 @@ const SectionModalAddForm = function (props) {
     props.onClose((prevState) => ({ ...prevState, [props.indicator]: false }));
 
   return (
-    <AnimatedModal visible={props.visible} onClose={closeSectionAddForm}>
+    <AnimatedModal
+      visible={props.visible}
+      onClose={closeSectionAddForm}
+      onAnimationEnd={setInitialStateWhenClosing}
+    >
       <div className="container">
         <div className="row">
           <form className="section-add-form col-12" onSubmit={handleFormSubmit}>
@@ -104,14 +113,9 @@ const SectionModalAddForm = function (props) {
   );
 };
 
-SectionModalAddForm.defaultProps = {
-  transitionDuration: 400,
-};
-
 SectionModalAddForm.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
-  transitionDuration: PropTypes.number,
   indicator: PropTypes.string.isRequired,
   addSection: PropTypes.func.isRequired,
 };

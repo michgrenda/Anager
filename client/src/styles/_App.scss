@@ -37,7 +37,7 @@ body,
 }
 
 .resize-animation-transition-stopper * {
-  animation: none !important;
+  // animation: none !important; // Problem Modal
   transition: none !important;
 }
 
