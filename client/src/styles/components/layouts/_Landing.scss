@@ -37,16 +37,22 @@
   $section-information-min-height: $option-size;
   $project-col-padding-TB: 10px;
   $project-text-margin-L: 10px;
-  $status-priority-width: 40px;
+  $status-priority-width-md: 40px;
+  $status-priority-width-sm: 30px;
   $status-priority-height: 10px;
   $status-priority-border-radius: 5px;
 
   // Grid-template
-  $name-width: auto;
-  $due-date-width: 80px;
-  $priority-width: 75px;
-  $status-width: 75px;
-  $menu-width: 40px;
+  $name-width-md: auto;
+  $name-width-sm: auto;
+  $due-date-width-md: 80px;
+  $due-date-width-sm: 70px;
+  $priority-width-md: 75px;
+  $priority-width-sm: 50px;
+  $status-width-md: 75px;
+  $status-width-sm: 50px;
+  $menu-width-md: 40px;
+  $menu-width-sm: 20px;
 
   // First column
   $first-col-margin-L: 24px;
@@ -234,8 +240,17 @@
 
     @include grid-template(
       columns,
-      $name-width $due-date-width $priority-width $status-width $menu-width
+      $name-width-md $due-date-width-md $priority-width-md $status-width-md
+        $menu-width-md
     );
+
+    @media (max-width: map-get($breakpoints, breakpoint-small)) {
+      @include grid-template(
+        columns,
+        $name-width-sm $due-date-width-sm $priority-width-sm $status-width-sm
+          $menu-width-sm
+      );
+    }
   }
 
   &__project-col {
@@ -310,11 +325,16 @@
     // Status-priority-border-radius
     border-radius: $status-priority-border-radius;
 
-    // Status-priority-width & Status-priority-height
+    // Status-priority-width-md & Status-priority-height
     @include size(
-      $width: $status-priority-width,
+      $width: $status-priority-width-md,
       $height: $status-priority-height
     );
+
+    @media (max-width: map-get($breakpoints, breakpoint-small)) {
+      // Status-priority-width-sm
+      @include size($width: $status-priority-width-sm);
+    }
 
     /* =============== Modifiers =============== */
     @include status-priority(high, $project-high, $project-high-darken);
