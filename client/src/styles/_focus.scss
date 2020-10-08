@@ -55,6 +55,14 @@ body.using-keyboard {
     }
   }
 
+  .landing-page {
+    &__try-for-free {
+      &:focus {
+        background-color: darken($landing-neutral-secondary, 5%);
+      }
+    }
+  }
+
   .sign-out {
     &__link {
       &:focus {
@@ -138,6 +146,12 @@ body.using-keyboard {
           $delete-confirmation-background-color-primary,
           5%
         );
+      }
+    }
+
+    &--nav-right {
+      &:focus {
+        color: $navigation-accents-primary;
       }
     }
   }

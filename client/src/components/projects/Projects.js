@@ -946,14 +946,15 @@ const Projects = (props) => {
               </Ripple>
               <Droppable droppableId={section._id} type="droppableSubItem">
                 {(provided, snapshot) => (
-                  <div
+                  <section
+                    className="projects__project-list"
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                     style={getListStyle(snapshot.isDraggingOver)}
                   >
                     {createProjectsList(section.projects)}
                     {provided.placeholder}
-                  </div>
+                  </section>
                 )}
               </Droppable>
             </section>
@@ -970,14 +971,15 @@ const Projects = (props) => {
           key={section._id}
         >
           {(provided, snapshot) => (
-            <div
+            <section
+              className="projects__project-list"
               {...provided.droppableProps}
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
               {createProjectsList(section.projects)}
               {provided.placeholder}
-            </div>
+            </section>
           )}
         </Droppable>
       ))}

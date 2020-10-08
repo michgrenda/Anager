@@ -61,7 +61,7 @@
 /* ***===================== React transition group =====================*** */
 @include basicTransition(
   $classNames: project-menu__list,
-  $transformsStart: translateX(10px) translateY(-50%) scale(0),
+  $transformsStart: translateX($translateX-transition) translateY(-50%) scale(0),
   $transformsEnd: translateX(0) translateY(-50%) scale(1),
   $done: true
 );

@@ -24,6 +24,10 @@
   @include grid;
 }
 
+%inline-grid {
+  @include inline-grid;
+}
+
 %user-select-none {
   @include prefix(
     (
@@ -158,8 +162,9 @@
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      text-decoration: none;
       color: $link-hover-font-color;
+
+      text-decoration: none;
     }
   }
 

@@ -179,7 +179,9 @@
       // Title-wrapper-padding-RL--projects-main
       @include space(
         padding,
+        $top: unset,
         $right: $title-wrapper-padding-RL--projects-main,
+        $bottom: unset,
         $left: $title-wrapper-padding-RL--projects-main
       );
       @include box-shadow(none);
@@ -471,7 +473,7 @@
 .select-input__list-enter {
   z-index: 2;
 
-  @include transform(translateY(-10px) scale(0));
+  @include transform(translateY(-$translateX-transition) scale(0));
 }
 
 .select-input__list-enter-active {
@@ -495,7 +497,7 @@
 .select-input__list-exit-active {
   z-index: 1;
 
-  @include transform(translateY(-10px) scale(0));
+  @include transform(translateY(-$translateX-transition) scale(0));
   @include transition(
     null,
     (
@@ -508,7 +510,9 @@
 .select-input__list--project-enter {
   z-index: 2;
 
-  @include transform(translateX(-50%) translateY(-10px) scale(0));
+  @include transform(
+    translateX(-50%) translateY(-$translateX-transition) scale(0)
+  );
 }
 
 .select-input__list--project-enter-active {
@@ -538,7 +542,9 @@
 .select-input__list--project-exit-active {
   z-index: 1;
 
-  @include transform(translateX(-50%) translateY(-10px) scale(0));
+  @include transform(
+    translateX(-50%) translateY(-$translateX-transition) scale(0)
+  );
   @include transition(
     null,
     (
@@ -550,7 +556,8 @@
 /* ***===================== React transition group --Projects-main =====================*** */
 @include basicTransition(
   $classNames: select-input__list--projects-main,
-  $transformsStart: translateX(-50%) translateY(-10px) scale(0),
+  $transformsStart: translateX(-50%) translateY(-$translateX-transition)
+    scale(0),
   $transformsEnd: translateX(-50%) translateY(0) scale(1),
   $opacity: false,
   $done: true

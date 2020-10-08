@@ -1,0 +1,350 @@
+.landing-page {
+  /* =============== Variables =============== */
+  $header-quote-font-color: $landing-neutral-primary;
+  $header-text-font-color: $landing-neutral-secondary;
+  $try-for-free-background-color: $landing-neutral-secondary;
+  $try-for-free-hover-background-color: darken(
+    $try-for-free-background-color,
+    5%
+  );
+  $try-for-free-font-color: $landing-font-color-secondary;
+  $try-for-free-hover-font-color: $try-for-free-font-color;
+  $section-header-font-color: $landing-font-color-primary;
+  $section-header-hover-font-color: $landing-accents-primary;
+  $section-header-border-color-B: $section-header-font-color;
+  $section-header-hover-border-color-B: $section-header-hover-font-color;
+  $grid-project-border-color-B: $landing-accents-secondary;
+  $project-col-border-color-L: $grid-project-border-color-B;
+  $project-name-hover-background-color: $landing-accents-secondary;
+  $project-name-font-color: $landing-neutral-primary;
+  $project-icon-font-color: $landing-neutral-tertiary;
+
+  $header-padding-TB: 25px;
+  $header-padding-RL: 30px;
+  $header-qoute-margin-B-md: 50px;
+  $header-qoute-margin-B-lg: 25px;
+  $header-qoute-font-size: 40px;
+  $header-text-margin-B-md: 75px;
+  $header-text-margin-B-lg: 50px;
+  $header-text-font-size: 20px;
+  $try-for-free-border-radius: 3px;
+  $try-for-free-padding-RL: 25px;
+  $try-for-free-padding-TB: 10px;
+  $grid-font-size: 14px;
+  $grid-padding-RL-lg: 5px;
+  $section-header-padding-RL: 5px;
+  $section-header-padding-TB: 15px;
+  $section-information-min-height: $option-size;
+  $project-col-padding-TB: 10px;
+  $project-text-margin-L: 10px;
+  $status-priority-width: 40px;
+  $status-priority-height: 10px;
+  $status-priority-border-radius: 5px;
+
+  // Grid-template
+  $name-width: auto;
+  $due-date-width: 80px;
+  $priority-width: 75px;
+  $status-width: 75px;
+  $menu-width: 40px;
+
+  // First column
+  $first-col-margin-L: 24px;
+
+  // Using first-col-margin-L
+  $section-text-margin-L: 24px;
+  $project-icon-margin-L: 24px;
+
+  /* =============== Mixins =============== */
+  @mixin status-priority($name, $color, $color-darken) {
+    &--#{$name} {
+      background-color: $color;
+
+      &:hover {
+        background-color: $color-darken;
+      }
+    }
+  }
+
+  &__header {
+    // Header-padding-TB & Header-padding-RL
+    @include space(
+      padding,
+      $top: $header-padding-TB,
+      $right: $header-padding-RL,
+      $bottom: $header-padding-TB,
+      $left: $header-padding-RL
+    );
+  }
+
+  &__header-quote {
+    color: $header-quote-font-color;
+
+    text-align: center;
+    // Header-qoute-font-size
+    font-size: $header-qoute-font-size;
+
+    // Header-qoute-margin-B-md
+    @include space(margin, $top: unset, $bottom: $header-qoute-margin-B-md);
+
+    @media (max-width: map-get($breakpoints, breakpoint-large)) {
+      // Header-qoute-margin-B-lg
+      @include space(margin, $bottom: $header-qoute-margin-B-lg);
+    }
+  }
+
+  &__header-text {
+    color: $header-text-font-color;
+
+    text-align: center;
+    // Header-text-font-size
+    font-size: $header-text-font-size;
+
+    // Header-text-margin-B-md
+    @include space(margin, $bottom: $header-text-margin-B-md);
+
+    @media (max-width: map-get($breakpoints, breakpoint-large)) {
+      // Header-text-margin-B-lg
+      @include space(margin, $bottom: $header-text-margin-B-lg);
+    }
+  }
+
+  &__try-for-free-wrapper {
+    @extend %flexbox;
+    @extend %justify-content-center;
+  }
+
+  &__try-for-free {
+    background-color: $try-for-free-background-color;
+    color: $try-for-free-font-color;
+
+    // Try-for-free-border-radius
+    border-radius: $try-for-free-border-radius;
+
+    @extend %user-select-none;
+
+    // Try-for-free-padding-TB & Try-for-free-padding-RL
+    @include space(
+      padding,
+      $top: $try-for-free-padding-TB,
+      $right: $try-for-free-padding-RL,
+      $bottom: $try-for-free-padding-TB,
+      $left: $try-for-free-padding-RL
+    );
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      )
+    );
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $try-for-free-hover-background-color;
+        color: $try-for-free-hover-font-color;
+
+        text-decoration: none;
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      &:hover {
+        color: $try-for-free-hover-font-color;
+
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__grid-wrapper {
+    @extend %flexbox;
+    @extend %align-items-center;
+  }
+
+  &__grid {
+    // Grid-font-size
+    font-size: $grid-font-size;
+
+    @extend %grid;
+    @extend %w-100;
+
+    @include grid-template(rows, auto);
+
+    @media (max-width: map-get($breakpoints, breakpoint-large)) {
+      // Grid-padding-RL-lg
+      @include space(
+        padding,
+        $right: $grid-padding-RL-lg,
+        $left: $grid-padding-RL-lg
+      );
+    }
+  }
+
+  &__section-header {
+    color: $section-header-font-color;
+
+    border-bottom: 1px solid $section-header-border-color-B;
+
+    @extend %user-select-none;
+
+    // Section-header-padding-TB & Section-header-padding-RL
+    @include space(
+      padding,
+      $top: $section-header-padding-TB,
+      $right: $section-header-padding-RL,
+      $bottom: $section-header-padding-TB,
+      $left: $section-header-padding-RL
+    );
+    @include transition(
+      null,
+      (
+        "property": color,
+      ),
+      (
+        "property": border-color,
+      )
+    );
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $section-header-hover-font-color;
+
+        border-color: $section-header-hover-border-color-B;
+      }
+    }
+  }
+
+  &__section-information {
+    // Section-information-min-height
+    min-height: $section-information-min-height;
+
+    @extend %flexbox;
+    @extend %align-items-center;
+  }
+
+  &__section-text {
+    // Section-text-margin-L
+    @include space(margin, $left: $section-text-margin-L);
+  }
+
+  &__grid-project {
+    border-bottom: 1px solid $grid-project-border-color-B;
+
+    @extend %grid;
+
+    @include grid-template(
+      columns,
+      $name-width $due-date-width $priority-width $status-width $menu-width
+    );
+  }
+
+  &__project-col {
+    border-left: 1px solid $project-col-border-color-L;
+
+    // Project-col-padding-TB
+    @include space(
+      padding,
+      $top: $project-col-padding-TB,
+      $bottom: $project-col-padding-TB
+    );
+
+    &:first-child {
+      border-left: none;
+
+      @include space(padding, $gen: unset);
+    }
+
+    /* =============== Modifiers =============== */
+    &--options {
+      @extend %flexbox;
+      @extend %justify-content-center;
+      @extend %align-items-center;
+    }
+
+    &--date {
+      color: $color-dove-gray;
+
+      @extend %flexbox;
+      @extend %justify-content-center;
+      @extend %align-items-center;
+      @extend %user-select-none;
+    }
+    // End ***
+  }
+
+  &__project-name {
+    color: $project-name-font-color;
+
+    @extend %flexbox;
+    @extend %align-items-center;
+    @extend %w-100;
+    @extend %h-100;
+
+    @include transition(
+      null,
+      (
+        "property": background-color,
+      )
+    );
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $project-name-hover-background-color;
+      }
+    }
+  }
+
+  &__project-text {
+    // Project-text-margin-L
+    @include space(margin, $left: $project-text-margin-L);
+  }
+
+  &__project-icon {
+    color: $project-icon-font-color;
+
+    // Project-icon-margin-L
+    @include space(margin, $left: $project-icon-margin-L);
+  }
+
+  &__status-priority {
+    // Status-priority-border-radius
+    border-radius: $status-priority-border-radius;
+
+    // Status-priority-width & Status-priority-height
+    @include size(
+      $width: $status-priority-width,
+      $height: $status-priority-height
+    );
+
+    /* =============== Modifiers =============== */
+    @include status-priority(high, $project-high, $project-high-darken);
+    @include status-priority(low, $project-low, $project-low-darken);
+    @include status-priority(medium, $project-medium, $project-medium-darken);
+    @include status-priority(
+      on-hold,
+      $project-on-hold,
+      $project-on-hold-darken
+    );
+    @include status-priority(active, $project-active, $project-active-darken);
+    @include status-priority(
+      archived,
+      $project-archived,
+      $project-archived-darken
+    );
+
+    &--high,
+    &--low,
+    &--medium,
+    &--on-hold,
+    &--active,
+    &--archived {
+      @include transition(
+        null,
+        (
+          "property": background-color,
+        )
+      );
+    }
+    /* =============== End =============== */
+  }
+}

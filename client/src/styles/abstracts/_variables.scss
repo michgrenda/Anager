@@ -120,6 +120,36 @@ $transition-duration-secondary: 0.2s;
 $transition-duration-tertiary: 0.7s;
 $transition-delay-primary: 0.2s;
 
+/* Landing
+============================================================================================== */
+$landing-font-color-primary: $font-color-light-primary;
+// -----------------------------------------------------------------
+// (Landing)            |   Section-header (Font-color, Border-bottom)
+
+$landing-font-color-secondary: $font-color-dark-primary;
+// -----------------------------------------------------------------
+// (Landing)            |   Try-for-free (Font-color, Hover - Font-color)
+
+$landing-neutral-primary: $black;
+// -----------------------------------------------------------------
+// (Landing)            |   Header-quote (Font-color), Project-name (Font-color)
+
+$landing-neutral-secondary: $gray-dark;
+// -----------------------------------------------------------------
+// (Landing)            |   Header-text (Font-color), Try-for-free (Background-color)
+
+$landing-neutral-tertiary: $gray-light;
+// -----------------------------------------------------------------
+// (Landing)            |   Project-icon (Font-color)
+
+$landing-accents-primary: $accents-primary;
+// -----------------------------------------------------------------
+// (Landing)            |   Section-header (Hover - Font-color, Border-bottom)
+
+$landing-accents-secondary: $accents-secondary;
+// -----------------------------------------------------------------
+// (Landing)            |   Grid-project (Border-bottom), Project-col (Border-left), Project-name (Hover - Background-color)
+
 /* Modal
 ============================================================================================== */
 $modal-background-color-primary: $color-transparentized-black;
@@ -128,11 +158,11 @@ $modal-background-color-primary: $color-transparentized-black;
 
 $modal-background-color-secondary: $background-color-light-primary;
 // -----------------------------------------------------------------
-// (Modal)              | Container (--Default-light), Close-icon (--Default-light), Close-icon (--Default-dark - Hover)
+// (Modal)              |   Container (--Default-light), Close-icon (--Default-light), Close-icon (--Default-dark - Hover)
 
 $modal-background-color-tertiary: $background-color-dark-primary;
 // -----------------------------------------------------------------
-// (Modal)              | Container (--Defult-dark), Close-icon (--Defult-dark), Close-icon (--Default-light - Hover)
+// (Modal)              |   Container (--Defult-dark), Close-icon (--Defult-dark), Close-icon (--Default-light - Hover)
 
 /* Routing
 ============================================================================================== */
@@ -257,6 +287,9 @@ $select-input-font-color-tertiary: $font-color-light-primary;
 $select-input-accents-primary: $accents-secondary;
 // -----------------------------------------------------------------
 // (SelectInput)        |   Item (--Default-light & --Default-dark - Hover - Background-color)
+
+// SelectInput Global
+$translateX-transition: 5px;
 
 /* Button - Default
 ============================================================================================== */

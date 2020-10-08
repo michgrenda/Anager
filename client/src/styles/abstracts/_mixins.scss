@@ -93,6 +93,11 @@
   display: grid;
 }
 
+@mixin inline-grid {
+  display: -ms-inline-grid;
+  display: inline-grid;
+}
+
 @mixin grid-template($type, $value) {
   @if $type == rows or $type == columns {
     -ms-grid-#{$type}: $value;
