@@ -140,6 +140,7 @@ const Projects = (props) => {
   const deleteSectionBtns = useRef({});
   const editSectionBtns = useRef({});
   const editProjectBtns = useRef({});
+  // const projectDetailViewContainer = useRef(null)
 
   // Manage fetched data
   useEffect(() => {
@@ -161,11 +162,11 @@ const Projects = (props) => {
       fetchedData.forEach((section) => {
         if (section._id !== "noSection") {
           section.projects = projects.filter(
-            (project) => project.section === section._id
+            (project) => project.projectSection === section._id
           );
         } else {
           section.projects = projects.filter(
-            (project) => !project.hasOwnProperty("section")
+            (project) => !project.hasOwnProperty("projectSection")
           );
         }
       });
@@ -533,6 +534,7 @@ const Projects = (props) => {
             indicator="project"
             updateProject={updateProject}
             project={project}
+            // container={projectDetailViewContainer}
           />
         </div>
       </div>
@@ -691,6 +693,7 @@ const Projects = (props) => {
                   indicator="project"
                   updateProject={updateProject}
                   project={project}
+                  // container={projectDetailViewContainer}
                 />
               </div>
             </div>
@@ -784,8 +787,8 @@ const Projects = (props) => {
           const [draggedItem] = newSourceSubItems.splice(sourceIndex, 1);
 
           if (destinationParentId !== "noSection")
-            draggedItem.section = destinationParentId;
-          else delete draggedItem.section;
+            draggedItem.projectSection = destinationParentId;
+          else delete draggedItem.projectSection;
 
           let newDestinationSubItems = [...destinationSubItems];
           newDestinationSubItems.splice(destinationIndex, 0, draggedItem);
@@ -805,7 +808,7 @@ const Projects = (props) => {
 
           if (destinationParentId !== "noSection") {
             updateProject(
-              { section: destinationParentId },
+              { projectSection: destinationParentId },
               result.draggableId
             ).catch((error) => console.log(error));
           } else {
@@ -1075,6 +1078,7 @@ const Projects = (props) => {
                 </div>
               </div>
             </header>
+          
             <section className="projects__section col-12">
               <div className="projects__grid">
                 <header className="projects__grid-header">
@@ -1104,6 +1108,7 @@ const Projects = (props) => {
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                           >
+                              {/* <div className="projects__project-detail-view" ref={projectDetailViewContainer}></div> */}
                             {sectionsList}
                             {provided.placeholder}
                           </section>

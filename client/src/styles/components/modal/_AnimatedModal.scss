@@ -11,8 +11,10 @@
   $close-icon-background-color--default-dark: $modal-background-color-tertiary;
   $close-icon-hover-background-color--default-dark: $modal-background-color-secondary;
 
-  $container-width: 450px;
+  $overlay-padding-RL-sm: 10px;
+  $container-width: 400px;
   $container-border-radius: 10px;
+  $container-padding-RL-sm-momentary: 50px;
   $container-padding: 30px;
   $close-button-position-T: 16px;
   $close-button-position-R: -30px;
@@ -30,6 +32,15 @@
 
     // Overlay-padding
     @include space(padding, $gen: $overlay-padding);
+
+    @media (max-width: map-get($breakpoints, breakpoint-small)) {
+      // Overlay-padding-RL-sm
+      @include space(
+        padding,
+        $right: $overlay-padding-RL-sm,
+        $left: $overlay-padding-RL-sm
+      );
+    }
 
     /* =============== Modifiers =============== */
     &--default-light {
@@ -99,6 +110,15 @@
     @media (max-width: map-get($breakpoints, breakpoint-small)) {
       @include size($width: 100%);
     }
+
+    @media (max-width: map-get($breakpoints, breakpoint-small)) and (min-width: map-get($breakpoints, breakpoint-small) - 100px + 1px) {
+      // Container-padding-RL-sm-momentary
+      @include space(
+        padding,
+        $right: $container-padding-RL-sm-momentary,
+        $left: $container-padding-RL-sm-momentary
+      );
+    }
   }
 
   &__close-button {
@@ -106,6 +126,10 @@
     top: $close-button-position-T;
     // Close-button-position-R
     right: $close-button-position-R;
+
+    @media (max-width: map-get($breakpoints, breakpoint-small)) {
+      display: none;
+    }
   }
 
   &__close-icon {

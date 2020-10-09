@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
-const Section = require("./Section");
+const ProjectSection = require("./ProjectSection");
 const Project = require("./Project");
-const Column = require("./Column");
+const TaskSection = require("./TaskSection");
 const Task = require("./Task");
 
 const userSchema = new mongoose.Schema({
@@ -42,9 +42,9 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-// Specify User/Sections relationship
-userSchema.virtual("sections", {
-  ref: "Section",
+// Specify User/ProjectSections relationship
+userSchema.virtual("projectSections", {
+  ref: "ProjectSection",
   localField: "_id",
   foreignField: "owner",
 });
@@ -56,9 +56,9 @@ userSchema.virtual("projects", {
   foreignField: "owner",
 });
 
-// Specify User/Columns relationship
-userSchema.virtual("columns", {
-  ref: "Column",
+// Specify User/TaskSections relationship
+userSchema.virtual("taskSections", {
+  ref: "TaskSection",
   localField: "_id",
   foreignField: "owner",
 });
@@ -146,19 +146,19 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-// Cascade delete sections & projects & columns & tasks
+// Cascade delete projectSections & projects & taskSections & tasks
 userSchema.pre("remove", async function (next) {
   const user = this;
   await Task.deleteMany({
     owner: user._id,
   });
-  await Column.deleteMany({
+  await TaskSection.deleteMany({
     owner: user._id,
   });
   await Project.deleteMany({
     owner: user._id,
   });
-  await Section.deleteMany({
+  await ProjectSection.deleteMany({
     owner: user._id,
   });
   next();

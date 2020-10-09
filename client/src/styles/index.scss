@@ -22,6 +22,10 @@
 
 /* Components
 ============================================================================================== */
+/* =============== Modal =============== */
+@import "./components/modal/AnimatedModal";
+/* =============== Routing =============== */
+@import "./components/routing/PageNotFound";
 /* =============== Auth =============== */
 @import "./components/auth/SignIn";
 @import "./components/auth/SignUp";
@@ -43,10 +47,6 @@
 @import "./components/projects/SectionInlineAdd";
 @import "./components/projects/ProjectMenu";
 @import "./components/projects/ProjectDetailView";
-/* =============== Modal =============== */
-@import "./components/modal/AnimatedModal";
-/* =============== Routing =============== */
-@import "./components/routing/PageNotFound";
 
 @import "./partials/Button";
 @import "./partials/SelectInput";

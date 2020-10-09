@@ -11,6 +11,7 @@
   // --Next
   $react-datepicker-navigation-border-left-color--next: $projects-accents-secondary;
 
+  $modal-width: 500px;
   $input-date-padding-RL: $input-padding-RL-secondary;
   $select-input-wrapper-padding-RL: 10px;
   $select-input-wrapper-margin-B: $input-margin-B-primary;
@@ -18,6 +19,14 @@
   $placeholder-position-T--text-area: $text-area-padding-TB-primary;
 
   @extend %form;
+
+  &__modal {
+    @include size($width: $modal-width);
+
+    @media (max-width: map-get($breakpoints, breakpoint-small)) {
+      @include size($width: 100%);
+    }
+  }
 
   &__welcome-text {
     color: $welcome-text-font-color;

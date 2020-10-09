@@ -35,8 +35,10 @@ const SectionInlineEditForm = function (props) {
 
   // Close section inline edit using keyboard
   const handleSectionInlineEditKeyDownClose = (e) => {
-    switch (e.which) {
-      case 27:
+    const keyboardEvent = e.which || e.key
+      switch (keyboardEvent) {
+        case 27:
+        case "Escape":
         closeSectionInlineEditExtended();
 
         const button = props.triggeringElement.current[props.sectionId];
@@ -70,11 +72,14 @@ const SectionInlineEditForm = function (props) {
   // React-onClickOutside
   SectionInlineEditForm[`handleClickOutside${props.sectionId}`] = (e) => {
     if (e.type === "keydown") {
-      switch (e.which) {
+      const keyboardEvent = e.which || e.key
+      switch (keyboardEvent) {
         case 27:
+        case "Escape":
           closeSectionInlineEditExtended();
           break;
         case 13:
+        case "Enter":
           closeSectionInlineEditExtended();
           break;
         default:

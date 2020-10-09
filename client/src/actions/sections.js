@@ -11,7 +11,7 @@ import {
 // Get all user's sections
 export const getSections = () => async (dispatch) => {
   try {
-    const res = await api.get("/sections");
+    const res = await api.get("/project-sections");
 
     dispatch({
       type: GET_SECTIONS,
@@ -31,7 +31,7 @@ export const getSections = () => async (dispatch) => {
 // Add section
 export const addSection = (formData) => async (dispatch) => {
   try {
-    const res = await api.post("/sections", formData);
+    const res = await api.post("/project-sections", formData);
 
     dispatch({
       type: ADD_SECTION,
@@ -55,7 +55,7 @@ export const addSection = (formData) => async (dispatch) => {
 // Update section
 export const updateSection = (formData, sectionId) => async (dispatch) => {
   try {
-    const res = await api.patch(`/sections/${sectionId}`, formData);
+    const res = await api.patch(`/project-sections/${sectionId}`, formData);
 
     dispatch({
       type: UPDATE_SECTION,
@@ -79,7 +79,7 @@ export const updateSection = (formData, sectionId) => async (dispatch) => {
 // Delete section
 export const deleteSection = (formData, sectionId) => async (dispatch) => {
   try {
-    const res = await api.delete(`/sections/${sectionId}`, { data: formData });
+    const res = await api.delete(`/project-sections/${sectionId}`, { data: formData });
 
     dispatch({
       type: DELETE_SECTION,

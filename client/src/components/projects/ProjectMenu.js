@@ -20,9 +20,11 @@ const Menu = function (props) {
   };
 
   const handleItemKeyDown = (e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key
+    switch (keyboardEvent) {
       // Trap focus
       case 9:
+      case "Tab":
         if (e.shiftKey) {
           if (document.activeElement.isSameNode(firstItem.current)) {
             lastItem.current.focus();
@@ -36,11 +38,13 @@ const Menu = function (props) {
         }
         break;
       case 13:
+      case "Enter":
         e.preventDefault();
 
         handleItemClick();
         break;
       case 27:
+      case "Escape":
         props.onClose();
 
         focusTriggeringElement();
@@ -68,11 +72,14 @@ const Menu = function (props) {
   // React-onClickOutside
   Menu[`handleClickOutside${props.uniqueId}`] = (e) => {
     if (e.type === "keydown") {
-      switch (e.which) {
+      const keyboardEvent = e.which || e.key
+      switch (keyboardEvent) {
         case 27:
+        case "Escape":
           props.onClose();
           break;
         case 13:
+        case "Enter":
           props.onClose();
           break;
         default:
@@ -142,8 +149,10 @@ const ProjectMenu = function (props) {
 
   // Close menu using keyboard
   const handleButtonKeyDownClose = (e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key
+    switch (keyboardEvent) {
       case 27:
+      case "Escape":
         if (menuOpen) closeMenu();
         break;
       default:

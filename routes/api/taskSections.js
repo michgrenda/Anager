@@ -4,11 +4,11 @@ const infoColors = require("../../config/chalk/variables");
 const auth = require("../../middleware/auth");
 const checkObjectId = require("../../middleware/checkObjectId");
 const { check, validationResult } = require("express-validator");
-const Column = require("../../models/Column");
+const TaskSection = require("../../models/TaskSection");
 const Project = require("../../models/Project");
 
-// @route          POST api/columns/:project_id
-// @desc           Create project's column
+// @route          POST api/task-sections/:project_id
+// @desc           Create project's section
 // @access         Private
 router.post(
   "/:project_id",
@@ -33,16 +33,16 @@ router.post(
 
     const { name } = req.body;
 
-    const column = new Column({
+    const section = new TaskSection({
       name,
       project: req.params.project_id,
       owner: req.user._id,
     });
 
     try {
-      await column.save();
+      await section.save();
 
-      res.status(201).send(column);
+      res.status(201).send(section);
     } catch (error) {
       console.error(infoColors.error(error.message));
       res.status(500).send("Server error");
@@ -50,8 +50,8 @@ router.post(
   }
 );
 
-// @route          GET api/columns/:project_id
-// @desc           Get project's columns
+// @route          GET api/task-sections/:project_id
+// @desc           Get project's sections
 // @access         Private
 router.get(
   "/:project_id",
@@ -66,9 +66,9 @@ router.get(
         return res.status(404).send();
       }
 
-      await project.populate("columns").execPopulate();
+      await project.populate("taskSections").execPopulate();
 
-      res.send(project.columns);
+      res.send(project.taskSections);
     } catch (error) {
       console.error(infoColors.error(error.message));
       res.status(500).send("Server error");
@@ -76,23 +76,23 @@ router.get(
   }
 );
 
-// @route          GET api/columns/column/:column_id
-// @desc           Get column by ID
+// @route          GET api/task-sections/section/:section_id
+// @desc           Get section by ID
 // @access         Private
 router.get(
-  "/column/:column_id",
-  [auth, checkObjectId("column_id")],
+  "/section/:section_id",
+  [auth, checkObjectId("section_id")],
   async (req, res) => {
     try {
-      const column = await Column.findOne({
-        _id: req.params.column_id,
+      const section = await TaskSection.findOne({
+        _id: req.params.section_id,
         owner: req.user._id,
       });
-      if (!column) {
-        return res.status(404).send("Column was not found");
+      if (!section) {
+        return res.status(404).send("Section was not found");
       }
 
-      res.send(column);
+      res.send(section);
     } catch (error) {
       console.error(infoColors.error(error.message));
       res.status(500).send("Server error");
@@ -100,14 +100,14 @@ router.get(
   }
 );
 
-// @route          PATCH api/columns/:column_id
-// @desc           Update column by ID
+// @route          PATCH api/task-sections/:section_id
+// @desc           Update section by ID
 // @access         Private
 router.patch(
-  "/:column_id",
+  "/:section_id",
   [
     auth,
-    checkObjectId("column_id"),
+    checkObjectId("section_id"),
     [
       check("name", "Name is required")
         .optional()
@@ -142,21 +142,21 @@ router.patch(
     }
 
     try {
-      const column = await Column.findOne({
-        _id: req.params.column_id,
+      const section = await TaskSection.findOne({
+        _id: req.params.section_id,
         owner: req.user._id,
       });
-      if (!column) {
+      if (!section) {
         return res.status(404).send();
       }
 
       updates.forEach((update) => {
-        column[update] = requestBody[update];
+        section[update] = requestBody[update];
       });
 
-      await column.save();
+      await section.save();
 
-      res.send(column);
+      res.send(section);
     } catch (error) {
       console.error(infoColors.error(error.message));
       res.status(500).send("Server error");
@@ -164,29 +164,29 @@ router.patch(
   }
 );
 
-// @route          DELETE api/columns/:column_id
-// @desc           Delete column by ID
+// @route          DELETE api/task-sections/:section_id
+// @desc           Delete section by ID
 // @access         Private
 router.delete(
-  "/:column_id",
-  [auth, checkObjectId("column_id")],
+  "/:section_id",
+  [auth, checkObjectId("section_id")],
   async (req, res) => {
     try {
-      const column = await Column.findOne({
-        _id: req.params.column_id,
+      const section = await TaskSection.findOne({
+        _id: req.params.section_id,
         owner: req.user._id,
       });
 
-      if (!column) {
+      if (!section) {
         return res.status(404).send();
       }
 
-      const columnSymbol = Symbol.for("columnCascade");
-      column[columnSymbol] = req.body.cascade;
+      const taskSectionSymbol = Symbol.for("taskSectionCascade");
+      section[taskSectionSymbol] = req.body.cascade;
 
-      column.remove();
+      section.remove();
 
-      res.send(column);
+      res.send(section);
     } catch (error) {
       console.error(infoColors.error(error.message));
       res.status(500).send("Server error");

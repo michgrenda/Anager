@@ -4,9 +4,9 @@ const infoColors = require("../../config/chalk/variables");
 const auth = require("../../middleware/auth");
 const checkObjectId = require("../../middleware/checkObjectId");
 const { check, validationResult } = require("express-validator");
-const Section = require("../../models/Section");
+const ProjectSection = require("../../models/ProjectSection");
 
-// @route          POST api/sections
+// @route          POST api/project-sections
 // @desc           Create section
 // @access         Private
 router.post(
@@ -31,7 +31,7 @@ router.post(
 
     const { name } = req.body;
 
-    const section = new Section({
+    const section = new ProjectSection({
       name,
       owner: req.user._id,
     });
@@ -47,21 +47,21 @@ router.post(
   }
 );
 
-// @route          GET api/sections
+// @route          GET api/project-sections
 // @desc           Get sections
 // @access         Private
 router.get("/", auth, async (req, res) => {
   try {
-    await req.user.populate("sections").execPopulate();
+    await req.user.populate("projectSections").execPopulate();
 
-    res.send(req.user.sections);
+    res.send(req.user.projectSections);
   } catch (error) {
     console.error(infoColors.error(error.message));
     res.status(500).send("Server error");
   }
 });
 
-// @route          GET api/sections/:section_id
+// @route          GET api/project-sections/:section_id
 // @desc           Get section by ID
 // @access         Private
 router.get(
@@ -69,7 +69,7 @@ router.get(
   [auth, checkObjectId("section_id")],
   async (req, res) => {
     try {
-      const section = await Section.findOne({
+      const section = await ProjectSection.findOne({
         _id: req.params.section_id,
         owner: req.user._id,
       });
@@ -85,7 +85,7 @@ router.get(
   }
 );
 
-// @route          PATCH api/sections/:section_id
+// @route          PATCH api/project-sections/:section_id
 // @desc           Update section by ID
 // @access         Private
 router.patch(
@@ -127,7 +127,7 @@ router.patch(
     }
 
     try {
-      const section = await Section.findOne({
+      const section = await ProjectSection.findOne({
         _id: req.params.section_id,
         owner: req.user._id,
       });
@@ -149,7 +149,7 @@ router.patch(
   }
 );
 
-// @route          DELETE api/sections/:section_id
+// @route          DELETE api/project-sections/:section_id
 // @desc           Delete section by ID
 // @access         Private
 router.delete(
@@ -157,7 +157,7 @@ router.delete(
   [auth, checkObjectId("section_id")],
   async (req, res) => {
     try {
-      const section = await Section.findOne({
+      const section = await ProjectSection.findOne({
         _id: req.params.section_id,
         owner: req.user._id,
       });
@@ -165,8 +165,8 @@ router.delete(
         return res.status(404).send();
       }
 
-      const sectionSymbol = Symbol.for("sectionCascade");
-      section[sectionSymbol] = req.body.cascade;
+      const projectSectionSymbol = Symbol.for("projectSectionCascade");
+      section[projectSectionSymbol] = req.body.cascade;
 
       section.remove();
 

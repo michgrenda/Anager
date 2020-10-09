@@ -1,8 +1,8 @@
 .landing-page {
   /* =============== Variables =============== */
-  $header-quote-font-color: $landing-neutral-primary;
-  $header-text-font-color: $landing-neutral-secondary;
-  $try-for-free-background-color: $landing-neutral-secondary;
+  $header-quote-font-color: $landing-accents-primary;
+  $header-text-font-color: $landing-font-color-primary;
+  $try-for-free-background-color: $landing-accents-primary;
   $try-for-free-hover-background-color: darken(
     $try-for-free-background-color,
     5%

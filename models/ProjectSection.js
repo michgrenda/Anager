@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Project = require("./Project");
 
-const sectionSchema = new mongoose.Schema({
+const projectSectionSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -14,30 +14,30 @@ const sectionSchema = new mongoose.Schema({
   },
 });
 
-// Specify Sections/Projects relationship
-sectionSchema.virtual("projects", {
+// Specify ProjectSections/Projects relationship
+projectSectionSchema.virtual("projects", {
   ref: "Project",
   localField: "_id",
-  foreignField: "section",
+  foreignField: "projectSection",
 });
 
 // Cascade delete projects
-sectionSchema.pre("remove", async function (next) {
+projectSectionSchema.pre("remove", async function (next) {
   const section = this;
-  const sectionSymbol = Symbol.for("sectionCascade");
+  const projectSectionSymbol = Symbol.for("projectSectionCascade");
 
-  if (section[sectionSymbol]) {
+  if (section[projectSectionSymbol]) {
     await section.populate("projects").execPopulate();
     section.projects.forEach((project) => project.remove());
   } else {
     await Project.updateMany(
       {
-        section: section._id,
+        projectSection: section._id,
       },
-      { $unset: { section: "" } }
+      { $unset: { projectSection: "" } }
     );
   }
   next();
 });
 
-module.exports = Section = mongoose.model("Section", sectionSchema);
+module.exports = ProjectSection = mongoose.model("ProjectSection", projectSectionSchema);

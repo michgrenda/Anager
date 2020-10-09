@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
-const Portal = ({ children, className = "portal-root", el = "div" }) => {
+const Portal = ({ children, className = "portal-root", el = "div", container = {} }) => {
   const [portalRoot] = useState(() => {
     const portalRoot = document.createElement(el);
     portalRoot.classList.add(className);
@@ -9,12 +9,17 @@ const Portal = ({ children, className = "portal-root", el = "div" }) => {
   });
 
   useEffect(() => {
-    document.body.appendChild(portalRoot);
+    if(!container.current) {
+      document.body.appendChild(portalRoot);
 
-    return () => document.body.removeChild(portalRoot);
-  }, [portalRoot]);
+      return () => document.body.removeChild(portalRoot);
+    }
+  }, [portalRoot, container]);
 
-  return ReactDOM.createPortal(children, portalRoot);
+  if (container.current)
+    return ReactDOM.createPortal(children, container.current);
+  else
+    return ReactDOM.createPortal(children, portalRoot);
 };
 
 export default Portal;

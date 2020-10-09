@@ -35,8 +35,10 @@ const ProjectInlineEditForm = function (props) {
 
   // Close project inline edit using keyboard
   const handleProjectInlineEditKeyDownClose = (e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key
+    switch (keyboardEvent) {
       case 27:
+      case "Escape":
         closeProjectInlineEditExtended();
 
         const button = props.triggeringElement.current[props.projectId];
@@ -70,11 +72,14 @@ const ProjectInlineEditForm = function (props) {
   // React-onClickOutside
   ProjectInlineEditForm[`handleClickOutside${props.projectId}`] = (e) => {
     if (e.type === "keydown") {
-      switch (e.which) {
+      const keyboardEvent = e.which || e.key
+      switch (keyboardEvent) {
         case 27:
+        case "Escape":
           closeProjectInlineEditExtended();
           break;
         case 13:
+        case "Enter":
           closeProjectInlineEditExtended();
           break;
         default:

@@ -33,8 +33,10 @@ const DeleteConfirmation = function (props) {
 
   // Close delete confirmation using keyboard
   const handleDeleteConfirmationKeyDown = (e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key
+    switch (keyboardEvent) {
       case 27:
+      case "Escape":
         closeDeleteConfirmation();
 
         const button = props.triggeringElement.current[props.uniqueId];
@@ -52,11 +54,14 @@ const DeleteConfirmation = function (props) {
   // React-onClickOutside
   DeleteConfirmation[`handleClickOutside${props.uniqueId}`] = (e) => {
     if (e.type === "keydown") {
-      switch (e.which) {
+      const keyboardEvent = e.which || e.key
+      switch (keyboardEvent) {
         case 27:
+        case "Escape":
           closeDeleteConfirmation();
           break;
         case 13:
+        case "Enter":
           closeDeleteConfirmation();
           break;
         default:

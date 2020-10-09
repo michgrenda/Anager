@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Column = require("./Column");
+const TaskSection = require("./TaskSection");
 const Task = require("./Task");
 
 const projectSchema = new mongoose.Schema({
@@ -36,9 +36,9 @@ const projectSchema = new mongoose.Schema({
     ],
     default: "active",
   },
-  section: {
+  projectSection: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Section",
+    ref: "ProjectSection",
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -47,9 +47,9 @@ const projectSchema = new mongoose.Schema({
   },
 });
 
-// Specify Project/Columns relationship
-projectSchema.virtual("columns", {
-  ref: "Column",
+// Specify Project/TaskSections relationship
+projectSchema.virtual("taskSections", {
+  ref: "TaskSection",
   localField: "_id",
   foreignField: "project",
 });
@@ -61,27 +61,27 @@ projectSchema.virtual("tasks", {
   foreignField: "project",
 });
 
-// Cascade delete columns & tasks
+// Cascade delete taskSections & tasks
 projectSchema.pre("findOneAndDelete", async function (next) {
   const project = this;
 
   await Task.deleteMany({
     project: project._id,
   });
-  await Column.deleteMany({
+  await TaskSection.deleteMany({
     project: project._id,
   });
   next();
 });
 
-// Cascade delete columns & tasks (chain)
+// Cascade delete taskSections & tasks (chain)
 projectSchema.pre("remove", async function (next) {
   const project = this;
 
   await Task.deleteMany({
     project: project._id,
   });
-  await Column.deleteMany({
+  await TaskSection.deleteMany({
     project: project._id,
   });
   next();

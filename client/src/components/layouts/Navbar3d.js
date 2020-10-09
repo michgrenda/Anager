@@ -7,8 +7,10 @@ import { CSSTransition } from "react-transition-group";
 const Navbar3d = function (props) {
   // Close 3d navbar using keyboard
   const handleNav3dKeyDownClose = (e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key
+    switch (keyboardEvent) {
       case 27:
+      case "Escape":
         props.onClose();
 
         const button = props.triggeringElement.current;

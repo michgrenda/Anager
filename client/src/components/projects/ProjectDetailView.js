@@ -8,6 +8,7 @@ import DatePicker, { CalendarContainer } from "react-datepicker";
 import Button from "../Button";
 import SelectInput from "../SelectInput";
 import AnimatedModal from "../modal/AnimatedModal";
+// import Portal from "../Portal"
 
 const ProjectDetailView = (props) => {
   const initialState = {
@@ -101,7 +102,9 @@ const ProjectDetailView = (props) => {
       visible={props.visible}
       onClose={closeProjectDetailView}
       onAnimationEnd={setInitialStateWhenClosing}
+      modalClassName="project-detail-view__modal"
     >
+    {/* <Portal className="projects__project-detail-view" container={props.container}> */}
       <div className="container">
         <div className="row">
           <form
@@ -189,11 +192,13 @@ const ProjectDetailView = (props) => {
           </form>
         </div>
       </div>
-    </AnimatedModal>
+      {/* </Portal> */}
+     </AnimatedModal>
   );
 };
 
 ProjectDetailView.propTypes = {
+  container: PropTypes.object,
   visible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   priorityProps: PropTypes.arrayOf(PropTypes.object).isRequired,

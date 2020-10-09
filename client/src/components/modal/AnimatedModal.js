@@ -26,16 +26,17 @@ const AnimatedModal = (props) => {
       closeOnEsc={false} // Propagation problem
       animationDuration={props.animationDuration}
       closeIcon={modalCloseIcon}
+      showCloseIcon={props.showCloseIcon}
       container={document.querySelector("#modal-root")}
       classNames={{
-        overlay: `modal__overlay ${modifiers} ${
+        overlay: `modal__overlay ${props.overlayClassName} ${modifiers} ${
           props.defaultLight && !props.defaultDark
             ? "modal__overlay--default-light"
             : props.defaultDark && "modal__overlay--default-dark"
         } ${
           props.visible ? props.overlayClassNameIn : props.overlayClassNameOut
         }`,
-        modal: `modal__container ${
+        modal: `modal__container ${props.modalClassName} ${
           props.visible ? props.modalClassNameIn : props.modalClassNameOut
         }`,
         closeButton: "modal__close-button",
@@ -45,11 +46,13 @@ const AnimatedModal = (props) => {
           animation: `${
             props.visible ? props.animationOverlayIn : props.animationOverlayOut
           } ${props.animationDuration}ms`,
+          ...props.overlayStyles
         },
         modal: {
           animation: `${
             props.visible ? props.animationModalIn : props.animationModalOut
           } ${props.animationDuration}ms`,
+          ...props.modalStyles
         },
       }}
       onAnimationEnd={props.onAnimationEnd}
@@ -60,6 +63,9 @@ const AnimatedModal = (props) => {
 };
 
 AnimatedModal.defaultProps = {
+  overlayStyles: {},
+  modalStyles: {},
+  showCloseIcon: true,
   center: true,
   animationDuration: 400,
   defaultLight: true,
@@ -75,6 +81,9 @@ AnimatedModal.defaultProps = {
 };
 
 AnimatedModal.propTypes = {
+  overlayStyles: PropTypes.object,
+  modalStyles: PropTypes.object,
+  showCloseIcon: PropTypes.bool,
   categories: PropTypes.arrayOf(PropTypes.string),
   visible: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
@@ -83,10 +92,12 @@ AnimatedModal.propTypes = {
   default: PropTypes.string,
   animationOverlayIn: PropTypes.string,
   animationOverlayOut: PropTypes.string,
+  overlayClassName: PropTypes.string,
   overlayClassNameIn: PropTypes.string,
   overlayClassNameOut: PropTypes.string,
   animationModalIn: PropTypes.string,
   animationModalOut: PropTypes.string,
+  modalClassName: PropTypes.string,
   modalClassNameIn: PropTypes.string,
   modalClassNameOut: PropTypes.string,
   onAnimationEnd: PropTypes.func,

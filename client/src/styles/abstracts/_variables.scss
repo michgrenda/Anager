@@ -124,7 +124,7 @@ $transition-delay-primary: 0.2s;
 ============================================================================================== */
 $landing-font-color-primary: $font-color-light-primary;
 // -----------------------------------------------------------------
-// (Landing)            |   Section-header (Font-color, Border-bottom)
+// (Landing)            |   Header-text (Font-color), Section-header (Font-color, Border-bottom)
 
 $landing-font-color-secondary: $font-color-dark-primary;
 // -----------------------------------------------------------------
@@ -132,11 +132,11 @@ $landing-font-color-secondary: $font-color-dark-primary;
 
 $landing-neutral-primary: $black;
 // -----------------------------------------------------------------
-// (Landing)            |   Header-quote (Font-color), Project-name (Font-color)
+// (Landing)            |   Project-name (Font-color)
 
 $landing-neutral-secondary: $gray-dark;
 // -----------------------------------------------------------------
-// (Landing)            |   Header-text (Font-color), Try-for-free (Background-color)
+// (Landing)            |
 
 $landing-neutral-tertiary: $gray-light;
 // -----------------------------------------------------------------
@@ -148,7 +148,7 @@ $landing-accents-primary: $accents-primary;
 
 $landing-accents-secondary: $accents-secondary;
 // -----------------------------------------------------------------
-// (Landing)            |   Grid-project (Border-bottom), Project-col (Border-left), Project-name (Hover - Background-color)
+// (Landing)            |   Header-quote (Font-color), Try-for-free (Background-color), Grid-project (Border-bottom), Project-col (Border-left), Project-name (Hover - Background-color)
 
 /* Modal
 ============================================================================================== */

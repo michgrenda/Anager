@@ -12,9 +12,9 @@ app.use(express.json());
 
 // Define routes
 app.use("/api/users", require("./routes/api/users"));
-app.use("/api/sections", require("./routes/api/sections"));
+app.use("/api/project-sections", require("./routes/api/projectSections"));
 app.use("/api/projects", require("./routes/api/projects"));
-app.use("/api/columns", require("./routes/api/columns"));
+app.use("/api/task-sections", require("./routes/api/taskSections"));
 app.use("/api/tasks", require("./routes/api/tasks"));
 app.use("/api/auth", require("./routes/api/auth"));
 

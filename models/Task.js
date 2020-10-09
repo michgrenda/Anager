@@ -37,9 +37,9 @@ const taskSchema = new mongoose.Schema({
     enum: ["low", "medium", "high", "critical"],
     default: "low",
   },
-  column: {
+  taskSection: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Column",
+    ref: "taskSection",
   },
   project: {
     type: mongoose.Schema.Types.ObjectId,

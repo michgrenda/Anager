@@ -5,19 +5,19 @@ const auth = require("../../middleware/auth");
 const checkObjectId = require("../../middleware/checkObjectId");
 const { check, validationResult } = require("express-validator");
 const Task = require("../../models/Task");
-const Column = require("../../models/Column");
+const TaskSection = require("../../models/TaskSection");
 const Project = require("../../models/Project");
 const mongoose = require("mongoose");
 
-// @route          POST api/tasks/:project_id/:column_id
-// @desc           Create column's task
+// @route          POST api/tasks/:project_id/:section_id
+// @desc           Create section's task
 // @access         Private
 router.post(
-  "/:project_id/:column_id",
+  "/:project_id/:section_id",
   [
     auth,
     checkObjectId("project_id"),
-    checkObjectId("column_id"),
+    checkObjectId("section_id"),
     [
       check("title", "Title is required")
         .not()
@@ -47,7 +47,7 @@ router.post(
       completed,
       deadline,
       priority,
-      column: req.params.column_id,
+      taskSection: req.params.section_id,
       project: req.params.project_id,
       owner: req.user._id,
     });
@@ -115,25 +115,25 @@ router.post(
   }
 );
 
-// @route          GET api/tasks/column/:column_id
-// @desc           Get column's tasks
+// @route          GET api/tasks/section/:section_id
+// @desc           Get section's tasks
 // @access         Private
 router.get(
-  "/columns/:column_id",
-  [auth, checkObjectId("column_id")],
+  "/sections/:section_id",
+  [auth, checkObjectId("section_id")],
   async (req, res) => {
     try {
-      const column = await Column.findOne({
-        _id: req.params.column_id,
+      const section = await TaskSection.findOne({
+        _id: req.params.section_id,
         owner: req.user._id,
       });
-      if (!column) {
+      if (!section) {
         return res.status(404).send();
       }
 
-      await column.populate("tasks").execPopulate();
+      await section.populate("tasks").execPopulate();
 
-      res.send(column.tasks);
+      res.send(section.tasks);
     } catch (error) {
       console.error(infoColors.error(error.message));
       res.status(500).send("Server error");
@@ -209,7 +209,7 @@ router.patch(
         .isEmpty()
         .custom((value) => value && value.trim())
         .withMessage("Description needs to include at least 1 character"),
-      check("column", "Incorrect ID")
+      check("taskSection", "Incorrect ID")
         .optional()
         .custom((value) => mongoose.Types.ObjectId.isValid(value))
         .withMessage("ID needs to be valid"),
@@ -231,7 +231,7 @@ router.patch(
       "completed",
       "deadline",
       "priority",
-      "column",
+      "taskSection",
     ];
     const isValidOperation = updates.every((update) =>
       allowedUpdates.includes(update)

@@ -16,9 +16,11 @@ const List = function (props) {
   };
 
   const handleItemKeyDown = (key, title, e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key
+      switch (keyboardEvent) {
       // Trap focus
       case 9:
+      case "Tab":
         if (e.shiftKey) {
           if (document.activeElement.isSameNode(firstItem.current)) {
             lastItem.current.focus();
@@ -32,9 +34,11 @@ const List = function (props) {
         }
         break;
       case 13:
+      case "Enter":
         handleItemClick(key, title);
         break;
       case 27:
+      case "Escape":
         props.onClose();
 
         focusTriggeringElement();
@@ -66,11 +70,14 @@ const List = function (props) {
   // React-onClickOutside
   List[`handleClickOutside${props.uniqueId}`] = (e) => {
     if (e.type === "keydown") {
-      switch (e.which) {
+      const keyboardEvent = e.which || e.key
+      switch (keyboardEvent) {
         case 27:
+        case "Escape":
           props.onClose();
           break;
         case 13:
+        case "Enter":
           props.onClose();
           break;
         default:
@@ -163,11 +170,14 @@ const SelectInput = function (props) {
   // Toggle list using keyboard (enter)
   // Close list using keyboard (escape)
   const handleSelectInputKeyDown = (e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key
+    switch (keyboardEvent) {
       case 13:
+      case "Enter":
         handleSelectInputClick();
         break;
       case 27:
+      case "Escape":
         if (listOpen) closeList();
         break;
       default:

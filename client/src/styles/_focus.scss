@@ -58,7 +58,7 @@ body.using-keyboard {
   .landing-page {
     &__try-for-free {
       &:focus {
-        background-color: darken($landing-neutral-secondary, 5%);
+        background-color: darken($landing-accents-primary, 5%);
       }
     }
   }

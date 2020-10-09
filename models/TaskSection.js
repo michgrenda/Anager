@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Task = require("./Task");
 
-const columnSchema = new mongoose.Schema({
+const taskSectionSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -19,31 +19,31 @@ const columnSchema = new mongoose.Schema({
   },
 });
 
-// Specify Columns/Tasks relationship
-columnSchema.virtual("tasks", {
+// Specify TaskSections/Tasks relationship
+taskSectionSchema.virtual("tasks", {
   ref: "Task",
   localField: "_id",
-  foreignField: "column",
+  foreignField: "taskSection",
 });
 
 // Cascade delete tasks
-columnSchema.pre("remove", async function (next) {
-  const column = this;
-  const columnSymbol = Symbol.for("columnCascade");
+taskSectionSchema.pre("remove", async function (next) {
+  const section = this;
+  const taskSectionSymbol = Symbol.for("taskSectionCascade");
 
-  if (column[columnSymbol]) {
+  if (section[taskSectionSymbol]) {
     await Task.deleteMany({
-      column: column._id,
+      taskSection: section._id,
     });
   } else {
     await Task.updateMany(
       {
-        column: column._id,
+        taskSection: section._id,
       },
-      { $unset: { column: "" } }
+      { $unset: { taskSection: "" } }
     );
   }
   next();
 });
 
-module.exports = Column = mongoose.model("Column", columnSchema);
+module.exports = TaskSection = mongoose.model("TaskSection", taskSectionSchema);

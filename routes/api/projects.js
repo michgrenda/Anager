@@ -5,7 +5,7 @@ const auth = require("../../middleware/auth");
 const checkObjectId = require("../../middleware/checkObjectId");
 const { check, validationResult } = require("express-validator");
 const Project = require("../../models/Project");
-const Section = require("../../models/Section");
+const ProjectSection = require("../../models/ProjectSection");
 const mongoose = require("mongoose");
 
 // @route          POST api/projects
@@ -87,7 +87,7 @@ router.post(
       offset,
       priority,
       status,
-      section: req.params.section_id,
+      projectSection: req.params.section_id,
       owner: req.user._id,
     });
 
@@ -148,7 +148,7 @@ router.get(
   [auth, checkObjectId("section_id")],
   async (req, res) => {
     try {
-      const section = await Section.findOne({
+      const section = await ProjectSection.findOne({
         _id: req.params.section_id,
         owner: req.user._id,
       });
@@ -204,7 +204,7 @@ router.patch(
       "offset",
       "priority",
       "status",
-      "section",
+      "projectSection",
       "unset",
     ];
     const isValidOperation = updates.every((update) =>
@@ -243,7 +243,7 @@ router.patch(
             _id: req.params.project_id,
             owner: req.user._id,
           },
-          { $unset: { section: "" } },
+          { $unset: { projectSection: "" } },
           {
             new: true,
           }
