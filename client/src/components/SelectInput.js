@@ -16,8 +16,8 @@ const List = function (props) {
   };
 
   const handleItemKeyDown = (key, title, e) => {
-    const keyboardEvent = e.which || e.key
-      switch (keyboardEvent) {
+    const keyboardEvent = e.which || e.key;
+    switch (keyboardEvent) {
       // Trap focus
       case 9:
       case "Tab":
@@ -70,7 +70,7 @@ const List = function (props) {
   // React-onClickOutside
   List[`handleClickOutside${props.uniqueId}`] = (e) => {
     if (e.type === "keydown") {
-      const keyboardEvent = e.which || e.key
+      const keyboardEvent = e.which || e.key;
       switch (keyboardEvent) {
         case 27:
         case "Escape":
@@ -170,7 +170,7 @@ const SelectInput = function (props) {
   // Toggle list using keyboard (enter)
   // Close list using keyboard (escape)
   const handleSelectInputKeyDown = (e) => {
-    const keyboardEvent = e.which || e.key
+    const keyboardEvent = e.which || e.key;
     switch (keyboardEvent) {
       case 13:
       case "Enter":

@@ -79,7 +79,9 @@ export const updateSection = (formData, sectionId) => async (dispatch) => {
 // Delete section
 export const deleteSection = (formData, sectionId) => async (dispatch) => {
   try {
-    const res = await api.delete(`/project-sections/${sectionId}`, { data: formData });
+    const res = await api.delete(`/project-sections/${sectionId}`, {
+      data: formData,
+    });
 
     dispatch({
       type: DELETE_SECTION,

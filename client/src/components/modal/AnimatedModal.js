@@ -46,13 +46,13 @@ const AnimatedModal = (props) => {
           animation: `${
             props.visible ? props.animationOverlayIn : props.animationOverlayOut
           } ${props.animationDuration}ms`,
-          ...props.overlayStyles
+          ...props.overlayStyles,
         },
         modal: {
           animation: `${
             props.visible ? props.animationModalIn : props.animationModalOut
           } ${props.animationDuration}ms`,
-          ...props.modalStyles
+          ...props.modalStyles,
         },
       }}
       onAnimationEnd={props.onAnimationEnd}

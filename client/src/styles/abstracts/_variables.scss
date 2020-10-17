@@ -315,7 +315,7 @@ $button-accents-primary: $accents-tertiary;
 
 // Button Global
 $line-width-primary: 24px;
-$line-width-secondary: 14px;
+$line-width-secondary: 16px;
 $line-height-primary: 3px;
 $line-height-secondary: 2px;
 $line-border-radius-primary: #{5%}/#{50%};
@@ -360,7 +360,7 @@ $projects-neutral-secondary: $gray-dark;
 
 $projects-neutral-tertiary: $gray-light;
 // -----------------------------------------------------------------
-// (Projects)           |   Project-icon (Font-color)
+// (Projects)           |   Project-icon (Font-color), Add-inline-project-text (Font-color)
 // (SectionInlineAdd)   |   Information (Font-color, Border-bottom), Plus-line (Background-color), Input (Border-bottom, Box-shadow)
 // (Button)             |   Plus-line (--Section-inline-add - Background-color)
 

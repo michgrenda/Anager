@@ -20,7 +20,7 @@ const Menu = function (props) {
   };
 
   const handleItemKeyDown = (e) => {
-    const keyboardEvent = e.which || e.key
+    const keyboardEvent = e.which || e.key;
     switch (keyboardEvent) {
       // Trap focus
       case 9:
@@ -72,7 +72,7 @@ const Menu = function (props) {
   // React-onClickOutside
   Menu[`handleClickOutside${props.uniqueId}`] = (e) => {
     if (e.type === "keydown") {
-      const keyboardEvent = e.which || e.key
+      const keyboardEvent = e.which || e.key;
       switch (keyboardEvent) {
         case 27:
         case "Escape":
@@ -149,7 +149,7 @@ const ProjectMenu = function (props) {
 
   // Close menu using keyboard
   const handleButtonKeyDownClose = (e) => {
-    const keyboardEvent = e.which || e.key
+    const keyboardEvent = e.which || e.key;
     switch (keyboardEvent) {
       case 27:
       case "Escape":

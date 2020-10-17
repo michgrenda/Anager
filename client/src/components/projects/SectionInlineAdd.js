@@ -12,7 +12,7 @@ const Form = function (props) {
 
   // Close form using keyboard
   const handleFormKeyDownClose = (e) => {
-    const keyboardEvent = e.which || e.key
+    const keyboardEvent = e.which || e.key;
     switch (keyboardEvent) {
       case 27:
       case "Escape":
@@ -113,7 +113,7 @@ const SectionInlineAdd = (props) => {
 
   // Open form using keyboard
   const handleAddSectionKeyDown = (e) => {
-    const keyboardEvent = e.which || e.key
+    const keyboardEvent = e.which || e.key;
     switch (keyboardEvent) {
       case 13:
       case "Enter":

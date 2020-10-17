@@ -104,7 +104,7 @@ const ProjectDetailView = (props) => {
       onAnimationEnd={setInitialStateWhenClosing}
       modalClassName="project-detail-view__modal"
     >
-    {/* <Portal className="projects__project-detail-view" container={props.container}> */}
+      {/* <Portal className="projects__project-detail-view" container={props.container}> */}
       <div className="container">
         <div className="row">
           <form
@@ -193,7 +193,7 @@ const ProjectDetailView = (props) => {
         </div>
       </div>
       {/* </Portal> */}
-     </AnimatedModal>
+    </AnimatedModal>
   );
 };
 

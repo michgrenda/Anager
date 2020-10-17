@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import onClickOutside from "react-onclickoutside";
 // Components
-import Button from "./../Button";
+// import Button from "./../Button";
 
 const SectionInlineEditForm = function (props) {
   // States
   const [inputValue, setInputValue] = useState(props.sectionName);
+  const [updated, setUpdated] = useState(false);
 
   // References
   const input = useRef(null);
@@ -19,27 +20,49 @@ const SectionInlineEditForm = function (props) {
   // Control form input
   const handleInputChange = (e) => setInputValue(e.target.value);
 
+  // Update section name
+  const updateSectionName = () => {
+    // Information - set section name to initial if it has not been updated?
+    setUpdated(true);
+
+    props
+      .updateSection({ name: input.current.value }, props.sectionId)
+      .then(() => closeSectionInlineEdit())
+      .catch((error) => console.log(error));
+  };
+
   // Change name of section
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    props
-      .updateSection({ name: inputValue }, props.sectionId)
-      .then((updatedSection) => {
-        setInputValue(updatedSection.name);
+    const initialInputValue =
+      (input.current && input.current.dataset["name"]) ||
+      input.current.getAttribute("data-name");
 
-        closeSectionInlineEdit();
-      })
-      .catch((error) => console.log(error));
+    if (
+      input.current &&
+      input.current.value &&
+      initialInputValue !== input.current.value
+    )
+      updateSectionName();
+    else {
+      // Information - set section name to initial if it has not been updated?
+      setUpdated(false);
+
+      closeSectionInlineEdit();
+    }
   };
 
   // Close section inline edit using keyboard
   const handleSectionInlineEditKeyDownClose = (e) => {
-    const keyboardEvent = e.which || e.key
-      switch (keyboardEvent) {
-        case 27:
-        case "Escape":
-        closeSectionInlineEditExtended();
+    const keyboardEvent = e.which || e.key;
+    switch (keyboardEvent) {
+      case 27:
+      case "Escape":
+        // Information - set section name to initial if it has not been updated?
+        setUpdated(false);
+
+        closeSectionInlineEdit();
 
         const button = props.triggeringElement.current[props.sectionId];
         if (button) button.focus();
@@ -50,42 +73,54 @@ const SectionInlineEditForm = function (props) {
   };
 
   // Close section inline edit
-  const closeSectionInlineEdit = () => {
+  const closeSectionInlineEdit = () =>
     props.onClose((prevState) => ({
       ...prevState,
       [props.sectionId]: false,
     }));
 
-    setTimeout(() => props.onExited(), props.transitionDuration);
-  };
+  const onExited = () => {
+    props.onExited();
 
-  // Close section inline edit and set sectiona name to initial if it is not updated when closing
-  const closeSectionInlineEditExtended = () => {
-    if (input.current)
+    // Set section name to initial if it has not been updated when closing
+    if (!updated && input.current)
       setInputValue(
         input.current.dataset["name"] || input.current.getAttribute("data-name")
       );
-
-    closeSectionInlineEdit();
   };
 
   // React-onClickOutside
   SectionInlineEditForm[`handleClickOutside${props.sectionId}`] = (e) => {
-    if (e.type === "keydown") {
-      const keyboardEvent = e.which || e.key
-      switch (keyboardEvent) {
-        case 27:
-        case "Escape":
-          closeSectionInlineEditExtended();
-          break;
-        case 13:
-        case "Enter":
-          closeSectionInlineEditExtended();
-          break;
-        default:
-          break;
-      }
-    } else closeSectionInlineEditExtended();
+    const initialInputValue =
+      (input.current && input.current.dataset["name"]) ||
+      input.current.getAttribute("data-name");
+
+    if (
+      input.current &&
+      input.current.value &&
+      initialInputValue !== input.current.value
+    )
+      updateSectionName();
+    else {
+      // Information - set section name to initial if it has not been updated?
+      setUpdated(false);
+
+      if (e.type === "keydown") {
+        const keyboardEvent = e.which || e.key;
+        switch (keyboardEvent) {
+          case 27:
+          case "Escape":
+            closeSectionInlineEdit();
+            break;
+          case 13:
+          case "Enter":
+            closeSectionInlineEdit();
+            break;
+          default:
+            break;
+        }
+      } else closeSectionInlineEdit();
+    }
   };
 
   return (
@@ -93,16 +128,19 @@ const SectionInlineEditForm = function (props) {
       in={props.visible}
       timeout={props.transitionDuration}
       classNames={props.transitionClassNames}
-      mountOnEnter
       unmountOnExit
-      onExited={props.onExited}
+      onExited={onExited}
       onEntered={onEntered}
     >
       <div
         className="section-inline-edit"
         onKeyDown={handleSectionInlineEditKeyDownClose}
       >
-        <form className="section-inline-edit__form" onSubmit={handleFormSubmit}>
+        <form
+          className="section-inline-edit__form"
+          onSubmit={handleFormSubmit}
+          autoComplete="off"
+        >
           <div className="section-inline-edit__input-wrapper">
             <input
               className="section-inline-edit__input"
@@ -116,12 +154,12 @@ const SectionInlineEditForm = function (props) {
               ref={input}
             ></input>
           </div>
-          <Button
+          {/* <Button
             categories={["section-inline-edit"]}
             type="submit"
             icon="far fa-save"
             defaultLight={false}
-          />
+          /> */}
         </form>
       </div>
     </CSSTransition>

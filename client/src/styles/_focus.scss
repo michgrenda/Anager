@@ -186,7 +186,8 @@ body.using-keyboard {
 
         #{$root}__section-icon {
           &--edit,
-          &--delete {
+          &--delete,
+          &--add {
             opacity: 1;
           }
         }
@@ -203,6 +204,13 @@ body.using-keyboard {
       &:focus {
         outline: $outline;
         background-color: $projects-accents-primary;
+      }
+    }
+
+    &__add-inline-project-text {
+      &:focus {
+        outline: $outline;
+        color: darken($gray-light, 15%);
       }
     }
   }

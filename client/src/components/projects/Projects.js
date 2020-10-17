@@ -41,8 +41,6 @@ import ProjectMenu from "./ProjectMenu";
 // Portal
 const draggableRoot = document.getElementById("draggable-root");
 
-// const touch = matchMedia("(hover: none) and (pointer: coarse)").matches;
-
 // Settings
 const addProps = [
   {
@@ -132,6 +130,7 @@ const Projects = (props) => {
   const [projectInlineEditOpen, setProjectInlineEditOpen] = useState({});
   const [projectNameHidden, setProjectNameHidden] = useState({});
   const [projectDetailViewOpen, setProjectDetailViewOpen] = useState({});
+  const [projectAddStopSpam, setProjectAddStopSpam] = useState({});
 
   const [modalOpen, setModalOpen] = useState({});
   const [whichModal, setWhichModal] = useState("project");
@@ -280,11 +279,14 @@ const Projects = (props) => {
   // Open section inline edit using keyboard (enter)
   // Close section inline edit using keyboard (escape)
   const handleSectionInlineEditKeyDown = (sectionId, e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key;
+    switch (keyboardEvent) {
       case 13:
+      case "Enter":
         handleSectionInlineEditClick(sectionId, e);
         break;
       case 27:
+      case "Escape":
         if (sectionInlineEditOpen[sectionId]) {
           e.stopPropagation();
           e.preventDefault();
@@ -316,16 +318,22 @@ const Projects = (props) => {
   };
 
   const restoreSectionName = (sectionId) =>
-    setSectionNameHidden((prevState) => ({ ...prevState, [sectionId]: false }));
+    setSectionNameHidden((prevState) => ({
+      ...prevState,
+      [sectionId]: false,
+    }));
 
   // Toggle delete section using keyboard (enter)
   // Close delete section using keyboard (escape)
   const handleDeleteSectionKeyDown = (sectionId, e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key;
+    switch (keyboardEvent) {
       case 13:
+      case "Enter":
         handleDeleteSectionClick(sectionId, e);
         break;
       case 27:
+      case "Escape":
         if (deleteSectionOpen[sectionId]) {
           e.stopPropagation();
           e.preventDefault();
@@ -355,11 +363,14 @@ const Projects = (props) => {
   // Toggle project inline edit using keyboard (enter)
   // Close project inline edit using keyboard (escape)
   const handleProjectInlineEditKeyDown = (projectId, e) => {
-    switch (e.which) {
+    const keyboardEvent = e.which || e.key;
+    switch (keyboardEvent) {
       case 13:
+      case "Enter":
         handleProjectInlineEditClick(projectId, e);
         break;
       case 27:
+      case "Escape":
         if (projectInlineEditOpen[projectId]) {
           e.stopPropagation();
           e.preventDefault();
@@ -377,8 +388,10 @@ const Projects = (props) => {
 
   // Toggle project inline edit
   const handleProjectInlineEditClick = (projectId, e) => {
-    e.stopPropagation();
-    e.preventDefault();
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
 
     setProjectInlineEditOpen((prevState) => ({
       ...prevState,
@@ -391,7 +404,45 @@ const Projects = (props) => {
   };
 
   const restoreProjectName = (projectId) =>
-    setProjectNameHidden((prevState) => ({ ...prevState, [projectId]: false }));
+    setProjectNameHidden((prevState) => ({
+      ...prevState,
+      [projectId]: false,
+    }));
+
+  // Add project
+  const handleAddInlineProjectClick = (sectionId) => {
+    setProjectAddStopSpam((prevState) => ({ ...prevState, [sectionId]: true }));
+
+    addProject({
+      name: "Untitled Project",
+      projectSection: sectionId,
+    })
+      .then((project) => {
+        project.inputEmpty = true;
+
+        handleProjectInlineEditClick.call(null, project._id);
+      })
+      .catch((error) => console.log(error))
+      .finally(() =>
+        setProjectAddStopSpam((prevState) => ({
+          ...prevState,
+          [sectionId]: false,
+        }))
+      );
+  };
+
+  // Add project using keyboard
+  const handleAddInlineProjectKeyDown = (sectionId, e) => {
+    const keyboardEvent = e.which || e.key;
+    switch (keyboardEvent) {
+      case 13:
+      case "Enter":
+        handleAddInlineProjectClick(sectionId);
+        break;
+      default:
+        break;
+    }
+  };
 
   const preventLinkDefaultBehaviour = (projectId, e) =>
     projectNameHidden[projectId] && e.preventDefault();
@@ -526,7 +577,7 @@ const Projects = (props) => {
             }
           />
           <ProjectDetailView
-            key={`${project.priority}-${project.status}`} // Re-render
+            key={`${project.priority}-${project.status}-${project.name}`} // Re-render
             onClose={setProjectDetailViewOpen}
             visible={projectDetailViewOpen[project._id]}
             priorityProps={priorityProps}
@@ -603,6 +654,7 @@ const Projects = (props) => {
                         outsideClickIgnoreClass={`edit-project-ignore-${project._id}`}
                         triggeringElement={editProjectBtns}
                         updateProject={updateProject}
+                        inputEmpty={project.inputEmpty}
                       />
                       <div className="projects__project-options">
                         <div className="projects__project-option-wrapper">
@@ -685,7 +737,7 @@ const Projects = (props) => {
                 />
 
                 <ProjectDetailView
-                  key={`${project.priority}-${project.status}`} // Re-render
+                  key={`${project.priority}-${project.status}-${project.name}`} // Re-render
                   onClose={setProjectDetailViewOpen}
                   visible={projectDetailViewOpen[project._id]}
                   priorityProps={priorityProps}
@@ -905,6 +957,14 @@ const Projects = (props) => {
                             </div>
                             <div className="projects__section-option-wrapper">
                               <div
+                                className={`projects__section-option add-section-ignore-${section._id}`}
+                                tabIndex={0}
+                              >
+                                <i className="projects__section-icon projects__section-icon--add far fa-plus-square"></i>
+                              </div>
+                            </div>
+                            <div className="projects__section-option-wrapper">
+                              <div
                                 className={`projects__section-option delete-ignore-${section._id}`}
                                 onClick={handleDeleteSectionClick.bind(
                                   null,
@@ -960,6 +1020,31 @@ const Projects = (props) => {
                   </section>
                 )}
               </Droppable>
+              {section.projects.length ? (
+                <div className="projects__add-inline-project">
+                  <div className="projects__add-inline-project-text-wrapper">
+                    <span
+                      className="projects__add-inline-project-text"
+                      tabIndex={0}
+                      onClick={
+                        !projectAddStopSpam[section._id]
+                          ? handleAddInlineProjectClick.bind(null, section._id)
+                          : undefined
+                      }
+                      onKeyDown={
+                        !projectAddStopSpam[section._id]
+                          ? handleAddInlineProjectKeyDown.bind(
+                              null,
+                              section._id
+                            )
+                          : undefined
+                      }
+                    >
+                      Add Project...
+                    </span>
+                  </div>
+                </div>
+              ) : null}
             </section>
           )
         }
@@ -1046,6 +1131,7 @@ const Projects = (props) => {
                         categories={["projects-main"]}
                         onClick={handleMainButtonClick}
                         light
+                        // icon="fas fa-plus"
                         plus
                       />
                       <SelectInput
@@ -1078,7 +1164,6 @@ const Projects = (props) => {
                 </div>
               </div>
             </header>
-          
             <section className="projects__section col-12">
               <div className="projects__grid">
                 <header className="projects__grid-header">
@@ -1108,7 +1193,7 @@ const Projects = (props) => {
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                           >
-                              {/* <div className="projects__project-detail-view" ref={projectDetailViewContainer}></div> */}
+                            {/* <div className="projects__project-detail-view" ref={projectDetailViewContainer}></div> */}
                             {sectionsList}
                             {provided.placeholder}
                           </section>

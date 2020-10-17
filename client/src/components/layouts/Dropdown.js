@@ -11,7 +11,7 @@ const DropdownMenu = function (props) {
   // React-onClickOutside
   DropdownMenu[`handleClickOutside${props.uniqueId}`] = (e) => {
     if (e.type === "keydown") {
-      const keyboardEvent = e.which || e.key
+      const keyboardEvent = e.which || e.key;
       switch (keyboardEvent) {
         case 27:
         case "Escape":
@@ -77,7 +77,7 @@ const Dropdown = (props) => {
 
   // Close dropdown menu using keyboard
   const handleDropdownKeyDownClose = (e) => {
-    const keyboardEvent = e.which || e.key
+    const keyboardEvent = e.which || e.key;
     switch (keyboardEvent) {
       case 27:
       case "Escape":

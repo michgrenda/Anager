@@ -35,7 +35,11 @@ export const getProjects = () => async (dispatch) => {
 // Add project
 export const addProject = (formData) => async (dispatch) => {
   try {
-    const res = await api.post("/projects/", formData);
+    let res;
+
+    if (formData.projectSection !== "noSection")
+      res = await api.post(`/projects/${formData.projectSection}`, formData);
+    else res = await api.post("/projects/", formData);
 
     dispatch({
       type: ADD_PROJECT,

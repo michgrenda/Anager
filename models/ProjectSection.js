@@ -40,4 +40,7 @@ projectSectionSchema.pre("remove", async function (next) {
   next();
 });
 
-module.exports = ProjectSection = mongoose.model("ProjectSection", projectSectionSchema);
+module.exports = ProjectSection = mongoose.model(
+  "ProjectSection",
+  projectSectionSchema
+);

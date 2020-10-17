@@ -95,7 +95,7 @@ const Navbar = function (props) {
 
   // Close 3d navbar using keyboard | (max-width: 991px)
   const handleMainButtonKeyDown = (e) => {
-    const keyboardEvent = e.which || e.key
+    const keyboardEvent = e.which || e.key;
     switch (keyboardEvent) {
       case 27:
       case "Escape":
@@ -255,6 +255,7 @@ const Navbar = function (props) {
                       onClick={handleMainButtonClick}
                       onKeyDown={handleMainButtonKeyDown}
                       light
+                      // icon="fas fa-bars"
                       hamburger
                       ref={triggeringElement}
                     />
