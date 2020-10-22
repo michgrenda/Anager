@@ -1,7 +1,7 @@
 {
-  "name": "todo-app",
+  "name": "anager",
   "version": "1.0.0",
-  "description": "Task manager.",
+  "description": "Organize projects. See which tasks are a priority, and when work is due. (Using MERN Stack, Inspired by Asana, Internet Explorer is not supported at this moment)",
   "main": "server.js",
   "scripts": {
     "start": "node server",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/michgrenda/ToDo-app.git"
+    "url": "git+https://github.com/michgrenda/Anager.git"
   },
   "author": "Michał Grenda",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/michgrenda/ToDo-app/issues"
+    "url": "https://github.com/michgrenda/Anager/issues"
   },
-  "homepage": "https://github.com/michgrenda/ToDo-app#readme",
+  "homepage": "https://github.com/michgrenda/Anager#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.0",
@@ -28,8 +28,7 @@
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.25",
-    "password-validator": "^5.0.3",
-    "react-tooltip": "^4.2.10"
+    "password-validator": "^5.0.3"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
