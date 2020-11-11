@@ -62,7 +62,11 @@ const Form = function (props) {
         className="section-inline-add__form-wrapper"
         onKeyDown={handleFormKeyDownClose}
       >
-        <form className="section-inline-add__form" onSubmit={handleFormSubmit}>
+        <form
+          className="section-inline-add__form"
+          onSubmit={handleFormSubmit}
+          autoComplete="off"
+        >
           <div className="section-inline-add__input-wrapper">
             <input
               className="section-inline-add__input"

@@ -192,7 +192,11 @@ const SignUp = (props) => {
   return (
     <section className={`sign-up ${modifiers} col-12 col-lg-8 offset-lg-2`}>
       {fromAlerts === "sign-up" ? <Alert /> : null}
-      <form className="sign-up__form" onSubmit={handleFormSubmit}>
+      <form
+        className="sign-up__form"
+        onSubmit={handleFormSubmit}
+        autoComplete="off"
+      >
         <header className="sign-up__header">
           <h2 className="sign-up__welcome-text sign-up__welcome-text--main">
             Welcome

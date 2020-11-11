@@ -37,7 +37,7 @@ export const addProject = (formData) => async (dispatch) => {
   try {
     let res;
 
-    if (formData.projectSection !== "noSection")
+    if (formData.projectSection && formData.projectSection !== "noSection")
       res = await api.post(`/projects/${formData.projectSection}`, formData);
     else res = await api.post("/projects/", formData);
 
